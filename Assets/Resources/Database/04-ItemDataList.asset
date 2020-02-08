@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2a3087445750964f9dc02ef7d793e2f, type: 3}
+  m_Name: 04-ItemDataList
+  m_EditorClassIdentifier: 
+  entries:
+  - name: Herb
+    description: Restores 50 HP
+    type: 0
+    usage: 2
+    scope: 0
+    price: 10
+    effect:
+      type: 0
+      state: 0
+      recover:
+        attribute: 0
+        amount: 50
+        variance: 0
+        amountAsPerc: 0
+        varianceAsPerc: 0
+        canCritical: 0
+        type: 0
+      damage:
+        attribute: 0
+        amount: 10
+        variance: 0
+        amountAsPerc: 1
+        varianceAsPerc: 0
+        canCritical: 0
+        type: 0
+  - name: Antidote
+    description: Removes poison
+    type: 0
+    usage: 2
+    scope: 0
+    price: 15
+    effect:
+      type: 2
+      state: 1
+      recover:
+        attribute: 0
+        amount: 0
+        variance: 0
+        amountAsPerc: 0
+        varianceAsPerc: 0
+        canCritical: 0
+        type: 0
+      damage:
+        attribute: 0
+        amount: 20
+        variance: 10
+        amountAsPerc: 0
+        varianceAsPerc: 1
+        canCritical: 0
+        type: 0
+  - name: Bomb
+    description: Deals 20 damage to target
+    type: 0
+    usage: 0
+    scope: 2
+    price: 20
+    effect:
+      type: 1
+      state: 0
+      recover:
+        attribute: 0
+        amount: 20
+        variance: 0
+        amountAsPerc: 0
+        varianceAsPerc: 0
+        canCritical: 0
+        type: 0
+      damage:
+        attribute: 0
+        amount: 20
+        variance: 0
+        amountAsPerc: 0
+        varianceAsPerc: 0
+        canCritical: 0
+        type: 0

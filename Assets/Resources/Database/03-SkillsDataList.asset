@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a44e938d88d92346b6bbef70addef33, type: 3}
+  m_Name: 03-SkillsDataList
+  m_EditorClassIdentifier: 
+  entries:
+  - name: Cura
+    description: Restores 50 HP to one target
+    damage: 0
+    usage: 2
+    scope: 0
+    hpCost: 0
+    mpCost: 3
+    effect:
+      type: 0
+      state: 0
+      recover:
+        attribute: 0
+        amount: 50
+        variance: 0
+        amountAsPerc: 0
+        varianceAsPerc: 0
+        canCritical: 0
+        type: 0
+      damage:
+        attribute: 0
+        amount: 0
+        variance: 0
+        amountAsPerc: 0
+        varianceAsPerc: 0
+        canCritical: 0
+        type: 0
+  - name: Flare
+    description: 20 Fire damage to a single enemy
+    damage: 0
+    usage: 0
+    scope: 2
+    hpCost: 0
+    mpCost: 3
+    effect:
+      type: 1
+      state: 0
+      recover:
+        attribute: 0
+        amount: 0
+        variance: 0
+        amountAsPerc: 0
+        varianceAsPerc: 0
+        canCritical: 0
+        type: 0
+      damage:
+        attribute: 0
+        amount: 20
+        variance: 0
+        amountAsPerc: 0
+        varianceAsPerc: 0
+        canCritical: 0
+        type: 1
