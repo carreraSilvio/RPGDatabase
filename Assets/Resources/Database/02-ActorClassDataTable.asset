@@ -13,19 +13,20 @@ MonoBehaviour:
   m_Name: 02-ActorClassDataTable
   m_EditorClassIdentifier: 
   entries:
-  - name: Wanderer
+  - id: 100
+    name: Wanderer
     expCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 0.34734136
+        outSlope: 0.34734136
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.18333334
       - serializedVersion: 3
         time: 1
         value: 1
@@ -254,9 +255,10 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    weaponsMask: 1
+    weaponTypeId: 100
     skills: []
-  - name: Princess
+  - id: 101
+    name: Princess
     expCurve:
       serializedVersion: 2
       m_Curve:
@@ -497,11 +499,12 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    weaponsMask: 2
+    weaponTypeId: 101
     skills:
     - level: 2
-      skillId: 0
-  - name: Hunter
+      skillId: 100
+  - id: 102
+    name: Hunter
     expCurve:
       serializedVersion: 2
       m_Curve:
@@ -742,7 +745,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    weaponsMask: 4
+    weaponTypeId: 102
     skills:
     - level: 3
-      skillId: 1
+      skillId: 101

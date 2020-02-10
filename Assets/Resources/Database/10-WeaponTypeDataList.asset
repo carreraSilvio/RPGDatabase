@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: 10-WeaponTypeDataList
   m_EditorClassIdentifier: 
   entries:
-  - name: Sword
-  - name: Rapier
-  - name: Bow
+  - id: 100
+    name: Sword
+  - id: 101
+    name: Rapier
+  - id: 102
+    name: Bow

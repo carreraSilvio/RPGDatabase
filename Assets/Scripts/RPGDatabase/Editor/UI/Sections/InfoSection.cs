@@ -1,4 +1,4 @@
-﻿using BrightLib.Extensions;
+﻿using BrightLib.Utility;
 using Rotorz.ReorderableList;
 using System;
 using System.Linq;
@@ -27,45 +27,54 @@ public class InfoSection : Section
 
     private void DrawActor(DatabaseManager database)
     {
-        var weaponNames = database.FetchEntry<WeaponDataList>().entries.Select(l => l.name).ToArray();
-        var list = database.FetchEntry<AttributeSpecDataList>();
-        var level = list.entries.First<AttributeSpecData>(x => x.name == "Level");
-
         var entry = (ActorData)entrySelected;
+
+        var classNames = database.FetchEntry<ActorClassDataList>().entries.Select(l => l.name).ToArray();
+        var classIds = database.FetchEntry<ActorClassDataList>().entries.Select(l => l.id).ToArray();
+
+        var actorClass = database.FetchEntry<ActorClassDataList>().entries.First<ActorClassData>(l => l.id == entry.classId);
+        var weaponNames = database.FetchEntry<WeaponDataList>().entries.Where(l => l.typeId == actorClass.weaponTypeId).Select(l=>l.name).ToArray();
+        var weaponIds = database.FetchEntry<WeaponDataList>().entries.Where(l => l.typeId == actorClass.weaponTypeId).Select(l => l.id).ToArray();
+
+        var attrList = database.FetchEntry<AttributeSpecDataList>();
+        var level = attrList.entries.First<AttributeSpecData>(x => x.name == "Level");
 
         EditorGUILayout.BeginVertical("GroupBox", GUILayout.Width(400));
         DrawTitle();
 
-        var classNames = database.FetchEntry<ActorClassDataList>().entries.Select(l => l.name).ToArray();
-
         entry.name = EditorGUILayout.TextField("Name", entry.name);
-        entry.classId = EditorGUILayout.Popup("Class", entry.classId, classNames);
+        entry.classId = EditorGUILayout.IntPopup("Class", entry.classId, classNames, classIds);
         entry.initialLevel = EditorGUILayout.IntSlider("Initial Level", entry.initialLevel, level.start, level.end);
 
         EditorGUILayout.BeginVertical("GroupBox", GUILayout.Width(350));
-        EditorGUILayoutExtensions.LabelFieldBold("Initial Equipment");
-        entry.initialWeapon  = EditorGUILayout.Popup("Weapon", entry.initialWeapon, weaponNames);
+        EditorGUILayoutUtility.LabelFieldBold("Initial Equipment");
+        entry.initialWeapon  = EditorGUILayout.IntPopup("Weapon", entry.initialWeapon, weaponNames, weaponIds);
         EditorGUILayout.EndVertical();
 
         EditorGUILayout.EndVertical();
     }
 
     private int previewLv = 1;
-    private Vector2 vect;
+    private Vector2 classAreaVect;
+    private Vector2 skillUnlockVect;
     private void DrawClass(DatabaseManager database)
     {
+        var weaponTypeIds = database.FetchEntry<WeaponTypeDataList>().entries.Select(l => l.id).ToArray();
         var weaponTypeNames = database.FetchEntry<WeaponTypeDataList>().entries.Select(l => l.name).ToArray();
+        var skillIds = database.FetchEntry<SkillDataList>().entries.Select(l => l.id).ToArray();
         var skillNames = database.FetchEntry<SkillDataList>().entries.Select(l => l.name).ToArray();
 
         var entry = (ActorClassData)entrySelected;
 
         EditorGUILayout.BeginVertical("GroupBox", GUILayout.Width(400));
+        classAreaVect = EditorGUILayout.BeginScrollView(classAreaVect, GUILayout.Width(400));
+
         DrawTitle();
-
         entry.name = EditorGUILayout.TextField("Name", entry.name);
-        
 
-        EditorGUILayoutExtensions.LabelFieldBold("Growth");
+       
+        #region Growth
+        EditorGUILayoutUtility.LabelFieldBold("Growth");
         entry.expCurve = EditorGUILayout.CurveField("Exp", entry.expCurve, GUILayout.Height(25f));
         entry.hpCurve = EditorGUILayout.CurveField("HP", entry.hpCurve, GUILayout.Height(25f));
         entry.mpCurve = EditorGUILayout.CurveField("MP", entry.mpCurve, GUILayout.Height(25f));
@@ -75,7 +84,9 @@ public class InfoSection : Section
         entry.lckCurve = EditorGUILayout.CurveField("Luck", entry.lckCurve, GUILayout.Height(25f));
         entry.defCurve = EditorGUILayout.CurveField("Defense", entry.defCurve, GUILayout.Height(25f));
         entry.resCurve = EditorGUILayout.CurveField("Resistance", entry.resCurve, GUILayout.Height(25f));
+        #endregion
 
+        #region Preview
         EditorGUILayout.BeginVertical("GroupBox", GUILayout.Width(350));
         var list = database.FetchEntry<AttributeSpecDataList>();
         var level = list.entries.First<AttributeSpecData>(x => x.name == "Level");
@@ -85,7 +96,7 @@ public class InfoSection : Section
         var mp = list.entries.First<AttributeSpecData>(x => x.name == "MP");
         var attr = list.entries.First<AttributeSpecData>(x => x.name == "Common");
 
-        EditorGUILayoutExtensions.LabelFieldBold("Preview");
+        EditorGUILayoutUtility.LabelFieldBold("Preview");
         previewLv = EditorGUILayout.IntSlider("Lv", previewLv, level.start, level.end);
 
         float normalizedValue = Mathf.InverseLerp(level.start, level.end, previewLv);
@@ -114,18 +125,19 @@ public class InfoSection : Section
         curveT = entry.resCurve.Evaluate(baseT);
         EditorGUILayout.LabelField($"Res:\t{Mathf.Round(Mathf.Lerp(attr.start, attr.end, curveT))}");
         EditorGUILayout.EndVertical();
+        #endregion
 
         #region Weapons
         EditorGUILayout.BeginVertical("GroupBox", GUILayout.Width(350));
-        EditorGUILayoutExtensions.LabelFieldBold("Weapons");
-        entry.weaponsMask = EditorGUILayout.MaskField(entry.weaponsMask, weaponTypeNames);
+        EditorGUILayoutUtility.LabelFieldBold("Weapon Type");
+        entry.weaponTypeId = EditorGUILayout.IntPopup(entry.weaponTypeId, weaponTypeNames, weaponTypeIds);
         EditorGUILayout.EndVertical();
         #endregion
 
         #region Skills
         EditorGUILayout.BeginVertical("GroupBox", GUILayout.Width(350));
-        vect = EditorGUILayout.BeginScrollView(vect, GUILayout.MinHeight(90));
-        EditorGUILayoutExtensions.LabelFieldBold("Skills");
+        skillUnlockVect = EditorGUILayout.BeginScrollView(skillUnlockVect, GUILayout.MinHeight(90));
+        EditorGUILayoutUtility.LabelFieldBold("Skills");
         if (entry.skills == null) entry.skills = new SkillUnlockArgs[1];
         var total = EditorGUILayout.IntField("Total:", entry.skills.Length);
 
@@ -139,7 +151,7 @@ public class InfoSection : Section
             EditorGUI.indentLevel++;
             EditorGUILayout.BeginHorizontal();
             skill.level = EditorGUILayout.IntField("Lv", skill.level);
-            skill.skillId = EditorGUILayout.Popup(skill.skillId, skillNames);
+            skill.skillId = EditorGUILayout.IntPopup(skill.skillId, skillNames, skillIds);
             EditorGUILayout.EndHorizontal();
             EditorGUI.indentLevel--;
         }
@@ -147,7 +159,7 @@ public class InfoSection : Section
         EditorGUILayout.EndVertical();
         #endregion
 
-
+        EditorGUILayout.EndScrollView();
         EditorGUILayout.EndVertical();
     }
 
@@ -192,6 +204,7 @@ public class InfoSection : Section
 
     private void DrawWeapon(DatabaseManager database)
     {
+        var weaponTypeIds = database.FetchEntry<WeaponTypeDataList>().entries.Select(l => l.id).ToArray();
         var weaponTypeNames = database.FetchEntry<WeaponTypeDataList>().entries.Select(l => l.name).ToArray();
 
         var entry = (WeaponData)entrySelected;
@@ -201,7 +214,7 @@ public class InfoSection : Section
 
         entry.name = EditorGUILayout.TextField("Name", entry.name);
         entry.description = EditorGUILayout.TextField("Description", entry.description);
-        entry.typeId = EditorGUILayout.Popup("Type", entry.typeId, weaponTypeNames);
+        entry.typeId = EditorGUILayout.IntPopup("Type", entry.typeId, weaponTypeNames, weaponTypeIds);
         entry.price = EditorGUILayout.IntField("Price", entry.price);
 
         EditorGUILayout.BeginVertical("GroupBox", GUILayout.Width(350));

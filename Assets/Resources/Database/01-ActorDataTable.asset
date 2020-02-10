@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: 01-ActorDataTable
   m_EditorClassIdentifier: 
   entries:
-  - name: Ryu
-    classId: 0
+  - id: 100
+    name: Ryu
+    classId: 100
     initialLevel: 1
-    initialWeapon: 0
-  - name: Nina
-    classId: 1
+    initialWeapon: 100
+  - id: 101
+    name: Nina
+    classId: 101
     initialLevel: 5
-    initialWeapon: 1
-  - name: Bo
-    classId: 2
+    initialWeapon: 101
+  - id: 102
+    name: Bo
+    classId: 102
     initialLevel: 7
-    initialWeapon: 1
+    initialWeapon: 102

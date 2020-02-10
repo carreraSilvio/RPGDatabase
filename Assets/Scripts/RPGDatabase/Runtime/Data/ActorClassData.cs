@@ -18,7 +18,7 @@ public class ActorClassData : BaseData
     public AnimationCurve defCurve = AnimationCurve.Linear(0, 0, 1, 1);
     public AnimationCurve resCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
-    public int weaponsMask;
+    public int weaponTypeId;
     public SkillUnlockArgs[] skills;
 
 }

@@ -13,18 +13,23 @@ MonoBehaviour:
   m_Name: 11-AttributeSpecDataList
   m_EditorClassIdentifier: 
   entries:
-  - name: Level
+  - id: 100
+    name: Level
     start: 1
     end: 100
-  - name: Exp
+  - id: 101
+    name: Exp
     start: 0
     end: 9999
-  - name: HP
+  - id: 102
+    name: HP
     start: 20
     end: 999
-  - name: MP
+  - id: 103
+    name: MP
     start: 20
     end: 999
-  - name: Common
+  - id: 104
+    name: Common
     start: 5
     end: 99

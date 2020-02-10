@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: 04-ItemDataList
   m_EditorClassIdentifier: 
   entries:
-  - name: Herb
+  - id: 100
+    name: Herb
     description: Restores 50 HP
     type: 0
     usage: 2
@@ -38,7 +39,8 @@ MonoBehaviour:
         varianceAsPerc: 0
         canCritical: 0
         type: 0
-  - name: Antidote
+  - id: 101
+    name: Antidote
     description: Removes poison
     type: 0
     usage: 2
@@ -63,7 +65,8 @@ MonoBehaviour:
         varianceAsPerc: 1
         canCritical: 0
         type: 0
-  - name: Bomb
+  - id: 102
+    name: Bomb
     description: Deals 20 damage to target
     type: 0
     usage: 0

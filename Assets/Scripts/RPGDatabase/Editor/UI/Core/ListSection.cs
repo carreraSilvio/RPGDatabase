@@ -11,7 +11,6 @@ public class ListSection <T> : Section where T : BaseData
 
     private ReorderableListFlags _flags;
 
-
     public ListSection(DataList<T> dataList, string title = "Title", ReorderableListFlags flags = ReorderableListFlags.ShowIndices)
     {
         _title = title;
@@ -76,7 +75,9 @@ public class ListSection <T> : Section where T : BaseData
     private void HandleEntryAdd()
     {
         var newEntry = Activator.CreateInstance<T>();
+        newEntry.id = _dataList.FetchUniqueId();
         _dataList.entries.Add(newEntry);
+        
     }
 
     private void HandleEntryRemove(int index)

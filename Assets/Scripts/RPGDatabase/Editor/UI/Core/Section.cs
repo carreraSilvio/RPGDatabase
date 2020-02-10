@@ -1,4 +1,4 @@
-﻿using BrightLib.Extensions;
+﻿using BrightLib.Utility;
 
 public class Section
 {
@@ -6,7 +6,7 @@ public class Section
 
     protected void DrawTitle()
     {
-        GUILayoutExtensions.LabelBold(_title);
+        GUILayoutUtility.LabelBold(_title);
     }
 
     public virtual void Draw()

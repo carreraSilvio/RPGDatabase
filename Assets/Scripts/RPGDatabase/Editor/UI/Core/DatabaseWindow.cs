@@ -274,7 +274,6 @@ public class DatabaseWindow : EditorWindow
         UpdateDataList(_attributeSpectDataList, _attributeSpecListSection);
     }
 
-
     private void DrawInfo<T>(ListSection<T> listSection) where T : BaseData
     {
         if (listSection.TotalEntries == 0) return;

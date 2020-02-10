@@ -77,7 +77,7 @@ public class EffectsSection : Section
         int stringAttr = EditorGUILayout.Popup("Attribute", (int)effect.damage.attribute, validOptions);
 
         effect.damage.attribute = (ActorAttributeType)stringAttr;
-        effect.damage.amountAsPerc = EditorGUILayout.Toggle("Use Percentual", effect.damage.amountAsPerc);
+        effect.damage.amountAsPerc = EditorGUILayout.Toggle("Use %", effect.damage.amountAsPerc);
         if (effect.damage.amountAsPerc)
         {
             effect.damage.amount = EditorGUILayout.Slider("Amount", effect.damage.amount, 0, 100f);
@@ -87,7 +87,7 @@ public class EffectsSection : Section
         {
             effect.damage.amount = EditorGUILayout.FloatField("Amount", effect.damage.amount);
         }
-        effect.damage.varianceAsPerc = EditorGUILayout.Toggle("Use Percentual", effect.damage.varianceAsPerc);
+        effect.damage.varianceAsPerc = EditorGUILayout.Toggle("Use %", effect.damage.varianceAsPerc);
         if (effect.damage.varianceAsPerc)
         {
             effect.damage.variance = EditorGUILayout.Slider("Variance", effect.damage.variance, 0, 100f);

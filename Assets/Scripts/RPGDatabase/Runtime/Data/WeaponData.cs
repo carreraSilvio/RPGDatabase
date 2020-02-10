@@ -13,5 +13,4 @@ public class WeaponData : BaseData
     public int lckIncrease;
     public int defIncrease;
     public int resIncrease;
-
 }

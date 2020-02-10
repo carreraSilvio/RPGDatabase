@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: 03-SkillsDataList
   m_EditorClassIdentifier: 
   entries:
-  - name: Cura
+  - id: 100
+    name: Cura
     description: Restores 50 HP to one target
     damage: 0
     usage: 2
@@ -39,7 +40,8 @@ MonoBehaviour:
         varianceAsPerc: 0
         canCritical: 0
         type: 0
-  - name: Flare
+  - id: 101
+    name: Flare
     description: 20 Fire damage to a single enemy
     damage: 0
     usage: 0
