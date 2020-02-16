@@ -21,6 +21,10 @@ public class ActorClassData : BaseData
     public int weaponTypeId;
     public SkillUnlockArgs[] skills;
 
+    public ActorClassData(int id) : base(id)
+    {
+    }
+
     public AnimationCurve FetchCurve(ActorAttributeType type)
     {
         if (type == ActorAttributeType.HP)              return hpCurve;

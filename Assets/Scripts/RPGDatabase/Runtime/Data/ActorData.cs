@@ -6,4 +6,8 @@ public class ActorData : BaseData
     public int initialLevel = 1;
 
     public int initialWeapon = 1;
+
+    public ActorData(int id) : base(id)
+    {
+    }
 }

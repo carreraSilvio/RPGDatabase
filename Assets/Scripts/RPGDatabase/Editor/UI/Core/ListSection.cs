@@ -2,6 +2,7 @@
 using Rotorz.ReorderableList;
 using System.Collections.Generic;
 using System;
+using RPGDatabase.Runtime.Core;
 
 public class ListSection <T> : Section where T : BaseData
 {
@@ -74,10 +75,10 @@ public class ListSection <T> : Section where T : BaseData
 
     private void HandleEntryAdd()
     {
-        var newEntry = Activator.CreateInstance<T>();
-        newEntry.SetId(_dataList.FetchUniqueId());
+        var uniqueId = DatabaseUtils.Config.FetchUniqueId();
+        var newEntry = (T)Activator.CreateInstance(typeof(T), uniqueId);
+        //newEntry.SetId(_dataList.FetchUniqueId());
         _dataList.entries.Add(newEntry);
-        
     }
 
     private void HandleEntryRemove(int index)

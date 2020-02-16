@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using RPGDatabase.Runtime.Core;
+using UnityEditor;
 using UnityEngine;
 
 public class DatabaseFactory : MonoBehaviour
@@ -13,6 +14,11 @@ public class DatabaseFactory : MonoBehaviour
 
         CreateDatabaseAsset<WeaponTypeDataList>();
         CreateDatabaseAsset<AttributeSpecDataList>();
+
+        var config = ScriptableObject.CreateInstance<DatabaseConfigData>();
+        AssetDatabase.CreateAsset(config, "Assets/Resources/Database/00-DatabaseConfig.asset");
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
     }
 
     public static void CreateDatabaseAsset <T> () where T  : DatabaseEntry
@@ -56,7 +62,7 @@ public class DatabaseFactory : MonoBehaviour
         {
             list.entries = new System.Collections.Generic.List<ActorData>
             {
-                new ActorData() { name = "Alex" }
+                new ActorData(DatabaseUtils.Config.FetchUniqueId()) { name = "Alex" }
             };
             AssetDatabase.CreateAsset(list, "Assets/Resources/Database/01-ActorDataList.asset");
             AssetDatabase.SaveAssets();
@@ -77,7 +83,7 @@ public class DatabaseFactory : MonoBehaviour
         {
             list.entries = new System.Collections.Generic.List<ActorClassData>
             {
-                new ActorClassData() { name = "Warrior" }
+                new ActorClassData(DatabaseUtils.Config.FetchUniqueId()) { name = "Warrior" }
             };
             AssetDatabase.CreateAsset(list, "Assets/Resources/Database/02-ActorClassDataList.asset");
             AssetDatabase.SaveAssets();
@@ -98,7 +104,7 @@ public class DatabaseFactory : MonoBehaviour
         {
             skills.entries = new System.Collections.Generic.List<SkillData>
             {
-                new SkillData() { name = "Fireball" }
+                new SkillData(DatabaseUtils.Config.FetchUniqueId()) { name = "Fireball" }
             };
             AssetDatabase.CreateAsset(skills, "Assets/Resources/Database/03-SkillDataList.asset");
             AssetDatabase.SaveAssets();
@@ -119,7 +125,7 @@ public class DatabaseFactory : MonoBehaviour
         {
             list.entries = new System.Collections.Generic.List<WeaponData>
             {
-                new WeaponData() { name = "Bronze Sword" }
+                new WeaponData(DatabaseUtils.Config.FetchUniqueId()) { name = "Bronze Sword" }
             };
             AssetDatabase.CreateAsset(list, "Assets/Resources/Database/05-WeaponDataList.asset");
             AssetDatabase.SaveAssets();
@@ -140,7 +146,7 @@ public class DatabaseFactory : MonoBehaviour
         {
             list.entries = new System.Collections.Generic.List<WeaponTypeData>
             {
-                new WeaponTypeData() { name = "Sword" }
+                new WeaponTypeData(DatabaseUtils.Config.FetchUniqueId()) { name = "Sword" }
             };
             AssetDatabase.CreateAsset(list, "Assets/Resources/Database/10-WeaponTypesDataList.asset");
             AssetDatabase.SaveAssets();
@@ -161,11 +167,11 @@ public class DatabaseFactory : MonoBehaviour
         {
             list.entries = new System.Collections.Generic.List<AttributeSpecData>
             {
-                new AttributeSpecData() { name = "Level", start = 1, end = 100},
-                new AttributeSpecData() { name = "XP", start = 0, end = 9999},
-                new AttributeSpecData() { name = "HP", start = 20, end = 999 },
-                new AttributeSpecData() { name = "MP", start = 20, end = 999 },
-                new AttributeSpecData() { name = "Common", start = 5, end = 99 }
+                new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "Level", start = 1, end = 100},
+                new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "XP", start = 0, end = 9999},
+                new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "HP", start = 20, end = 999 },
+                new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "MP", start = 20, end = 999 },
+                new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "Common", start = 5, end = 99 }
 
             };
             AssetDatabase.CreateAsset(list, "Assets/Resources/Database/11-AttributeSpecDataList.asset");

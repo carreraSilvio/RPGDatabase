@@ -8,9 +8,15 @@ public class WeaponData : BaseData
 
     public int strIncrease;
     public int magIncrease;
+
     public int dexIncrease;
     public int agiIncrease;
     public int lckIncrease;
+
     public int defIncrease;
     public int resIncrease;
+
+    public WeaponData(int id) : base(id)
+    {
+    }
 }

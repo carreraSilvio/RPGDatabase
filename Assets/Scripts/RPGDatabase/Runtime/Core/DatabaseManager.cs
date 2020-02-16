@@ -12,6 +12,7 @@ namespace RPGDatabase.Runtime.Core
         {
             _entries = new Dictionary<Type, DatabaseEntry>();
         }
+
         public void Load()
         {
             var databaseEntries = DatabaseLoader.LoadDatabaseAssets();

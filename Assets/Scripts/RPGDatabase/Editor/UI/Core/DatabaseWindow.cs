@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class DatabaseWindow : EditorWindow
 {
-    private const string _K_TITLE       = "Database";
-    private const string _K_MENU_NAME   = "Database";
+    private const string _kTitle     = "Database";
+    private const string _kMenuName  = "Database";
 
     private const string k_prefCoreTabSelected = "BrightDBPref_CoreTabSelected";
     private const string k_prefMainTabSelected = "BrightDBPref_TabSelected";
     private const string k_prefConfigTabSelected = "BrightDBPref_ConfigTabSelected";
     private const string k_prefLastSaveDateTime = "BrightDBPref_LastSaveDateTime";
-    private const int _K_START_TAB    = 0;
 
     private ActorDataList _actorDataList;
     private ActorClassDataList _classDataList;
@@ -44,10 +43,10 @@ public class DatabaseWindow : EditorWindow
 
     private RPGDatabaseManager _database;
 
-    [MenuItem ("Tools/" + _K_MENU_NAME)]
+    [MenuItem ("Tools/" + _kMenuName)]
 	public static void ShowWindow ()
 	{
-		GetWindow(typeof(DatabaseWindow), false, _K_TITLE);
+		GetWindow(typeof(DatabaseWindow), false, _kTitle);
 	}
 
 	private void OnEnable()
@@ -77,8 +76,6 @@ public class DatabaseWindow : EditorWindow
         _weaponTypeListSection = new ListSection<WeaponTypeData>(_weaponTypeDataList, "Weapon Types");
         var flags = ReorderableListFlags.ShowIndices | ReorderableListFlags.HideAddButton | ReorderableListFlags.DisableReordering | ReorderableListFlags.HideRemoveButtons;
         _attributeSpecListSection = new ListSection<AttributeSpecData>(_attributeSpectDataList, "Attribute Specs", flags);
-
-        
 
         _infoSection = new InfoSection();
         _effectsSection = new EffectsSection();

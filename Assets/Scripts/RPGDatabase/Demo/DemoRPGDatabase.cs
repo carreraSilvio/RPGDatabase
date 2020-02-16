@@ -6,9 +6,9 @@ public class DemoRPGDatabase : MonoBehaviour
 {
     public DemoActorInfoWindow ui;
 
-    private RPGDatabaseManager _database;
-
     private DemoActor[] _actors;
+
+    private RPGDatabaseManager _database;
 
     void Start()
     {
@@ -16,7 +16,7 @@ public class DemoRPGDatabase : MonoBehaviour
         _database = new RPGDatabaseManager();
         _database.Load();
 
-        //Fetch the values you need
+        //Fetch the values and inject them into your runtime classes
         var actorList = _database.FetchEntry<ActorDataList>();
         var classesList = _database.FetchEntry<ActorClassDataList>();
         _actors = new DemoActor[3];
@@ -30,9 +30,12 @@ public class DemoRPGDatabase : MonoBehaviour
             var mp = _database.FetchAmount(actorData.Id, actorData.initialLevel, ActorAttributeType.MP);
 
             _actors[i].SetAttributes(hp, mp);
+        }
 
+        //Display the info in your UI
+        for (int i = 0; i < 3; i++)
+        {
             ui.UpdateDisplay(_actors[i], i);
-          
         }
     }
 }

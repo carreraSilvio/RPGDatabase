@@ -11,7 +11,7 @@ public class ItemData : BaseData
 
     public EffectArgs effect;
 
-    public ItemData()
+    public ItemData(int id) : base(id)
     {
         effect = new EffectArgs();
     }

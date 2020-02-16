@@ -13,7 +13,7 @@ public class SkillData : BaseData
 
     public EffectArgs effect;
 
-    public SkillData()
+    public SkillData(int id) : base(id)
     {
         effect = new EffectArgs();
     }
