@@ -6,6 +6,11 @@ public class DatabaseFactory : MonoBehaviour
 {
     public static void CreateDatabase()
     {
+        var config = ScriptableObject.CreateInstance<DatabaseConfigData>();
+        AssetDatabase.CreateAsset(config, "Assets/Resources/Database/00-DatabaseConfig.asset");
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+
         CreateDatabaseAsset<ActorDataList>();
         CreateDatabaseAsset<ActorClassDataList>();
         CreateDatabaseAsset<SkillDataList>();
@@ -14,14 +19,9 @@ public class DatabaseFactory : MonoBehaviour
 
         CreateDatabaseAsset<WeaponTypeDataList>();
         CreateDatabaseAsset<AttributeSpecDataList>();
-
-        var config = ScriptableObject.CreateInstance<DatabaseConfigData>();
-        AssetDatabase.CreateAsset(config, "Assets/Resources/Database/00-DatabaseConfig.asset");
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
     }
 
-    public static void CreateDatabaseAsset <T> () where T  : DatabaseEntry
+    public static void CreateDatabaseAsset<T>() where T : DatabaseEntry
     {
         if (typeof(T) == typeof(ActorDataList))
         {
@@ -31,9 +31,13 @@ public class DatabaseFactory : MonoBehaviour
         {
             CreateActorClassDataList();
         }
-        else if(typeof(T) == typeof(SkillDataList))
+        else if (typeof(T) == typeof(SkillDataList))
         {
             CreateSkillDataList();
+        }
+        else if (typeof(T) == typeof(ItemDataList))
+        {
+            CreateItemDataList();
         }
         else if (typeof(T) == typeof(WeaponDataList))
         {
@@ -112,6 +116,27 @@ public class DatabaseFactory : MonoBehaviour
         }
     }
 
+    private static void CreateItemDataList()
+    {
+        Debug.Log("Create CreateItemDataList");
+
+        var list = ScriptableObject.CreateInstance<ItemDataList>();
+        if (list == null)
+        {
+            Debug.Log("error creating");
+        }
+        else
+        {
+            list.entries = new System.Collections.Generic.List<ItemData>
+            {
+                new ItemData(DatabaseUtils.Config.FetchUniqueId()) { name = "Health Potion" }
+            };
+            AssetDatabase.CreateAsset(list, "Assets/Resources/Database/04-ItemDataList.asset");
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+    }
+
     private static void CreateWeaponDataList()
     {
         Debug.Log("Create WeaponDataList");
@@ -132,6 +157,7 @@ public class DatabaseFactory : MonoBehaviour
             AssetDatabase.Refresh();
         }
     }
+
 
     private static void CreateWeaponTypeDataList()
     {

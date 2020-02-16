@@ -33,7 +33,12 @@ public class InfoSection : Section
         var classNames = database.FetchEntry<ActorClassDataList>().entries.Select(l => l.name).ToArray();
         var classIds = database.FetchEntry<ActorClassDataList>().entries.Select(l => l.Id).ToArray();
 
-        var actorClass = database.FetchEntry<ActorClassDataList>().entries.First<ActorClassData>(l => l.Id == entry.classId);
+        var actorClass = database.FetchEntry<ActorClassDataList>().entries.FirstOrDefault<ActorClassData>(l => l.Id == entry.classId);
+        if(actorClass == null)
+        {
+            actorClass = new ActorClassData(entry.classId);
+        }
+        
         var weaponNames = database.FetchEntry<WeaponDataList>().entries.Where(l => l.typeId == actorClass.weaponTypeId).Select(l=>l.name).ToArray();
         var weaponIds = database.FetchEntry<WeaponDataList>().entries.Where(l => l.typeId == actorClass.weaponTypeId).Select(l => l.Id).ToArray();
 

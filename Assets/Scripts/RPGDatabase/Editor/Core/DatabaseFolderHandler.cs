@@ -5,7 +5,7 @@ public static class DatabaseFolderHandler
 {
     public static bool ValidateAllFolders()
     {
-        bool valid = ValidateFolder("Assets/Resources", "Assets", "Resource");
+        bool valid = ValidateFolder("Assets/Resources", "Assets", "Resources");
         valid &= ValidateFolder("Assets/Resources/Database", "Resources", "Database");
 
         return valid;
