@@ -75,7 +75,7 @@ public class ListSection <T> : Section where T : BaseData
     private void HandleEntryAdd()
     {
         var newEntry = Activator.CreateInstance<T>();
-        newEntry.id = _dataList.FetchUniqueId();
+        newEntry.SetId(_dataList.FetchUniqueId());
         _dataList.entries.Add(newEntry);
         
     }

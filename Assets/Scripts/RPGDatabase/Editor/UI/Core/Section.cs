@@ -1,4 +1,5 @@
 ﻿using BrightLib.Utility;
+using RPGDatabase.Runtime.Core;
 
 public class Section
 {
@@ -14,7 +15,7 @@ public class Section
 
     }
 
-    public virtual void Draw(DatabaseManager database)
+    public virtual void Draw(RPGDatabaseManager database)
     {
 
     }

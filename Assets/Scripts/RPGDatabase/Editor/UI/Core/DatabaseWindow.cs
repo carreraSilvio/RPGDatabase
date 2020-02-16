@@ -1,4 +1,5 @@
 ﻿using Rotorz.ReorderableList;
+using RPGDatabase.Runtime.Core;
 using UnityEditor;
 using UnityEngine;
 
@@ -41,7 +42,7 @@ public class DatabaseWindow : EditorWindow
     enum ConfigTabId {WeaponsTypes, AttributeSpecs};
     private ConfigTabId _configTabSelected;
 
-    private DatabaseManager _database;
+    private RPGDatabaseManager _database;
 
     [MenuItem ("Tools/" + _K_MENU_NAME)]
 	public static void ShowWindow ()
@@ -51,7 +52,14 @@ public class DatabaseWindow : EditorWindow
 
 	private void OnEnable()
 	{
-        _database = new DatabaseManager();
+        DatabaseFolderHandler.ValidateAllFolders();
+        _database = new RPGDatabaseManager();
+        _database.Load();
+        if (_database.TotalEntries == 0)
+        {
+            DatabaseFactory.CreateDatabase();
+            _database.Load();
+        }
 
         _actorDataList = _database.FetchEntry<ActorDataList>();
         _classDataList = _database.FetchEntry<ActorClassDataList>();

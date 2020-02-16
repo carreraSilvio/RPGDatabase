@@ -12,24 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5497db83d87b9dd409e55667cf00d2a4, type: 3}
   m_Name: 11-AttributeSpecDataList
   m_EditorClassIdentifier: 
+  _entryUniqueId: 100
   entries:
-  - id: 100
+  - _id: 0
     name: Level
     start: 1
     end: 100
-  - id: 101
-    name: Exp
+  - _id: 0
+    name: XP
     start: 0
     end: 9999
-  - id: 102
+  - _id: 0
     name: HP
     start: 20
     end: 999
-  - id: 103
+  - _id: 0
     name: MP
     start: 20
     end: 999
-  - id: 104
+  - _id: 0
     name: Common
     start: 5
     end: 99

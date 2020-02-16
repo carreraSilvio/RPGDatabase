@@ -12,18 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cfcb966a47fcdc42a4f088952a0c81a, type: 3}
   m_Name: 01-ActorDataTable
   m_EditorClassIdentifier: 
+  _entryUniqueId: 103
   entries:
-  - id: 100
+  - _id: 101
     name: Ryu
     classId: 100
     initialLevel: 1
     initialWeapon: 100
-  - id: 101
+  - _id: 102
     name: Nina
     classId: 101
     initialLevel: 5
     initialWeapon: 101
-  - id: 102
+  - _id: 103
     name: Bo
     classId: 102
     initialLevel: 7

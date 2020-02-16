@@ -1,36 +1,51 @@
-﻿using System;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 public class DatabaseFactory : MonoBehaviour
 {
+    public static void CreateDatabase()
+    {
+        CreateDatabaseAsset<ActorDataList>();
+        CreateDatabaseAsset<ActorClassDataList>();
+        CreateDatabaseAsset<SkillDataList>();
+        CreateDatabaseAsset<ItemDataList>();
+        CreateDatabaseAsset<WeaponDataList>();
+
+        CreateDatabaseAsset<WeaponTypeDataList>();
+        CreateDatabaseAsset<AttributeSpecDataList>();
+    }
+
     public static void CreateDatabaseAsset <T> () where T  : DatabaseEntry
     {
         if (typeof(T) == typeof(ActorDataList))
         {
-            CreateActors();
+            CreateActorDataList();
         }
         else if (typeof(T) == typeof(ActorClassDataList))
         {
-            CreateClasses();
+            CreateActorClassDataList();
         }
         else if(typeof(T) == typeof(SkillDataList))
         {
-            CreateSkills();
+            CreateSkillDataList();
         }
         else if (typeof(T) == typeof(WeaponDataList))
         {
-            
+            CreateWeaponDataList();
         }
         else if (typeof(T) == typeof(WeaponTypeDataList))
         {
-            CreateWeaponTypes();
+            CreateWeaponTypeDataList();
+        }
+        else if (typeof(T) == typeof(AttributeSpecDataList))
+        {
+            CreateAttributeSpecDataList();
         }
     }
 
-    private static void CreateActors()
+    private static void CreateActorDataList()
     {
-        Debug.Log("creating actors ");
+        Debug.Log("Create ActorDataList");
 
         var list = ScriptableObject.CreateInstance<ActorDataList>();
         if (list == null)
@@ -43,15 +58,15 @@ public class DatabaseFactory : MonoBehaviour
             {
                 new ActorData() { name = "Alex" }
             };
-            AssetDatabase.CreateAsset(list, "Assets/Resources/Database/01-ActorDataTable.asset");
+            AssetDatabase.CreateAsset(list, "Assets/Resources/Database/01-ActorDataList.asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
     }
 
-    private static void CreateClasses()
+    private static void CreateActorClassDataList()
     {
-        Debug.Log("creating classes");
+        Debug.Log("Create ActorClassDataList");
 
         var list = ScriptableObject.CreateInstance<ActorClassDataList>();
         if (list == null)
@@ -64,15 +79,15 @@ public class DatabaseFactory : MonoBehaviour
             {
                 new ActorClassData() { name = "Warrior" }
             };
-            AssetDatabase.CreateAsset(list, "Assets/Resources/Database/02-ActorClassDataTable.asset");
+            AssetDatabase.CreateAsset(list, "Assets/Resources/Database/02-ActorClassDataList.asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
     }
 
-    private static void CreateSkills()
+    private static void CreateSkillDataList()
     {
-        Debug.Log("creating skills ");
+        Debug.Log("Create SkillDataList");
 
         var skills = ScriptableObject.CreateInstance<SkillDataList>();
         if (skills == null)
@@ -85,15 +100,36 @@ public class DatabaseFactory : MonoBehaviour
             {
                 new SkillData() { name = "Fireball" }
             };
-            AssetDatabase.CreateAsset(skills, "Assets/Resources/Database/03-SkillsDataTable.asset");
+            AssetDatabase.CreateAsset(skills, "Assets/Resources/Database/03-SkillDataList.asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
     }
 
-    private static void CreateWeaponTypes()
+    private static void CreateWeaponDataList()
     {
-        Debug.Log("creating weapon types");
+        Debug.Log("Create WeaponDataList");
+
+        var list = ScriptableObject.CreateInstance<WeaponDataList>();
+        if (list == null)
+        {
+            Debug.Log("error creating");
+        }
+        else
+        {
+            list.entries = new System.Collections.Generic.List<WeaponData>
+            {
+                new WeaponData() { name = "Bronze Sword" }
+            };
+            AssetDatabase.CreateAsset(list, "Assets/Resources/Database/05-WeaponDataList.asset");
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+    }
+
+    private static void CreateWeaponTypeDataList()
+    {
+        Debug.Log("Create WeaponTypeDataList");
 
         var list = ScriptableObject.CreateInstance<WeaponTypeDataList>();
         if (list == null)
@@ -107,6 +143,32 @@ public class DatabaseFactory : MonoBehaviour
                 new WeaponTypeData() { name = "Sword" }
             };
             AssetDatabase.CreateAsset(list, "Assets/Resources/Database/10-WeaponTypesDataList.asset");
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+    }
+
+    private static void CreateAttributeSpecDataList()
+    {
+        Debug.Log("Create AttributeSpecDataList");
+
+        var list = ScriptableObject.CreateInstance<AttributeSpecDataList>();
+        if (list == null)
+        {
+            Debug.Log("error creating");
+        }
+        else
+        {
+            list.entries = new System.Collections.Generic.List<AttributeSpecData>
+            {
+                new AttributeSpecData() { name = "Level", start = 1, end = 100},
+                new AttributeSpecData() { name = "XP", start = 0, end = 9999},
+                new AttributeSpecData() { name = "HP", start = 20, end = 999 },
+                new AttributeSpecData() { name = "MP", start = 20, end = 999 },
+                new AttributeSpecData() { name = "Common", start = 5, end = 99 }
+
+            };
+            AssetDatabase.CreateAsset(list, "Assets/Resources/Database/11-AttributeSpecDataList.asset");
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }

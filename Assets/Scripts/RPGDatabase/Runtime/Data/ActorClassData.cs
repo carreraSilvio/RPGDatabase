@@ -21,6 +21,24 @@ public class ActorClassData : BaseData
     public int weaponTypeId;
     public SkillUnlockArgs[] skills;
 
+    public AnimationCurve FetchCurve(ActorAttributeType type)
+    {
+        if (type == ActorAttributeType.HP)              return hpCurve;
+        else if (type == ActorAttributeType.MP)         return mpCurve;
+
+        else if (type == ActorAttributeType.Strength)   return strCurve;
+        else if (type == ActorAttributeType.Magic)      return magCurve;
+
+        else if (type == ActorAttributeType.Dextery)    return dexCurve;
+        else if (type == ActorAttributeType.Agility)    return agiCurve;
+        else if (type == ActorAttributeType.Luck)       return lckCurve;
+
+        else if (type == ActorAttributeType.Defense)    return defCurve;
+        else if (type == ActorAttributeType.Resistance) return resCurve;
+
+        return expCurve;
+    }
+
 }
 
 [System.Serializable]

@@ -9,5 +9,6 @@
     Agility, //Chance of dodging
     Luck, // Affects critical chance and dodge
     Defense, //Reduce phys damage taken
-    Resistance //Reduce mag damage taken
+    Resistance, //Reduce mag damage taken
+    XP
 }

@@ -1,5 +1,6 @@
 ﻿using BrightLib.Utility;
 using Rotorz.ReorderableList;
+using RPGDatabase.Runtime.Core;
 using System;
 using System.Linq;
 using UnityEditor;
@@ -14,7 +15,7 @@ public class InfoSection : Section
 		_title = "Info";
 	}
 	
-	public override void Draw(DatabaseManager database)
+	public override void Draw(RPGDatabaseManager database)
 	{
         if (entrySelected is ActorData)              DrawActor(database);
         else if(entrySelected is ActorClassData)     DrawClass(database);
@@ -25,16 +26,16 @@ public class InfoSection : Section
         else if (entrySelected is AttributeSpecData) DrawAttributeSpec();
     }
 
-    private void DrawActor(DatabaseManager database)
+    private void DrawActor(RPGDatabaseManager database)
     {
         var entry = (ActorData)entrySelected;
 
         var classNames = database.FetchEntry<ActorClassDataList>().entries.Select(l => l.name).ToArray();
-        var classIds = database.FetchEntry<ActorClassDataList>().entries.Select(l => l.id).ToArray();
+        var classIds = database.FetchEntry<ActorClassDataList>().entries.Select(l => l.Id).ToArray();
 
-        var actorClass = database.FetchEntry<ActorClassDataList>().entries.First<ActorClassData>(l => l.id == entry.classId);
+        var actorClass = database.FetchEntry<ActorClassDataList>().entries.First<ActorClassData>(l => l.Id == entry.classId);
         var weaponNames = database.FetchEntry<WeaponDataList>().entries.Where(l => l.typeId == actorClass.weaponTypeId).Select(l=>l.name).ToArray();
-        var weaponIds = database.FetchEntry<WeaponDataList>().entries.Where(l => l.typeId == actorClass.weaponTypeId).Select(l => l.id).ToArray();
+        var weaponIds = database.FetchEntry<WeaponDataList>().entries.Where(l => l.typeId == actorClass.weaponTypeId).Select(l => l.Id).ToArray();
 
         var attrList = database.FetchEntry<AttributeSpecDataList>();
         var level = attrList.entries.First<AttributeSpecData>(x => x.name == "Level");
@@ -57,11 +58,11 @@ public class InfoSection : Section
     private int previewLv = 1;
     private Vector2 classAreaVect;
     private Vector2 skillUnlockVect;
-    private void DrawClass(DatabaseManager database)
+    private void DrawClass(RPGDatabaseManager database)
     {
-        var weaponTypeIds = database.FetchEntry<WeaponTypeDataList>().entries.Select(l => l.id).ToArray();
+        var weaponTypeIds = database.FetchEntry<WeaponTypeDataList>().entries.Select(l => l.Id).ToArray();
         var weaponTypeNames = database.FetchEntry<WeaponTypeDataList>().entries.Select(l => l.name).ToArray();
-        var skillIds = database.FetchEntry<SkillDataList>().entries.Select(l => l.id).ToArray();
+        var skillIds = database.FetchEntry<SkillDataList>().entries.Select(l => l.Id).ToArray();
         var skillNames = database.FetchEntry<SkillDataList>().entries.Select(l => l.name).ToArray();
 
         var entry = (ActorClassData)entrySelected;
@@ -80,8 +81,11 @@ public class InfoSection : Section
         entry.mpCurve = EditorGUILayout.CurveField("MP", entry.mpCurve, GUILayout.Height(25f));
         entry.strCurve = EditorGUILayout.CurveField("Strength", entry.strCurve, GUILayout.Height(25f));
         entry.magCurve = EditorGUILayout.CurveField("Magic", entry.magCurve, GUILayout.Height(25f));
+
         entry.dexCurve = EditorGUILayout.CurveField("Dextery", entry.dexCurve, GUILayout.Height(25f));
+        entry.agiCurve = EditorGUILayout.CurveField("Agility", entry.agiCurve, GUILayout.Height(25f));
         entry.lckCurve = EditorGUILayout.CurveField("Luck", entry.lckCurve, GUILayout.Height(25f));
+
         entry.defCurve = EditorGUILayout.CurveField("Defense", entry.defCurve, GUILayout.Height(25f));
         entry.resCurve = EditorGUILayout.CurveField("Resistance", entry.resCurve, GUILayout.Height(25f));
         #endregion
@@ -90,7 +94,7 @@ public class InfoSection : Section
         EditorGUILayout.BeginVertical("GroupBox", GUILayout.Width(350));
         var list = database.FetchEntry<AttributeSpecDataList>();
         var level = list.entries.First<AttributeSpecData>(x => x.name == "Level");
-        var exp = list.entries.First<AttributeSpecData>(x => x.name == "Exp");
+        var exp = list.entries.First<AttributeSpecData>(x => x.name == "XP");
         
         var hp = list.entries.First<AttributeSpecData>(x => x.name == "HP");
         var mp = list.entries.First<AttributeSpecData>(x => x.name == "MP");
@@ -100,30 +104,33 @@ public class InfoSection : Section
         previewLv = EditorGUILayout.IntSlider("Lv", previewLv, level.start, level.end);
 
         float normalizedValue = Mathf.InverseLerp(level.start, level.end, previewLv);
-        float baseT = Mathf.Lerp(0, 1f, normalizedValue);
-        float curveT = 1f;
+        float targetCurveValue = 0f;
 
-        curveT = entry.expCurve.Evaluate(baseT);
-        EditorGUILayout.LabelField($"Exp:\t{Mathf.Round(Mathf.Lerp(exp.start, exp.end, curveT))}");
+        targetCurveValue = entry.expCurve.Evaluate(normalizedValue);
+        EditorGUILayout.LabelField($"Exp:\t{Mathf.Round(Mathf.Lerp(exp.start, exp.end, targetCurveValue))}");
 
-        curveT = entry.hpCurve.Evaluate(baseT);
-        EditorGUILayout.LabelField($"HP:\t{Mathf.Round(Mathf.Lerp(hp.start, hp.end, curveT))}");
-        curveT = entry.mpCurve.Evaluate(baseT);
-        EditorGUILayout.LabelField($"MP:\t{Mathf.Round(Mathf.Lerp(mp.end, mp.end, curveT))}");
+        targetCurveValue = entry.hpCurve.Evaluate(normalizedValue);
+        EditorGUILayout.LabelField($"HP:\t{Mathf.Round(Mathf.Lerp(hp.start, hp.end, targetCurveValue))}");
+        targetCurveValue = entry.mpCurve.Evaluate(normalizedValue);
+        EditorGUILayout.LabelField($"MP:\t{Mathf.Round(Mathf.Lerp(mp.end, mp.end, targetCurveValue))}");
 
-        curveT = entry.strCurve.Evaluate(baseT);
-        EditorGUILayout.LabelField($"Str:\t{Mathf.Round(Mathf.Lerp(attr.start, attr.end, curveT))}");
-        curveT = entry.magCurve.Evaluate(baseT);
-        EditorGUILayout.LabelField($"Mag:\t{Mathf.Round(Mathf.Lerp(attr.start, attr.end, curveT))}");
+        targetCurveValue = entry.strCurve.Evaluate(normalizedValue);
+        EditorGUILayout.LabelField($"Str:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
+        targetCurveValue = entry.magCurve.Evaluate(normalizedValue);
+        EditorGUILayout.LabelField($"Mag:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
 
-        curveT = entry.dexCurve.Evaluate(baseT);
-        EditorGUILayout.LabelField($"Dex:\t{Mathf.Round(Mathf.Lerp(attr.start, attr.end, curveT))}");
-        curveT = entry.dexCurve.Evaluate(baseT);
-        EditorGUILayout.LabelField($"Lck:\t{Mathf.Round(Mathf.Lerp(attr.start, attr.end, curveT))}");
-        curveT = entry.lckCurve.Evaluate(baseT);
-        EditorGUILayout.LabelField($"Mag:\t{Mathf.Round(Mathf.Lerp(attr.start, attr.end, curveT))}");
-        curveT = entry.resCurve.Evaluate(baseT);
-        EditorGUILayout.LabelField($"Res:\t{Mathf.Round(Mathf.Lerp(attr.start, attr.end, curveT))}");
+        targetCurveValue = entry.dexCurve.Evaluate(normalizedValue);
+        EditorGUILayout.LabelField($"Dex:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
+        targetCurveValue = entry.agiCurve.Evaluate(normalizedValue);
+        EditorGUILayout.LabelField($"Agi:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
+        targetCurveValue = entry.lckCurve.Evaluate(normalizedValue);
+        EditorGUILayout.LabelField($"Lck:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
+
+        targetCurveValue = entry.defCurve.Evaluate(normalizedValue);
+        EditorGUILayout.LabelField($"Def:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
+        targetCurveValue = entry.resCurve.Evaluate(normalizedValue);
+        EditorGUILayout.LabelField($"Res:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
+
         EditorGUILayout.EndVertical();
         #endregion
 
@@ -202,9 +209,9 @@ public class InfoSection : Section
         EditorGUILayout.EndVertical();
     }
 
-    private void DrawWeapon(DatabaseManager database)
+    private void DrawWeapon(RPGDatabaseManager database)
     {
-        var weaponTypeIds = database.FetchEntry<WeaponTypeDataList>().entries.Select(l => l.id).ToArray();
+        var weaponTypeIds = database.FetchEntry<WeaponTypeDataList>().entries.Select(l => l.Id).ToArray();
         var weaponTypeNames = database.FetchEntry<WeaponTypeDataList>().entries.Select(l => l.name).ToArray();
 
         var entry = (WeaponData)entrySelected;
