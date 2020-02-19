@@ -1,28 +1,26 @@
 ﻿using BrightLib.Utility;
-using Rotorz.ReorderableList;
 using RPGDatabase.Runtime.Core;
-using System;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
 public class InfoSection : Section
 {
-	public BaseData entrySelected;
-	
-	public InfoSection()
-	{
-		_title = "Info";
-	}
-	
-	public override void Draw(RPGDatabaseManager database)
-	{
-        if (entrySelected is ActorData)              DrawActor(database);
-        else if(entrySelected is ActorClassData)     DrawClass(database);
-        else if (entrySelected is SkillData)         DrawSkill();
-        else if (entrySelected is ItemData)          DrawItem();
-        else if (entrySelected is WeaponData)        DrawWeapon(database);
-        else if (entrySelected is WeaponTypeData)    DrawWeaponType();
+    public BaseData entrySelected;
+
+    public InfoSection()
+    {
+        _title = "Info";
+    }
+
+    public override void Draw(RPGDatabaseManager database)
+    {
+        if (entrySelected is ActorData) DrawActor(database);
+        else if (entrySelected is ActorClassData) DrawClass(database);
+        else if (entrySelected is SkillData) DrawSkill();
+        else if (entrySelected is ItemData) DrawItem();
+        else if (entrySelected is WeaponData) DrawWeapon(database);
+        else if (entrySelected is WeaponTypeData) DrawWeaponType();
         else if (entrySelected is AttributeSpecData) DrawAttributeSpec();
     }
 
@@ -34,12 +32,12 @@ public class InfoSection : Section
         var classIds = database.FetchEntry<ActorClassDataList>().entries.Select(l => l.Id).ToArray();
 
         var actorClass = database.FetchEntry<ActorClassDataList>().entries.FirstOrDefault<ActorClassData>(l => l.Id == entry.classId);
-        if(actorClass == null)
+        if (actorClass == null)
         {
             actorClass = new ActorClassData(entry.classId);
         }
-        
-        var weaponNames = database.FetchEntry<WeaponDataList>().entries.Where(l => l.typeId == actorClass.weaponTypeId).Select(l=>l.name).ToArray();
+
+        var weaponNames = database.FetchEntry<WeaponDataList>().entries.Where(l => l.typeId == actorClass.weaponTypeId).Select(l => l.name).ToArray();
         var weaponIds = database.FetchEntry<WeaponDataList>().entries.Where(l => l.typeId == actorClass.weaponTypeId).Select(l => l.Id).ToArray();
 
         var attrList = database.FetchEntry<AttributeSpecDataList>();
@@ -54,7 +52,7 @@ public class InfoSection : Section
 
         EditorGUILayout.BeginVertical("GroupBox", GUILayout.Width(350));
         EditorGUILayoutUtility.LabelFieldBold("Initial Equipment");
-        entry.initialWeapon  = EditorGUILayout.IntPopup("Weapon", entry.initialWeapon, weaponNames, weaponIds);
+        entry.initialWeapon = EditorGUILayout.IntPopup("Weapon", entry.initialWeapon, weaponNames, weaponIds);
         EditorGUILayout.EndVertical();
 
         EditorGUILayout.EndVertical();
@@ -78,7 +76,7 @@ public class InfoSection : Section
         DrawTitle();
         entry.name = EditorGUILayout.TextField("Name", entry.name);
 
-       
+
         #region Growth
         EditorGUILayoutUtility.LabelFieldBold("Growth");
         entry.expCurve = EditorGUILayout.CurveField("Exp", entry.expCurve, GUILayout.Height(25f));
@@ -100,7 +98,7 @@ public class InfoSection : Section
         var list = database.FetchEntry<AttributeSpecDataList>();
         var level = list.entries.First<AttributeSpecData>(x => x.name == "Level");
         var exp = list.entries.First<AttributeSpecData>(x => x.name == "XP");
-        
+
         var hp = list.entries.First<AttributeSpecData>(x => x.name == "HP");
         var mp = list.entries.First<AttributeSpecData>(x => x.name == "MP");
         var attr = list.entries.First<AttributeSpecData>(x => x.name == "Common");
@@ -175,7 +173,7 @@ public class InfoSection : Section
         EditorGUILayout.EndVertical();
     }
 
-    
+
 
     private void DrawSkill()
     {
@@ -269,7 +267,7 @@ public class InfoSection : Section
 
         float start = entry.start;
         float end = entry.end;
-        
+
         EditorGUILayout.MinMaxSlider(ref start, ref end, 0, 9999);
 
         entry.start = (int)start;

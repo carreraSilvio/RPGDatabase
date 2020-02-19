@@ -6,7 +6,7 @@ public static class DatabaseFolderHandler
     public static bool ValidateAllFolders()
     {
         bool valid = ValidateFolder("Assets/Resources", "Assets", "Resources");
-        valid &= ValidateFolder("Assets/Resources/Database", "Resources", "Database");
+        valid &= ValidateFolder("Assets/Resources/Database", "Assets/Resources", "Database");
 
         return valid;
     }
@@ -22,26 +22,4 @@ public static class DatabaseFolderHandler
 
         return AssetDatabase.IsValidFolder(path);
     }
-    
-    //public static void CheckResourcesFolder()
-    //{
-    //    if (!AssetDatabase.IsValidFolder("Assets/Resources"))
-    //    {
-    //        Debug.Log("creating Resources folder");
-    //        AssetDatabase.CreateFolder("Assets", "Resources");
-    //        Debug.Assert(AssetDatabase.IsValidFolder("Assets/Resources"), "Error creating resources folder");
-    //    }
-    //}
-
-    //public static void CheckDatabaseFolder()
-    //{
-    //    if (!AssetDatabase.IsValidFolder("Assets/Resources/Database"))
-    //    {
-    //        Debug.Log("creating Database folder");
-    //        AssetDatabase.CreateFolder("Resources", "Database");
-    //        Debug.Assert(AssetDatabase.IsValidFolder("Assets/Resources/Database"), "Error creating database folder");
-    //    }
-    //}
-
-
 }

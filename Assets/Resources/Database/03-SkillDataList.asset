@@ -9,18 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2a3087445750964f9dc02ef7d793e2f, type: 3}
-  m_Name: 04-ItemDataList
+  m_Script: {fileID: 11500000, guid: 7a44e938d88d92346b6bbef70addef33, type: 3}
+  m_Name: 03-SkillDataList
   m_EditorClassIdentifier: 
   _entryUniqueId: 100
   entries:
-  - _id: 203
-    name: Health Potion
+  - _id: 202
+    name: Fireball
     description: 
-    type: 0
+    damage: 0
     usage: 0
     scope: 0
-    price: 0
+    hpCost: 0
+    mpCost: 0
     effect:
       type: 0
       state: 0

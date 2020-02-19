@@ -12,4 +12,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927ceee3e190b49408c5ea3d3ac94ea7, type: 3}
   m_Name: 00-DatabaseConfig
   m_EditorClassIdentifier: 
-  _entryUniqueId: 200
