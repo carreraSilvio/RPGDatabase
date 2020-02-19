@@ -12,26 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a984f9dcd80e44dbe100a6e5a6e34c, type: 3}
   m_Name: 05-WeaponDataList
   m_EditorClassIdentifier: 
-  _entryUniqueId: 100
+  _entryUniqueId: 103
   entries:
-  - _id: 204
-    name: Bronze Sword
+  - _id: 100
+    name: Dirk
     description: 
-    price: 0
-    typeId: 205
-    strIncrease: 0
+    price: 50
+    typeId: 100
+    strIncrease: 5
     magIncrease: 0
     dexIncrease: 0
     agiIncrease: 0
     lckIncrease: 0
     defIncrease: 0
     resIncrease: 0
-  - _id: 211
-    name: 
+  - _id: 101
+    name: Short Rapier
     description: 
-    price: 0
-    typeId: 0
-    strIncrease: 0
+    price: 45
+    typeId: 101
+    strIncrease: 5
+    magIncrease: 0
+    dexIncrease: 0
+    agiIncrease: 0
+    lckIncrease: 0
+    defIncrease: 0
+    resIncrease: 0
+  - _id: 102
+    name: Bronze Bow
+    description: 
+    price: 55
+    typeId: 103
+    strIncrease: 14
     magIncrease: 0
     dexIncrease: 0
     agiIncrease: 0

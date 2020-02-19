@@ -14,23 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entryUniqueId: 100
   entries:
-  - _id: 206
+  - _id: 0
     name: Level
     start: 1
     end: 100
-  - _id: 207
+  - _id: 0
     name: XP
     start: 0
     end: 9999
-  - _id: 208
+  - _id: 0
     name: HP
     start: 20
     end: 999
-  - _id: 209
+  - _id: 0
     name: MP
     start: 20
     end: 999
-  - _id: 210
+  - _id: 0
     name: Common
     start: 5
     end: 99
