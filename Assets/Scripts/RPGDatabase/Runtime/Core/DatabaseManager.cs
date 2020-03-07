@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RPGDatabase.Runtime.Core;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 

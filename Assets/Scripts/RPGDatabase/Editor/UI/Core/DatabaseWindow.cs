@@ -53,6 +53,7 @@ public class DatabaseWindow : EditorWindow
 	{
         DatabaseFolderHandler.ValidateAllFolders();
         _database = new RPGDatabaseManager();
+        
         _database.Load();
         if (_database.TotalEntries == 0)
         {

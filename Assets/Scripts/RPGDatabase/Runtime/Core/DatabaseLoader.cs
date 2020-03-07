@@ -1,20 +1,26 @@
 ﻿using UnityEngine;
 
-public class DatabaseLoader
+namespace RPGDatabase.Runtime.Core
 {
-    private static readonly string _kDefaultFolder = "Database";
-
-    public static DatabaseConfigData LoadDatabaseConfig()
+    public class DatabaseLoader
     {
-        var databaseConfig = Resources.LoadAll<DatabaseConfigData>(_kDefaultFolder)[0];
-       
-        return databaseConfig;
-    }
+        private static readonly string _kDefaultFolder = "Database";
 
-    public static DatabaseEntry[] LoadDatabaseAssets()
-    {
-        var databaseEntries = Resources.LoadAll<DatabaseEntry>(_kDefaultFolder);
+        public static DatabaseConfigData LoadDatabaseConfig()
+        {
+            var databaseConfig = Resources.LoadAll<DatabaseConfigData>(_kDefaultFolder);
 
-        return databaseEntries;
+            if(databaseConfig != null)
+                return databaseConfig[0];
+
+            return null;
+        }
+
+        public static DatabaseEntry[] LoadDatabaseAssets()
+        {
+            var databaseEntries = Resources.LoadAll<DatabaseEntry>(_kDefaultFolder);
+
+            return databaseEntries;
+        }
     }
 }

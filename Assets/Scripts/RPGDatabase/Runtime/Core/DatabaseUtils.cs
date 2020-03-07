@@ -11,6 +11,11 @@ namespace RPGDatabase.Runtime.Core
         private static void Init()
         {
             config = DatabaseLoader.LoadDatabaseConfig();
+
+            if(config == null)
+            {
+                Debug.LogWarning("Database not created properly. Make sure to open Tools/Database to create it.");
+            }
         }
 
     }

@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class DatabaseFactory : MonoBehaviour
 {
-    public static void CreateDatabase()
+    public static void CreateDatabaseConfig()
     {
         var config = ScriptableObject.CreateInstance<DatabaseConfigData>();
         AssetDatabase.CreateAsset(config, "Assets/Resources/Database/00-DatabaseConfig.asset");
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
+    }
+
+    public static void CreateDatabase()
+    {
+        CreateDatabaseConfig();
 
         CreateDatabaseAsset<ActorDataList>();
         CreateDatabaseAsset<ActorClassDataList>();

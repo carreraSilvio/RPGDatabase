@@ -1,4 +1,6 @@
-﻿public class ActorClassDataList : DataList<ActorClassData>
-{
+﻿using System.Linq;
 
+public class ActorClassDataList : DataList<ActorClassData>
+{
+    
 }

@@ -7,6 +7,12 @@ namespace RPGDatabase.Runtime.Core
 {
     public class RPGDatabaseManager : DatabaseManager
     {
+        public ActorClassData FetchClassData(int classDataId)
+        {
+            var classesList = FetchEntry<ActorClassDataList>();
+            return classesList.entries.First<ActorClassData>(l => l.Id == classDataId);
+        }
+
         public int FetchAmount(int actorId, int actorLevel, ActorAttributeType attr)
         {
             int amount = 0;
