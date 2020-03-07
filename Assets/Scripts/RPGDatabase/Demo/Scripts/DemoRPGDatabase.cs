@@ -1,41 +1,43 @@
 ﻿using RPGDatabase.Runtime.Core;
-using System.Linq;
 using UnityEngine;
 
-public class DemoRPGDatabase : MonoBehaviour
+namespace RPGDatabase.Demo
 {
-    public DemoActorInfoWindow ui;
-
-    private DemoActor[] _actors;
-
-    private RPGDatabaseManager _database;
-
-    void Start()
+    public class DemoRPGDatabase : MonoBehaviour
     {
-        //Loading database
-        _database = new RPGDatabaseManager();
-        _database.Load();
+        public DemoActorInfoWindow ui;
 
-        //Fetching data and injecting into runtime classes
-        var actorList = _database.FetchEntry<ActorDataList>();
-        _actors = new DemoActor[3];
+        private DemoActor[] _actors;
 
-        for (int i = 0; i < 3; i++)
+        private RPGDatabaseManager _database;
+
+        void Start()
         {
-            var actorData = actorList.entries[i];
-            var classData = _database.FetchClassData(actorData.classId);
-            _actors[i] = new DemoActor(actorData, classData);
+            //Loading database
+            _database = new RPGDatabaseManager();
+            _database.Load();
 
-            var hp = _database.FetchAmount(actorData.Id, actorData.initialLevel, ActorAttributeType.HP);
-            var mp = _database.FetchAmount(actorData.Id, actorData.initialLevel, ActorAttributeType.MP);
+            //Fetching data and injecting into runtime classes
+            var actorList = _database.FetchEntry<ActorDataList>();
+            _actors = new DemoActor[3];
 
-            _actors[i].SetAttributes(hp, mp);
-        }
+            for (int i = 0; i < 3; i++)
+            {
+                var actorData = actorList.entries[i];
+                var classData = _database.FetchClassData(actorData.classId);
+                _actors[i] = new DemoActor(actorData, classData);
 
-        //Displaying it on the UI
-        for (int i = 0; i < 3; i++)
-        {
-            ui.UpdateDisplay(_actors[i], i);
+                var hp = _database.FetchAmount(actorData.Id, actorData.initialLevel, ActorAttributeType.HP);
+                var mp = _database.FetchAmount(actorData.Id, actorData.initialLevel, ActorAttributeType.MP);
+
+                _actors[i].SetAttributes(hp, mp);
+            }
+
+            //Displaying it on the UI
+            for (int i = 0; i < 3; i++)
+            {
+                ui.UpdateDisplay(_actors[i], i);
+            }
         }
     }
 }

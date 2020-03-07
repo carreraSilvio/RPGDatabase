@@ -1,24 +1,26 @@
-﻿using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class DemoActorInfoUIElement : MonoBehaviour
+namespace RPGDatabase.Demo
 {
-   [SerializeField] private Text _actorName = default;
-   [SerializeField] private Text _actorClass = default;
-   [SerializeField] private Text _actorLvl = default;
-
-   [SerializeField] private Text _actorHP = default;
-   [SerializeField] private Text _actorMP = default;
-
-
-    public void UpdateDisplay(DemoActor actor)
+    public class DemoActorInfoUIElement : MonoBehaviour
     {
-        _actorName.text = actor.name;
-        _actorClass.text = actor.className;
-        _actorLvl.text = $"Lvl: {actor.level}";
+        [SerializeField] private Text _actorName = default;
+        [SerializeField] private Text _actorClass = default;
+        [SerializeField] private Text _actorLvl = default;
 
-        _actorHP.text = $"HP: {actor.hp}";
-        _actorMP.text = $"MP: {actor.mp}";
+        [SerializeField] private Text _actorHP = default;
+        [SerializeField] private Text _actorMP = default;
+
+
+        public void UpdateDisplay(DemoActor actor)
+        {
+            _actorName.text = actor.Name;
+            _actorClass.text = actor.ClassName;
+            _actorLvl.text = $"Lvl: {actor.Level}";
+
+            _actorHP.text = $"HP: {actor.hp}";
+            _actorMP.text = $"MP: {actor.mp}";
+        }
     }
 }

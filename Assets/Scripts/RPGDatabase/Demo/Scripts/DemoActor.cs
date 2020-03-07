@@ -1,29 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class DemoActor 
+﻿namespace RPGDatabase.Demo
 {
-    public string name;
-    public string className;
-
-    public int level;
-    public int xp;
-
-    public int hp;
-    public int mp;
-
-    public DemoActor(ActorData data, ActorClassData classData)
+    public class DemoActor
     {
-        name = data.name;
-        level = data.initialLevel;
-        className = classData.name;
-    }
+        private ActorData _actorData;
+        private ActorClassData _classData;
 
-    public void SetAttributes(int hp, int mp)
-    {
-        this.hp = hp;
-        this.mp = mp;
+        public int xp;
+        private int _level;
+
+        public int hp;
+        public int mp;
+
+        public DemoActor(ActorData data, ActorClassData classData)
+        {
+            _actorData = data;
+            _classData = classData;
+            _level = _actorData.initialLevel;
+        }
+
+        public void SetAttributes(int hp, int mp)
+        {
+            this.hp = hp;
+            this.mp = mp;
+        }
+
+        public string Name { get { return _actorData.name; } }
+        public string ClassName { get { return _classData.name; } }
+
+        public int Level { get => _level; set => _level = value; }
     }
-    
 }

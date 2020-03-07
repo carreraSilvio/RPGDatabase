@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DemoActorInfoWindow : MonoBehaviour
+namespace RPGDatabase.Demo
 {
-    [SerializeField] private DemoActorInfoUIElement[] _actorInfoUIElements = default;
-
-    public void UpdateDisplay(DemoActor actorData, int index)
+    public class DemoActorInfoWindow : MonoBehaviour
     {
-        _actorInfoUIElements[index].UpdateDisplay(actorData);
+        [SerializeField] private DemoActorInfoUIElement[] _actorInfoUIElements = default;
+
+        public void UpdateDisplay(DemoActor actorData, int index)
+        {
+            _actorInfoUIElements[index].UpdateDisplay(actorData);
+        }
     }
 }
