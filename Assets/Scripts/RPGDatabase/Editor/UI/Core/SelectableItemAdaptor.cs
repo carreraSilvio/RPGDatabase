@@ -15,18 +15,16 @@ public class SelectableItemAdaptor : GenericListAdaptor<string>
     public Action<int> onEntryDuplicate;
     public Action<int> onEntryInsert;
 
-    public SelectableItemAdaptor(List<string> list, float itemHeight)
+	public SelectableItemAdaptor(List<string> list, float itemHeight)
 		: base(list, null, itemHeight)
 	{
 	}
 	
-	public void Select(int index)
+	public void SetSelectedIndex(int index)
 	{
 		_selectedIndices.Clear();
 		_selectedIndices.Add(index);
 		_lastSelectedIndex = index;
-
-
 	}
 
 	public override void Move(int sourceIndex, int destIndex)
@@ -84,6 +82,7 @@ public class SelectableItemAdaptor : GenericListAdaptor<string>
 			case EventType.MouseDown:
 				if (Event.current.button == 0 && position.Contains(Event.current.mousePosition)) 
 				{
+					GUI.FocusControl(null);
 					if (Event.current.control) 
 					{
 						// Toggle selection of this item if control key is held.

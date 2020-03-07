@@ -13,6 +13,14 @@ namespace RPGDatabase.Runtime.Core
             return classesList.entries.First<ActorClassData>(l => l.Id == classDataId);
         }
 
+        
+        /// <summary>
+        /// Fetch the amount a given attribute will have in a given level
+        /// </summary>
+        /// <param name="actorId">The actor ID</param>
+        /// <param name="actorLevel">What level the character is</param>
+        /// <param name="attr">The attribute</param>
+        /// <returns></returns>
         public int FetchAmount(int actorId, int actorLevel, ActorAttributeType attr)
         {
             int amount = 0;
@@ -27,7 +35,6 @@ namespace RPGDatabase.Runtime.Core
 
         private int FetchCurveValue(AnimationCurve curve, int actorLevel, ActorAttributeType attr)
         {
-            var list = FetchEntry<AttributeSpecDataList>();
             var level = FetchAttributeData(ActorAttributeType.Level);
 
             float normalizedValue = Mathf.InverseLerp(level.start, level.end, actorLevel);

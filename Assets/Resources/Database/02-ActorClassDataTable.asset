@@ -22,20 +22,20 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 0.14150943
+        outSlope: 0.14150943
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.2
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 2
-        outSlope: 2
+        inSlope: 2.0283015
+        outSlope: 2.0283015
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.050000012
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -746,7 +746,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    weaponTypeId: 102
+    weaponTypeId: 103
     skills:
     - level: 3
       skillId: 101

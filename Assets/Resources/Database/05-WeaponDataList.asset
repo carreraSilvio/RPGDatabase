@@ -24,28 +24,28 @@ MonoBehaviour:
     dexIncrease: 0
     agiIncrease: 0
     lckIncrease: 0
-    defIncrease: 0
+    defIncrease: 2
     resIncrease: 0
   - _id: 101
     name: Short Rapier
     description: 
     price: 45
     typeId: 101
-    strIncrease: 5
+    strIncrease: 4
     magIncrease: 0
     dexIncrease: 0
     agiIncrease: 0
     lckIncrease: 0
     defIncrease: 0
-    resIncrease: 0
+    resIncrease: 2
   - _id: 102
     name: Bronze Bow
     description: 
     price: 55
     typeId: 103
-    strIncrease: 14
+    strIncrease: 4
     magIncrease: 0
-    dexIncrease: 0
+    dexIncrease: 3
     agiIncrease: 0
     lckIncrease: 0
     defIncrease: 0

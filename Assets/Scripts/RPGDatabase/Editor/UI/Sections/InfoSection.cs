@@ -110,12 +110,12 @@ public class InfoSection : Section
         float targetCurveValue = 0f;
 
         targetCurveValue = entry.expCurve.Evaluate(normalizedValue);
-        EditorGUILayout.LabelField($"Exp:\t{Mathf.Round(Mathf.Lerp(exp.start, exp.end, targetCurveValue))}");
+        EditorGUILayout.LabelField($"Exp:\t{exp.FetchAtCurvePoint(targetCurveValue)}");
 
         targetCurveValue = entry.hpCurve.Evaluate(normalizedValue);
-        EditorGUILayout.LabelField($"HP:\t{Mathf.Round(Mathf.Lerp(hp.start, hp.end, targetCurveValue))}");
+        EditorGUILayout.LabelField($"HP:\t{hp.FetchAtCurvePoint(targetCurveValue)}");
         targetCurveValue = entry.mpCurve.Evaluate(normalizedValue);
-        EditorGUILayout.LabelField($"MP:\t{Mathf.Round(Mathf.Lerp(mp.end, mp.end, targetCurveValue))}");
+        EditorGUILayout.LabelField($"MP:\t{mp.FetchAtCurvePoint(targetCurveValue)}");
 
         targetCurveValue = entry.strCurve.Evaluate(normalizedValue);
         EditorGUILayout.LabelField($"Str:\t{attr.FetchAtCurvePoint(targetCurveValue)}");

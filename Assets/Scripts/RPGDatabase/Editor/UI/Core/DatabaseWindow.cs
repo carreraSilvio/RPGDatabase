@@ -93,9 +93,10 @@ public class DatabaseWindow : EditorWindow
 
     private void Save()
 	{
-		Debug.Log("SAVING");
+        var saveDateTime = System.DateTime.Now.ToShortDateString() + " " + System.DateTime.Now.ToShortTimeString();
 
-        EditorPrefs.SetString(k_prefLastSaveDateTime, System.DateTime.Now.ToShortDateString() + " " + System.DateTime.Now.ToShortTimeString());
+        Debug.Log($"Database saved {saveDateTime}");
+        EditorPrefs.SetString(k_prefLastSaveDateTime, saveDateTime);
 
         EditorUtility.SetDirty(_actorDataList);
         EditorUtility.SetDirty(_classDataList);
@@ -110,15 +111,18 @@ public class DatabaseWindow : EditorWindow
 
     public void ShowMainTab()
     {
+        _clearFocusThisFrame.SetTrue();
         _coreTabSelected = CoreTabId.Main;
         EditorPrefs.SetInt(k_prefCoreTabSelected, (int)_coreTabSelected);
     }
 
     public void ShowConfigTab()
     {
+        _clearFocusThisFrame.SetTrue();
         _coreTabSelected = CoreTabId.Config;
         EditorPrefs.SetInt(k_prefCoreTabSelected, (int)_coreTabSelected);
     }
+
 
     void OnGUI()
     {
@@ -166,7 +170,14 @@ public class DatabaseWindow : EditorWindow
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField($"Last saved {EditorPrefs.GetString(k_prefLastSaveDateTime)}");
         EditorGUILayout.EndHorizontal();
+
+        if(_clearFocusThisFrame.IsTrue)
+        {
+            GUI.FocusControl(null);
+        }
     }
+
+    private AutoBool _clearFocusThisFrame;
 
     private void DrawActorsContent()
     {
@@ -308,6 +319,7 @@ public class DatabaseWindow : EditorWindow
         GUI.enabled = (_mainTabSelected != tabId);
         if (GUILayout.Button(tabId.ToString(), GUILayout.Width(110f)))
         {
+            GUI.FocusControl(null);
             _mainTabSelected = tabId;
         }
 
@@ -319,10 +331,30 @@ public class DatabaseWindow : EditorWindow
         GUI.enabled = (_configTabSelected != tabId);
         if (GUILayout.Button(tabId.ToString(), GUILayout.Width(110f)))
         {
+            GUI.FocusControl(null);
             _configTabSelected = tabId;
         }
 
         EditorPrefs.SetInt(k_prefConfigTabSelected, (int)_configTabSelected);
     }
    
+}
+
+public struct AutoBool
+{
+    private bool _on;
+
+    public void SetTrue() { _on = true; }
+
+    public bool IsTrue
+    {
+        get
+        {
+            var ret = _on;
+            _on = false;
+            return ret;
+        }
+        
+    }
+
 }

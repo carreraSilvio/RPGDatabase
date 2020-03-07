@@ -32,8 +32,9 @@ public class ListSection <T> : Section where T : BaseData
         _listAdapter.onEntryRemove += HandleEntryRemove;
         _listAdapter.onEntryDuplicate += HandleEntryDuplicate;
         _listAdapter.onEntryInsert += HandleEntryInsert;
+        
 
-        if (_dataList.entries.Count > 0) Select(0);
+        if (_dataList.entries.Count > 0) _listAdapter.SetSelectedIndex(0);
     }
 
     public void PrepareList(DataList<T> dataList)
@@ -61,11 +62,6 @@ public class ListSection <T> : Section where T : BaseData
         GUILayout.EndHorizontal();
     }
 
-    public void Select(int index)
-    {
-        _listAdapter.Select(index);
-    }
-
     private void HandleEntryMove(int sourceIndex, int destIndex)
     {
         var item = _dataList.entries[sourceIndex];
@@ -77,7 +73,6 @@ public class ListSection <T> : Section where T : BaseData
     {
         var uniqueId = DatabaseUtils.Config.FetchUniqueId();
         var newEntry = (T)Activator.CreateInstance(typeof(T), uniqueId);
-        //newEntry.SetId(_dataList.FetchUniqueId());
         _dataList.entries.Add(newEntry);
     }
 
@@ -87,7 +82,7 @@ public class ListSection <T> : Section where T : BaseData
 
         PrepareList(_dataList);
         if (_dataList.entries.Count > 0)
-            Select(index - 1);
+            _listAdapter.SetSelectedIndex(index - 1);
     }
 
     private void HandleEntryDuplicate(int index)
