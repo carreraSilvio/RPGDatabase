@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class ActorClassData : BaseData
@@ -19,10 +20,11 @@ public class ActorClassData : BaseData
     public AnimationCurve resCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
     public int weaponTypeId;
-    public SkillUnlockArgs[] skills;
+    public List<SkillUnlockArgs> skills;
 
     public ActorClassData(int id) : base(id)
     {
+        skills = new List<SkillUnlockArgs>();
     }
 
     public AnimationCurve FetchCurve(ActorAttributeType type)

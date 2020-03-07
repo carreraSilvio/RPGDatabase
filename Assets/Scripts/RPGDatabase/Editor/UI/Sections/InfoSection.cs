@@ -148,23 +148,32 @@ public class InfoSection : Section
         EditorGUILayout.BeginVertical("GroupBox", GUILayout.Width(350));
         skillUnlockVect = EditorGUILayout.BeginScrollView(skillUnlockVect, GUILayout.MinHeight(90));
         EditorGUILayoutUtility.LabelFieldBold("Skills");
-        if (entry.skills == null) entry.skills = new SkillUnlockArgs[1];
-        var total = EditorGUILayout.IntField("Total:", entry.skills.Length);
+        if (entry.skills == null) entry.skills = new System.Collections.Generic.List<SkillUnlockArgs>();
 
-        System.Array.Resize<SkillUnlockArgs>(ref entry.skills, total);
-
-        for (int i = 0; i < entry.skills.Length; i++)
+        for(int i = 0; i < entry.skills.Count; i++)
         {
-            var skill = entry.skills[i];
-            if (skill == null) skill = new SkillUnlockArgs();
+            var skillUnlockArgs = entry.skills[i];
 
             EditorGUI.indentLevel++;
             EditorGUILayout.BeginHorizontal();
-            skill.level = EditorGUILayout.IntField("Lv", skill.level);
-            skill.skillId = EditorGUILayout.IntPopup(skill.skillId, skillNames, skillIds);
+            skillUnlockArgs.level = EditorGUILayout.IntField("Lv", skillUnlockArgs.level);
+            skillUnlockArgs.skillId = EditorGUILayout.IntPopup(skillUnlockArgs.skillId, skillNames, skillIds);
+            if (GUILayout.Button("-", GUILayout.Width(20f)))
+            {
+                entry.skills.RemoveAt(i);
+                break;
+            }
             EditorGUILayout.EndHorizontal();
             EditorGUI.indentLevel--;
         }
+
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("+", GUILayout.Width(40f)))
+        {
+            entry.skills.Add(new SkillUnlockArgs());
+        }
+        EditorGUILayout.EndHorizontal();
+
         EditorGUILayout.EndScrollView();
         EditorGUILayout.EndVertical();
         #endregion

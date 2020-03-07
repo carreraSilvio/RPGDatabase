@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DatabaseWindow : EditorWindow
 {
-    private const string _kTitle     = "Database";
+    private const string _kWindowTitle    = "Database";
     private const string _kMenuName  = "Database";
 
     private const string k_prefCoreTabSelected = "BrightDBPref_CoreTabSelected";
@@ -46,7 +46,7 @@ public class DatabaseWindow : EditorWindow
     [MenuItem ("Tools/" + _kMenuName)]
 	public static void ShowWindow ()
 	{
-		GetWindow(typeof(DatabaseWindow), false, _kTitle);
+		GetWindow(typeof(DatabaseWindow), false, _kWindowTitle);
 	}
 
 	private void OnEnable()

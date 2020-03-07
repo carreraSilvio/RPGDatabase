@@ -68,3 +68,30 @@ MonoBehaviour:
         varianceAsPerc: 0
         canCritical: 0
         type: 1
+  - _id: 201
+    name: Burst
+    description: 
+    damage: 0
+    usage: 0
+    scope: 0
+    hpCost: 0
+    mpCost: 0
+    effect:
+      type: 0
+      state: 0
+      recover:
+        attribute: 0
+        amount: 0
+        variance: 0
+        amountAsPerc: 0
+        varianceAsPerc: 0
+        canCritical: 0
+        type: 0
+      damage:
+        attribute: 0
+        amount: 0
+        variance: 0
+        amountAsPerc: 0
+        varianceAsPerc: 0
+        canCritical: 0
+        type: 0
