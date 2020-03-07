@@ -1,5 +1,5 @@
 {
-    "name": "BrightLib.RPGDatabase",
+    "name": "BrightLib.RPGDatabase.Runtime",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

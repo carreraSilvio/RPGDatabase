@@ -55,12 +55,11 @@ namespace BrightLib.RPGDatabase.Editor
 
         private void OnEnable()
         {
-            DatabaseFolderHandler.ValidateAllFolders();
             _database = new RPGDatabaseManager();
-
             _database.Load();
             if (_database.TotalEntries == 0)
             {
+                DatabaseFolderHandler.ValidateAllFolders();
                 DatabaseFactory.CreateDatabase();
                 _database.Load();
             }
