@@ -72,9 +72,9 @@ namespace BrightLib.RPGDatabase.Editor
             else
             {
                 list.entries = new System.Collections.Generic.List<ActorData>
-            {
-                new ActorData(DatabaseUtils.Config.FetchUniqueId()) { name = "Alex" }
-            };
+                {
+                    new ActorData(DatabaseUtils.Config.FetchUniqueId()) { name = "Alex" }
+                };
                 AssetDatabase.CreateAsset(list, "Assets/Resources/Database/01-ActorDataList.asset");
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
@@ -93,9 +93,9 @@ namespace BrightLib.RPGDatabase.Editor
             else
             {
                 list.entries = new System.Collections.Generic.List<ActorClassData>
-            {
-                new ActorClassData(DatabaseUtils.Config.FetchUniqueId()) { name = "Warrior" }
-            };
+                {
+                    new ActorClassData(DatabaseUtils.Config.FetchUniqueId()) { name = "Warrior" }
+                };
                 AssetDatabase.CreateAsset(list, "Assets/Resources/Database/02-ActorClassDataList.asset");
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
@@ -114,9 +114,9 @@ namespace BrightLib.RPGDatabase.Editor
             else
             {
                 skills.entries = new System.Collections.Generic.List<SkillData>
-            {
-                new SkillData(DatabaseUtils.Config.FetchUniqueId()) { name = "Fireball" }
-            };
+                {
+                    new SkillData(DatabaseUtils.Config.FetchUniqueId()) { name = "Fireball" }
+                };
                 AssetDatabase.CreateAsset(skills, "Assets/Resources/Database/03-SkillDataList.asset");
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
@@ -135,9 +135,9 @@ namespace BrightLib.RPGDatabase.Editor
             else
             {
                 list.entries = new System.Collections.Generic.List<ItemData>
-            {
-                new ItemData(DatabaseUtils.Config.FetchUniqueId()) { name = "Health Potion" }
-            };
+                {
+                    new ItemData(DatabaseUtils.Config.FetchUniqueId()) { name = "Health Potion" }
+                };
                 AssetDatabase.CreateAsset(list, "Assets/Resources/Database/04-ItemDataList.asset");
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
@@ -156,9 +156,9 @@ namespace BrightLib.RPGDatabase.Editor
             else
             {
                 list.entries = new System.Collections.Generic.List<WeaponData>
-            {
-                new WeaponData(DatabaseUtils.Config.FetchUniqueId()) { name = "Bronze Sword" }
-            };
+                {
+                    new WeaponData(DatabaseUtils.Config.FetchUniqueId()) { name = "Bronze Sword" }
+                };
                 AssetDatabase.CreateAsset(list, "Assets/Resources/Database/05-WeaponDataList.asset");
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
@@ -178,9 +178,9 @@ namespace BrightLib.RPGDatabase.Editor
             else
             {
                 list.entries = new System.Collections.Generic.List<WeaponTypeData>
-            {
-                new WeaponTypeData(DatabaseUtils.Config.FetchUniqueId()) { name = "Sword" }
-            };
+                {
+                    new WeaponTypeData(DatabaseUtils.Config.FetchUniqueId()) { name = "Sword" }
+                };
                 AssetDatabase.CreateAsset(list, "Assets/Resources/Database/10-WeaponTypesDataList.asset");
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
@@ -199,14 +199,14 @@ namespace BrightLib.RPGDatabase.Editor
             else
             {
                 list.entries = new System.Collections.Generic.List<AttributeSpecData>
-            {
-                new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "Level", start = 1, end = 100},
-                new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "XP", start = 0, end = 9999},
-                new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "HP", start = 20, end = 999 },
-                new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "MP", start = 20, end = 999 },
-                new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "Common", start = 5, end = 99 }
+                {
+                    new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "Level", start = 1, end = 100},
+                    new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "XP", start = 0, end = 9999},
+                    new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "HP", start = 20, end = 999 },
+                    new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "MP", start = 20, end = 999 },
+                    new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "Common", start = 5, end = 99 }
 
-            };
+                };
                 AssetDatabase.CreateAsset(list, "Assets/Resources/Database/11-AttributeSpecDataList.asset");
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();

@@ -1,4 +1,4 @@
-﻿using Assets.Utility;
+﻿using BrightLib.Editor;
 using BrightLib.RPGDatabase.Runtime;
 
 namespace BrightLib.RPGDatabase.Editor
