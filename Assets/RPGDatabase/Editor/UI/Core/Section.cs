@@ -1,22 +1,25 @@
 ﻿using Assets.Utility;
 using BrightLib.RPGDatabase.Runtime;
 
-public class Section
+namespace BrightLib.RPGDatabase.Editor
 {
-    protected string _title;
-
-    protected void DrawTitle()
+    public class Section
     {
-        BrightGUILayout.LabelBold(_title);
-    }
+        protected string _title;
 
-    public virtual void Draw()
-    {
+        protected void DrawTitle()
+        {
+            BrightGUILayout.LabelBold(_title);
+        }
 
-    }
+        public virtual void Draw()
+        {
 
-    public virtual void Draw(RPGDatabaseManager database)
-    {
+        }
 
+        public virtual void Draw(RPGDatabaseManager database)
+        {
+
+        }
     }
 }

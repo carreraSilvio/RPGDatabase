@@ -1,25 +1,28 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-public static class DatabaseFolderHandler
+namespace BrightLib.RPGDatabase.Editor
 {
-    public static bool ValidateAllFolders()
+    public static class DatabaseFolderHandler
     {
-        bool valid = ValidateFolder("Assets/Resources", "Assets", "Resources");
-        valid &= ValidateFolder("Assets/Resources/Database", "Assets/Resources", "Database");
-
-        return valid;
-    }
-
-    private static bool ValidateFolder(string path, string parent, string child)
-    {
-        if (!AssetDatabase.IsValidFolder(path))
+        public static bool ValidateAllFolders()
         {
-            Debug.Log($"creating {child} folder");
-            AssetDatabase.CreateFolder(parent, child);
-            Debug.Assert(AssetDatabase.IsValidFolder(path), $"Error creating {child} folder");
+            bool valid = ValidateFolder("Assets/Resources", "Assets", "Resources");
+            valid &= ValidateFolder("Assets/Resources/Database", "Assets/Resources", "Database");
+
+            return valid;
         }
 
-        return AssetDatabase.IsValidFolder(path);
+        private static bool ValidateFolder(string path, string parent, string child)
+        {
+            if (!AssetDatabase.IsValidFolder(path))
+            {
+                Debug.Log($"creating {child} folder");
+                AssetDatabase.CreateFolder(parent, child);
+                Debug.Assert(AssetDatabase.IsValidFolder(path), $"Error creating {child} folder");
+            }
+
+            return AssetDatabase.IsValidFolder(path);
+        }
     }
 }
