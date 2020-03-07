@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using BrightLib.RPGDatabase.Runtime;
 
-namespace RPGDatabase.Demo
+namespace BrightLib.RPGDatabase.Demo
 {
     public class DemoRPGDatabase : MonoBehaviour
     {

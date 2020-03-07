@@ -1,11 +1,12 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Rotorz.ReorderableList {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <summary>
 	/// Reorderable list adaptor for generic list.
@@ -14,12 +15,13 @@ namespace Rotorz.ReorderableList {
 	/// <para>This adaptor can be subclassed to add special logic to item height calculation.
 	/// You may want to implement a custom adaptor class where specialised functionality
 	/// is needed.</para>
-	/// <para>List elements which implement the <see cref="System.ICloneable"/> interface are
+	/// <para>List elements which implement the <see cref="ICloneable"/> interface are
 	/// cloned using that interface upon duplication; otherwise the item value or reference is
 	/// simply copied.</para>
 	/// </remarks>
 	/// <typeparam name="T">Type of list element.</typeparam>
-	public class GenericListAdaptor<T> : IReorderableListAdaptor {
+	public class GenericListAdaptor<T> : IReorderableListAdaptor
+	{
 
 		private IList<T> _list;
 
@@ -33,7 +35,8 @@ namespace Rotorz.ReorderableList {
 		/// <summary>
 		/// Gets the underlying list data structure.
 		/// </summary>
-		public IList<T> List {
+		public IList<T> List
+		{
 			get { return _list; }
 		}
 
@@ -44,7 +47,8 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// The element.
 		/// </returns>
-		public T this[int index] {
+		public T this[int index]
+		{
 			get { return _list[index]; }
 		}
 
@@ -56,10 +60,11 @@ namespace Rotorz.ReorderableList {
 		/// <param name="list">The list which can be reordered.</param>
 		/// <param name="itemDrawer">Callback to draw list item.</param>
 		/// <param name="itemHeight">Height of list item in pixels.</param>
-		public GenericListAdaptor(IList<T> list, ReorderableListControl.ItemDrawer<T> itemDrawer, float itemHeight) {
-			this._list = list;
-			this._itemDrawer = itemDrawer ?? ReorderableListGUI.DefaultItemDrawer;
-			this.FixedItemHeight = itemHeight;
+		public GenericListAdaptor(IList<T> list, ReorderableListControl.ItemDrawer<T> itemDrawer, float itemHeight)
+		{
+			_list = list;
+			_itemDrawer = itemDrawer ?? ReorderableListGUI.DefaultItemDrawer;
+			FixedItemHeight = itemHeight;
 		}
 
 		#endregion
@@ -67,29 +72,35 @@ namespace Rotorz.ReorderableList {
 		#region IReorderableListAdaptor - Implementation
 
 		/// <inheritdoc/>
-		public int Count {
+		public int Count
+		{
 			get { return _list.Count; }
 		}
 
 		/// <inheritdoc/>
-		public virtual bool CanDrag(int index) {
+		public virtual bool CanDrag(int index)
+		{
 			return true;
 		}
 		/// <inheritdoc/>
-		public virtual bool CanRemove(int index) {
+		public virtual bool CanRemove(int index)
+		{
 			return true;
 		}
 
 		/// <inheritdoc/>
-		public virtual void Add() {
-			_list.Add(default(T));
+		public virtual void Add()
+		{
+			_list.Add(default);
 		}
 		/// <inheritdoc/>
-		public virtual void Insert(int index) {
-			_list.Insert(index, default(T));
+		public virtual void Insert(int index)
+		{
+			_list.Insert(index, default);
 		}
 		/// <inheritdoc/>
-		public virtual void Duplicate(int index) {
+		public virtual void Duplicate(int index)
+		{
 			T newItem = _list[index];
 
 			ICloneable existingItem = newItem as ICloneable;
@@ -99,11 +110,13 @@ namespace Rotorz.ReorderableList {
 			_list.Insert(index + 1, newItem);
 		}
 		/// <inheritdoc/>
-		public virtual void Remove(int index) {
+		public virtual void Remove(int index)
+		{
 			_list.RemoveAt(index);
 		}
 		/// <inheritdoc/>
-		public virtual void Move(int sourceIndex, int destIndex) {
+		public virtual void Move(int sourceIndex, int destIndex)
+		{
 			if (destIndex > sourceIndex)
 				--destIndex;
 
@@ -112,29 +125,35 @@ namespace Rotorz.ReorderableList {
 			_list.Insert(destIndex, item);
 		}
 		/// <inheritdoc/>
-		public virtual void Clear() {
+		public virtual void Clear()
+		{
 			_list.Clear();
 		}
 
 		/// <inheritdoc/>
-		public virtual void BeginGUI() {
+		public virtual void BeginGUI()
+		{
 		}
 
 		/// <inheritdoc/>
-		public virtual void EndGUI() {
+		public virtual void EndGUI()
+		{
 		}
 
 		/// <inheritdoc/>
-		public virtual void DrawItemBackground(Rect position, int index) {
+		public virtual void DrawItemBackground(Rect position, int index)
+		{
 		}
 
 		/// <inheritdoc/>
-		public virtual void DrawItem(Rect position, int index) {
+		public virtual void DrawItem(Rect position, int index)
+		{
 			_list[index] = _itemDrawer(position, _list[index]);
 		}
 
 		/// <inheritdoc/>
-		public virtual float GetItemHeight(int index) {
+		public virtual float GetItemHeight(int index)
+		{
 			return FixedItemHeight;
 		}
 

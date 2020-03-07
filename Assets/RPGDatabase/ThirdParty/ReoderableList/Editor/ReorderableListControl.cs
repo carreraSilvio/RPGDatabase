@@ -1,17 +1,18 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
-using Rotorz.ReorderableList.Internal;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Rotorz.ReorderableList {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <summary>
 	/// Base class for custom reorderable list control.
 	/// </summary>
-	public class ReorderableListControl {
+	public class ReorderableListControl
+	{
 
 		/// <summary>
 		/// Invoked to draw list item.
@@ -23,7 +24,7 @@ namespace Rotorz.ReorderableList {
 		/// <example>
 		/// <para>The following listing presents a text field for each list item:</para>
 		/// <code language="csharp"><![CDATA[
-		/// using Rotorz.ReorderableList;
+		/// 
 		/// using System.Collections.Generic;
 		/// using UnityEditor;
 		/// using UnityEngine;
@@ -44,7 +45,7 @@ namespace Rotorz.ReorderableList {
 		/// }
 		/// ]]></code>
 		/// <code language="unityscript"><![CDATA[
-		/// import Rotorz.ReorderableList;
+		/// 
 		/// import System.Collections.Generic;
 		/// 
 		/// class ExampleWindow extends EditorWindow {
@@ -80,7 +81,7 @@ namespace Rotorz.ReorderableList {
 		/// <example>
 		/// <para>The following listing displays a label for empty list control:</para>
 		/// <code language="csharp"><![CDATA[
-		/// using Rotorz.ReorderableList;
+		/// 
 		/// using System.Collections.Generic;
 		/// using UnityEditor;
 		/// using UnityEngine;
@@ -101,7 +102,7 @@ namespace Rotorz.ReorderableList {
 		/// }
 		/// ]]></code>
 		/// <code language="unityscript"><![CDATA[
-		/// import Rotorz.ReorderableList;
+		/// 
 		/// import System.Collections.Generic;
 		/// 
 		/// class ExampleWindow extends EditorWindow {
@@ -143,18 +144,21 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		private static GUIStyle s_RightAlignedLabelStyle;
 
-		static ReorderableListControl() {
+		static ReorderableListControl()
+		{
 			s_CurrentListStack = new Stack<ListInfo>();
-			s_CurrentListStack.Push(default(ListInfo));
+			s_CurrentListStack.Push(default);
 
 			s_CurrentItemStack = new Stack<ItemInfo>();
-			s_CurrentItemStack.Push(new ItemInfo(-1, default(Rect)));
+			s_CurrentItemStack.Push(new ItemInfo(-1, default));
 
-			if (EditorGUIUtility.isProSkin) {
+			if (EditorGUIUtility.isProSkin)
+			{
 				AnchorBackgroundColor = new Color(85f / 255f, 85f / 255f, 85f / 255f, 0.85f);
 				TargetBackgroundColor = new Color(0, 0, 0, 0.5f);
 			}
-			else {
+			else
+			{
 				AnchorBackgroundColor = new Color(225f / 255f, 225f / 255f, 225f / 255f, 0.85f);
 				TargetBackgroundColor = new Color(0, 0, 0, 0.5f);
 			}
@@ -166,7 +170,8 @@ namespace Rotorz.ReorderableList {
 
 		private static readonly int s_ReorderableListControlHint = "_ReorderableListControl_".GetHashCode();
 
-		private static int GetReorderableListControlID() {
+		private static int GetReorderableListControlID()
+		{
 			return GUIUtility.GetControlID(s_ReorderableListControlHint, FocusType.Passive);
 		}
 
@@ -176,7 +181,8 @@ namespace Rotorz.ReorderableList {
 		/// <param name="adaptor">Reorderable list adaptor.</param>
 		/// <param name="drawEmpty">Delegate for drawing empty list.</param>
 		/// <param name="flags">Optional flags to pass into list field.</param>
-		public static void DrawControlFromState(IReorderableListAdaptor adaptor, DrawEmpty drawEmpty, ReorderableListFlags flags) {
+		public static void DrawControlFromState(IReorderableListAdaptor adaptor, DrawEmpty drawEmpty, ReorderableListFlags flags)
+		{
 			int controlID = GetReorderableListControlID();
 
 			var control = GUIUtility.GetStateObject(typeof(ReorderableListControl), controlID) as ReorderableListControl;
@@ -191,7 +197,8 @@ namespace Rotorz.ReorderableList {
 		/// <param name="adaptor">Reorderable list adaptor.</param>
 		/// <param name="drawEmpty">Delegate for drawing empty list.</param>
 		/// <param name="flags">Optional flags to pass into list field.</param>
-		public static void DrawControlFromState(Rect position, IReorderableListAdaptor adaptor, DrawEmptyAbsolute drawEmpty, ReorderableListFlags flags) {
+		public static void DrawControlFromState(Rect position, IReorderableListAdaptor adaptor, DrawEmptyAbsolute drawEmpty, ReorderableListFlags flags)
+		{
 			int controlID = GetReorderableListControlID();
 
 			var control = GUIUtility.GetStateObject(typeof(ReorderableListControl), controlID) as ReorderableListControl;
@@ -224,21 +231,25 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		private static int s_AutoFocusIndex = -1;
 
-		private struct ListInfo {
+		private struct ListInfo
+		{
 			public int ControlID;
 			public Rect Position;
 
-			public ListInfo(int controlID, Rect position) {
+			public ListInfo(int controlID, Rect position)
+			{
 				ControlID = controlID;
 				Position = position;
 			}
 		}
 
-		private struct ItemInfo {
+		private struct ItemInfo
+		{
 			public int ItemIndex;
 			public Rect ItemPosition;
 
-			public ItemInfo(int itemIndex, Rect itemPosition) {
+			public ItemInfo(int itemIndex, Rect itemPosition)
+			{
 				ItemIndex = itemIndex;
 				ItemPosition = itemPosition;
 			}
@@ -257,7 +268,8 @@ namespace Rotorz.ReorderableList {
 		/// <summary>
 		/// Gets the control ID of the list that is currently being drawn.
 		/// </summary>
-		public static int CurrentListControlID {
+		public static int CurrentListControlID
+		{
 			get { return s_CurrentListStack.Peek().ControlID; }
 		}
 
@@ -269,7 +281,8 @@ namespace Rotorz.ReorderableList {
 		/// type events when using reorderable list controls with automatic layout.</para>
 		/// </remarks>
 		/// <see cref="CurrentItemTotalPosition"/>
-		public static Rect CurrentListPosition {
+		public static Rect CurrentListPosition
+		{
 			get { return s_CurrentListStack.Peek().Position; }
 		}
 
@@ -280,7 +293,8 @@ namespace Rotorz.ReorderableList {
 		/// <remarks>
 		/// <para>Use <see cref="ReorderableListGUI.CurrentItemIndex"/> instead.</para>
 		/// </remarks>
-		internal static int CurrentItemIndex {
+		internal static int CurrentItemIndex
+		{
 			get { return s_CurrentItemStack.Peek().ItemIndex; }
 		}
 
@@ -293,7 +307,8 @@ namespace Rotorz.ReorderableList {
 		/// </remarks>
 		/// <see cref="CurrentItemIndex"/>
 		/// <see cref="CurrentListPosition"/>
-		public static Rect CurrentItemTotalPosition {
+		public static Rect CurrentItemTotalPosition
+		{
 			get { return s_CurrentItemStack.Peek().ItemPosition; }
 		}
 
@@ -304,7 +319,8 @@ namespace Rotorz.ReorderableList {
 		/// <summary>
 		/// Gets or sets flags which affect behavior of control.
 		/// </summary>
-		public ReorderableListFlags Flags {
+		public ReorderableListFlags Flags
+		{
 			get { return _flags; }
 			set { _flags = value; }
 		}
@@ -312,19 +328,22 @@ namespace Rotorz.ReorderableList {
 		/// <summary>
 		/// Gets a value indicating whether any footer controls are shown.
 		/// </summary>
-		private bool HasFooterControls {
+		private bool HasFooterControls
+		{
 			get { return HasSizeField || HasAddButton || HasAddMenuButton; }
 		}
 		/// <summary>
 		/// Gets a value indicating whether the size field is shown.
 		/// </summary>
-		private bool HasSizeField {
+		private bool HasSizeField
+		{
 			get { return (_flags & ReorderableListFlags.ShowSizeField) != 0; }
 		}
 		/// <summary>
 		/// Gets a value indicating whether add button is shown.
 		/// </summary>
-		private bool HasAddButton {
+		private bool HasAddButton
+		{
 			get { return (_flags & ReorderableListFlags.HideAddButton) == 0; }
 		}
 		/// <summary>
@@ -335,7 +354,8 @@ namespace Rotorz.ReorderableList {
 		/// <summary>
 		/// Gets a value indicating whether remove buttons are shown.
 		/// </summary>
-		private bool HasRemoveButtons {
+		private bool HasRemoveButtons
+		{
 			get { return (_flags & ReorderableListFlags.HideRemoveButtons) == 0; }
 		}
 
@@ -347,7 +367,8 @@ namespace Rotorz.ReorderableList {
 		/// <summary>
 		/// Gets or sets the vertical spacing below the reorderable list control.
 		/// </summary>
-		public float VerticalSpacing {
+		public float VerticalSpacing
+		{
 			get { return _verticalSpacing; }
 			set { _verticalSpacing = value; }
 		}
@@ -355,7 +376,8 @@ namespace Rotorz.ReorderableList {
 		/// Gets or sets style used to draw background of list control.
 		/// </summary>
 		/// <seealso cref="ReorderableListStyles.Container"/>
-		public GUIStyle ContainerStyle {
+		public GUIStyle ContainerStyle
+		{
 			get { return _containerStyle; }
 			set { _containerStyle = value; }
 		}
@@ -363,7 +385,8 @@ namespace Rotorz.ReorderableList {
 		/// Gets or sets style used to draw footer buttons.
 		/// </summary>
 		/// <seealso cref="ReorderableListStyles.FooterButton"/>
-		public GUIStyle FooterButtonStyle {
+		public GUIStyle FooterButtonStyle
+		{
 			get { return _footerButtonStyle; }
 			set { _footerButtonStyle = value; }
 		}
@@ -371,7 +394,8 @@ namespace Rotorz.ReorderableList {
 		/// Gets or sets style used to draw list item buttons (like the remove button).
 		/// </summary>
 		/// <seealso cref="ReorderableListStyles.ItemButton"/>
-		public GUIStyle ItemButtonStyle {
+		public GUIStyle ItemButtonStyle
+		{
 			get { return _itemButtonStyle; }
 			set { _itemButtonStyle = value; }
 		}
@@ -383,7 +407,8 @@ namespace Rotorz.ReorderableList {
 		/// <summary>
 		/// Gets or sets the color of the horizontal lines that appear between list items.
 		/// </summary>
-		public Color HorizontalLineColor {
+		public Color HorizontalLineColor
+		{
 			get { return _horizontalLineColor; }
 			set { _horizontalLineColor = value; }
 		}
@@ -396,7 +421,8 @@ namespace Rotorz.ReorderableList {
 		/// <para>Horizontal line is not drawn for an empty list regardless of the value
 		/// of this property.</para>
 		/// </remarks>
-		public bool HorizontalLineAtStart {
+		public bool HorizontalLineAtStart
+		{
 			get { return _horizontalLineAtStart; }
 			set { _horizontalLineAtStart = value; }
 		}
@@ -409,7 +435,8 @@ namespace Rotorz.ReorderableList {
 		/// <para>Horizontal line is not drawn for an empty list regardless of the value
 		/// of this property.</para>
 		/// </remarks>
-		public bool HorizontalLineAtEnd {
+		public bool HorizontalLineAtEnd
+		{
 			get { return _horizontalLineAtEnd; }
 			set { _horizontalLineAtEnd = value; }
 		}
@@ -427,15 +454,18 @@ namespace Rotorz.ReorderableList {
 		/// <remarks>
 		/// <para>Add menu button is only shown when there is at least one subscriber to this event.</para>
 		/// </remarks>
-		public event AddMenuClickedEventHandler AddMenuClicked {
-			add {
+		public event AddMenuClickedEventHandler AddMenuClicked
+		{
+			add
+			{
 				if (value == null)
 					return;
 				_addMenuClicked += value;
 				++_addMenuClickedSubscriberCount;
 				HasAddMenuButton = _addMenuClickedSubscriberCount != 0;
 			}
-			remove {
+			remove
+			{
 				if (value == null)
 					return;
 				_addMenuClicked -= value;
@@ -448,7 +478,8 @@ namespace Rotorz.ReorderableList {
 		/// Raises event when add menu button is clicked.
 		/// </summary>
 		/// <param name="args">Event arguments.</param>
-		protected virtual void OnAddMenuClicked(AddMenuClickedEventArgs args) {
+		protected virtual void OnAddMenuClicked(AddMenuClickedEventArgs args)
+		{
 			if (_addMenuClicked != null)
 				_addMenuClicked(this, args);
 		}
@@ -462,7 +493,8 @@ namespace Rotorz.ReorderableList {
 		/// Raises event after list item is inserted or duplicated.
 		/// </summary>
 		/// <param name="args">Event arguments.</param>
-		protected virtual void OnItemInserted(ItemInsertedEventArgs args) {
+		protected virtual void OnItemInserted(ItemInsertedEventArgs args)
+		{
 			if (ItemInserted != null)
 				ItemInserted(this, args);
 		}
@@ -476,7 +508,8 @@ namespace Rotorz.ReorderableList {
 		/// Raises event before list item is removed and provides oppertunity to cancel.
 		/// </summary>
 		/// <param name="args">Event arguments.</param>
-		protected virtual void OnItemRemoving(ItemRemovingEventArgs args) {
+		protected virtual void OnItemRemoving(ItemRemovingEventArgs args)
+		{
 			if (ItemRemoving != null)
 				ItemRemoving(this, args);
 		}
@@ -490,7 +523,8 @@ namespace Rotorz.ReorderableList {
 		/// Raises event immediately before list item is moved and provides oppertunity to cancel.
 		/// </summary>
 		/// <param name="args">Event arguments.</param>
-		protected virtual void OnItemMoving(ItemMovingEventArgs args) {
+		protected virtual void OnItemMoving(ItemMovingEventArgs args)
+		{
 			if (ItemMoving != null)
 				ItemMoving(this, args);
 		}
@@ -504,7 +538,8 @@ namespace Rotorz.ReorderableList {
 		/// Raises event after list item has been moved.
 		/// </summary>
 		/// <param name="args">Event arguments.</param>
-		protected virtual void OnItemMoved(ItemMovedEventArgs args) {
+		protected virtual void OnItemMoved(ItemMovedEventArgs args)
+		{
 			if (ItemMoved != null)
 				ItemMoved(this, args);
 		}
@@ -516,7 +551,8 @@ namespace Rotorz.ReorderableList {
 		/// <summary>
 		/// Initializes a new instance of <see cref="ReorderableListControl"/>.
 		/// </summary>
-		public ReorderableListControl() {
+		public ReorderableListControl()
+		{
 			_containerStyle = ReorderableListStyles.Container;
 			_footerButtonStyle = ReorderableListStyles.FooterButton;
 			_itemButtonStyle = ReorderableListStyles.ItemButton;
@@ -529,8 +565,9 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		/// <param name="flags">Optional flags which affect behavior of control.</param>
 		public ReorderableListControl(ReorderableListFlags flags)
-			: this() {
-			this.Flags = flags;
+			: this()
+		{
+			Flags = flags;
 		}
 
 		#endregion
@@ -581,7 +618,8 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		/// <param name="controlID">Unique ID of list control.</param>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
-		private void PrepareState(int controlID, IReorderableListAdaptor adaptor) {
+		private void PrepareState(int controlID, IReorderableListAdaptor adaptor)
+		{
 			_controlID = controlID;
 			_visibleRect = GUIHelper.VisibleRect();
 
@@ -599,8 +637,9 @@ namespace Rotorz.ReorderableList {
 			_allowDropInsertion = true;
 		}
 
-		private static int CountDigits(int number) {
-			return Mathf.Max(2, Mathf.CeilToInt(Mathf.Log10((float)number)));
+		private static int CountDigits(int number)
+		{
+			return Mathf.Max(2, Mathf.CeilToInt(Mathf.Log10(number)));
 		}
 
 		#endregion
@@ -616,8 +655,10 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		/// <param name="controlID">Unique ID of list control.</param>
 		/// <param name="itemIndex">Zero-based index of list item.</param>
-		private void AutoFocusItem(int controlID, int itemIndex) {
-			if ((Flags & ReorderableListFlags.DisableAutoFocus) == 0) {
+		private void AutoFocusItem(int controlID, int itemIndex)
+		{
+			if ((Flags & ReorderableListFlags.DisableAutoFocus) == 0)
+			{
 				s_AutoFocusControlID = controlID;
 				s_AutoFocusIndex = itemIndex;
 			}
@@ -631,7 +672,8 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// A value of <c>true</c> if clicked; otherwise <c>false</c>.
 		/// </returns>
-		private bool DoRemoveButton(Rect position, bool visible) {
+		private bool DoRemoveButton(Rect position, bool visible)
+		{
 			var iconNormal = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_Remove_Normal);
 			var iconActive = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_Remove_Active);
 
@@ -645,7 +687,8 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		/// <param name="controlID">Unique ID of list control.</param>
 		/// <param name="itemIndex">Zero-based index of item which is going to be dragged.</param>
-		private static void BeginTrackingReorderDrag(int controlID, int itemIndex) {
+		private static void BeginTrackingReorderDrag(int controlID, int itemIndex)
+		{
 			GUIUtility.hotControl = controlID;
 			GUIUtility.keyboardControl = 0;
 			s_AnchorIndex = itemIndex;
@@ -656,7 +699,8 @@ namespace Rotorz.ReorderableList {
 		/// <summary>
 		/// Stop tracking drag and drop.
 		/// </summary>
-		private static void StopTrackingReorderDrag() {
+		private static void StopTrackingReorderDrag()
+		{
 			GUIUtility.hotControl = 0;
 			s_AnchorIndex = -1;
 			s_TargetIndex = -1;
@@ -669,7 +713,8 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// A value of <c>true</c> if item is being tracked; otherwise <c>false</c>.
 		/// </returns>
-		private static bool IsTrackingControl(int controlID) {
+		private static bool IsTrackingControl(int controlID)
+		{
 			return !s_TrackingCancelBlockContext && GUIUtility.hotControl == controlID;
 		}
 
@@ -677,14 +722,17 @@ namespace Rotorz.ReorderableList {
 		/// Accept reordering.
 		/// </summary>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
-		private void AcceptReorderDrag(IReorderableListAdaptor adaptor) {
-			try {
+		private void AcceptReorderDrag(IReorderableListAdaptor adaptor)
+		{
+			try
+			{
 				// Reorder list as needed!
 				s_TargetIndex = Mathf.Clamp(s_TargetIndex, 0, adaptor.Count + 1);
 				if (s_TargetIndex != s_AnchorIndex && s_TargetIndex != s_AnchorIndex + 1)
 					MoveItem(adaptor, s_AnchorIndex, s_TargetIndex);
 			}
-			finally {
+			finally
+			{
 				StopTrackingReorderDrag();
 			}
 		}
@@ -694,9 +742,10 @@ namespace Rotorz.ReorderableList {
 		// Micro-optimisation to avoid repeated construction.
 		private static Rect s_RemoveButtonPosition;
 
-		private void DrawListItem(Rect position, IReorderableListAdaptor adaptor, int itemIndex) {
+		private void DrawListItem(Rect position, IReorderableListAdaptor adaptor, int itemIndex)
+		{
 			bool isRepainting = Event.current.type == EventType.Repaint;
-			bool isVisible = (position.y < _visibleRect.yMax && position.yMax > _visibleRect.y);
+			bool isVisible = position.y < _visibleRect.yMax && position.yMax > _visibleRect.y;
 			bool isDraggable = _allowReordering && adaptor.CanDrag(itemIndex);
 
 			Rect itemContentPosition = position;
@@ -706,13 +755,15 @@ namespace Rotorz.ReorderableList {
 			itemContentPosition.height = position.height - 4;
 
 			// Make space for grab handle?
-			if (isDraggable) {
+			if (isDraggable)
+			{
 				itemContentPosition.x += 20;
 				itemContentPosition.width -= 20;
 			}
 
 			// Make space for element index.
-			if (_indexLabelWidth != 0) {
+			if (_indexLabelWidth != 0)
+			{
 				itemContentPosition.width -= _indexLabelWidth;
 
 				if (isRepainting && isVisible)
@@ -725,24 +776,29 @@ namespace Rotorz.ReorderableList {
 			if (HasRemoveButtons)
 				itemContentPosition.width -= 27;
 
-			try {
+			try
+			{
 				s_CurrentItemStack.Push(new ItemInfo(itemIndex, position));
 				EditorGUI.BeginChangeCheck();
 
-				if (isRepainting && isVisible) {
+				if (isRepainting && isVisible)
+				{
 					// Draw background of list item.
 					var backgroundPosition = new Rect(position.x, position.y, position.width, position.height - 1);
 					adaptor.DrawItemBackground(backgroundPosition, itemIndex);
 
 					// Draw grab handle?
-					if (isDraggable) {
+					if (isDraggable)
+					{
 						var texturePosition = new Rect(position.x + 6, position.y + position.height / 2f - 3, 9, 5);
 						GUIHelper.DrawTexture(texturePosition, ReorderableListResources.GetTexture(ReorderableListTexture.GrabHandle));
 					}
 
 					// Draw horizontal line between list items.
-					if (!_tracking || itemIndex != s_AnchorIndex) {
-						if (itemIndex != 0 || HorizontalLineAtStart) {
+					if (!_tracking || itemIndex != s_AnchorIndex)
+					{
+						if (itemIndex != 0 || HorizontalLineAtStart)
+						{
 							var horizontalLinePosition = new Rect(position.x, position.y - 1, position.width, 1);
 							GUIHelper.Separator(horizontalLinePosition, HorizontalLineColor);
 						}
@@ -760,7 +816,8 @@ namespace Rotorz.ReorderableList {
 					ReorderableListGUI.IndexOfChangedItem = itemIndex;
 
 				// Draw remove button?
-				if (HasRemoveButtons && adaptor.CanRemove(itemIndex)) {
+				if (HasRemoveButtons && adaptor.CanRemove(itemIndex))
+				{
 					s_RemoveButtonPosition = position;
 					s_RemoveButtonPosition.width = 27;
 					s_RemoveButtonPosition.x = itemContentPosition.xMax + 2;
@@ -771,20 +828,25 @@ namespace Rotorz.ReorderableList {
 				}
 
 				// Check for context click?
-				if ((Flags & ReorderableListFlags.DisableContextMenu) == 0) {
-					if (Event.current.GetTypeForControl(_controlID) == EventType.ContextClick && position.Contains(Event.current.mousePosition)) {
+				if ((Flags & ReorderableListFlags.DisableContextMenu) == 0)
+				{
+					if (Event.current.GetTypeForControl(_controlID) == EventType.ContextClick && position.Contains(Event.current.mousePosition))
+					{
 						ShowContextMenu(itemIndex, adaptor);
 						Event.current.Use();
 					}
 				}
 			}
-			finally {
+			finally
+			{
 				s_CurrentItemStack.Pop();
 			}
 		}
 
-		private void DrawFloatingListItem(IReorderableListAdaptor adaptor, float targetSlotPosition) {
-			if (Event.current.type == EventType.Repaint) {
+		private void DrawFloatingListItem(IReorderableListAdaptor adaptor, float targetSlotPosition)
+		{
+			if (Event.current.type == EventType.Repaint)
+			{
 				Color restoreColor = GUI.color;
 
 				// Fill background of target area.
@@ -839,7 +901,8 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		/// <param name="position">Position of list control in GUI.</param>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
-		private void DrawListContainerAndItems(Rect position, IReorderableListAdaptor adaptor) {
+		private void DrawListContainerAndItems(Rect position, IReorderableListAdaptor adaptor)
+		{
 			int initialDropTargetNestedCounterValue = s_DropTargetNestedCounter;
 
 			// Get local copy of event information for efficiency.
@@ -851,14 +914,16 @@ namespace Rotorz.ReorderableList {
 			// Position of first item in list.
 			float firstItemY = position.y + ContainerStyle.padding.top;
 			// Maximum position of dragged item.
-			float dragItemMaxY = (position.yMax - ContainerStyle.padding.bottom) - s_DragItemPosition.height + 1;
+			float dragItemMaxY = position.yMax - ContainerStyle.padding.bottom - s_DragItemPosition.height + 1;
 
 			bool isMouseDragEvent = eventType == EventType.MouseDrag;
-			if (s_SimulateMouseDragControlID == _controlID && eventType == EventType.Repaint) {
+			if (s_SimulateMouseDragControlID == _controlID && eventType == EventType.Repaint)
+			{
 				s_SimulateMouseDragControlID = 0;
 				isMouseDragEvent = true;
 			}
-			if (isMouseDragEvent && _tracking) {
+			if (isMouseDragEvent && _tracking)
+			{
 				// Reset target index and adjust when looping through list items.
 				if (mousePosition.y < firstItemY)
 					newTargetIndex = 0;
@@ -868,9 +933,11 @@ namespace Rotorz.ReorderableList {
 				s_DragItemPosition.y = Mathf.Clamp(mousePosition.y + s_AnchorMouseOffset, firstItemY, dragItemMaxY);
 			}
 
-			switch (eventType) {
+			switch (eventType)
+			{
 				case EventType.MouseDown:
-					if (_tracking) {
+					if (_tracking)
+					{
 						// Cancel drag when other mouse button is pressed.
 						s_TrackingCancelBlockContext = true;
 						Event.current.Use();
@@ -878,7 +945,8 @@ namespace Rotorz.ReorderableList {
 					break;
 
 				case EventType.MouseUp:
-					if (_controlID == GUIUtility.hotControl) {
+					if (_controlID == GUIUtility.hotControl)
+					{
 						// Allow user code to change control over reordering during drag.
 						if (!s_TrackingCancelBlockContext && _allowReordering)
 							AcceptReorderDrag(adaptor);
@@ -889,20 +957,24 @@ namespace Rotorz.ReorderableList {
 					break;
 
 				case EventType.KeyDown:
-					if (_tracking && Event.current.keyCode == KeyCode.Escape) {
+					if (_tracking && Event.current.keyCode == KeyCode.Escape)
+					{
 						StopTrackingReorderDrag();
 						Event.current.Use();
 					}
 					break;
 
 				case EventType.ExecuteCommand:
-					if (s_ContextControlID == _controlID) {
+					if (s_ContextControlID == _controlID)
+					{
 						int itemIndex = s_ContextItemIndex;
-						try {
+						try
+						{
 							DoCommand(s_ContextCommandName, itemIndex, adaptor);
 							Event.current.Use();
 						}
-						finally {
+						finally
+						{
 							s_ContextControlID = 0;
 							s_ContextItemIndex = 0;
 						}
@@ -928,15 +1000,18 @@ namespace Rotorz.ReorderableList {
 			float lastHeight = 0f;
 
 			int count = adaptor.Count;
-			for (int i = 0; i < count; ++i) {
+			for (int i = 0; i < count; ++i)
+			{
 				itemPosition.y = itemPosition.yMax;
 				itemPosition.height = 0;
 
 				lastMidPoint = itemPosition.y - lastHeight / 2f;
 
-				if (_tracking) {
+				if (_tracking)
+				{
 					// Does this represent the target index?
-					if (i == s_TargetIndex) {
+					if (i == s_TargetIndex)
+					{
 						targetSlotPosition = itemPosition.y;
 						itemPosition.y += s_DragItemPosition.height;
 					}
@@ -950,27 +1025,32 @@ namespace Rotorz.ReorderableList {
 					itemPosition.height = adaptor.GetItemHeight(i) + 4;
 					lastHeight = itemPosition.height;
 				}
-				else {
+				else
+				{
 					// Update position for current item.
 					itemPosition.height = adaptor.GetItemHeight(i) + 4;
 					lastHeight = itemPosition.height;
 
 					// Does this represent the drop insertion index?
 					float midpoint = itemPosition.y + itemPosition.height / 2f;
-					if (mousePosition.y > lastMidPoint && mousePosition.y <= midpoint) {
+					if (mousePosition.y > lastMidPoint && mousePosition.y <= midpoint)
+					{
 						_insertionIndex = i;
 						_insertionPosition = itemPosition.y;
 					}
 				}
 
-				if (_tracking && isMouseDragEvent) {
+				if (_tracking && isMouseDragEvent)
+				{
 					float midpoint = itemPosition.y + itemPosition.height / 2f;
 
-					if (s_TargetIndex < i) {
+					if (s_TargetIndex < i)
+					{
 						if (s_DragItemPosition.yMax > lastMidPoint && s_DragItemPosition.yMax < midpoint)
 							newTargetIndex = i;
 					}
-					else if (s_TargetIndex > i) {
+					else if (s_TargetIndex > i)
+					{
 						if (s_DragItemPosition.y > lastMidPoint && s_DragItemPosition.y < midpoint)
 							newTargetIndex = i;
 					}
@@ -985,7 +1065,8 @@ namespace Rotorz.ReorderableList {
 				DrawListItem(itemPosition, adaptor, i);
 
 				// Did list count change (i.e. item removed)?
-				if (adaptor.Count < count) {
+				if (adaptor.Count < count)
+				{
 					// We assume that it was this item which was removed, so --i allows us
 					// to process the next item as usual.
 					count = adaptor.Count;
@@ -994,14 +1075,18 @@ namespace Rotorz.ReorderableList {
 				}
 
 				// Event has already been used, skip to next item.
-				if (Event.current.type != EventType.Used) {
-					switch (eventType) {
+				if (Event.current.type != EventType.Used)
+				{
+					switch (eventType)
+					{
 						case EventType.MouseDown:
-							if (GUI.enabled && itemPosition.Contains(mousePosition)) {
+							if (GUI.enabled && itemPosition.Contains(mousePosition))
+							{
 								// Remove input focus from control before attempting a context click or drag.
 								GUIUtility.keyboardControl = 0;
 
-								if (_allowReordering && adaptor.CanDrag(i) && Event.current.button == 0) {
+								if (_allowReordering && adaptor.CanDrag(i) && Event.current.button == 0)
+								{
 									s_DragItemPosition = itemPosition;
 
 									BeginTrackingReorderDrag(_controlID, i);
@@ -1012,20 +1097,21 @@ namespace Rotorz.ReorderableList {
 								}
 							}
 							break;
-/* DEBUG
-						case EventType.Repaint:
-							GUI.color = Color.red;
-							GUI.DrawTexture(new Rect(0, lastMidPoint, 10, 1), EditorGUIUtility.whiteTexture);
-							GUI.color = Color.yellow;
-							GUI.DrawTexture(new Rect(5, itemPosition.y + itemPosition.height / 2f, 10, 1), EditorGUIUtility.whiteTexture);
-							GUI.color = Color.white;
-							break;
-//*/
+							/* DEBUG
+													case EventType.Repaint:
+														GUI.color = Color.red;
+														GUI.DrawTexture(new Rect(0, lastMidPoint, 10, 1), EditorGUIUtility.whiteTexture);
+														GUI.color = Color.yellow;
+														GUI.DrawTexture(new Rect(5, itemPosition.y + itemPosition.height / 2f, 10, 1), EditorGUIUtility.whiteTexture);
+														GUI.color = Color.white;
+														break;
+							//*/
 					}
 				}
 			}
 
-			if (HorizontalLineAtEnd) {
+			if (HorizontalLineAtEnd)
+			{
 				var horizontalLinePosition = new Rect(itemPosition.x, position.yMax - ContainerStyle.padding.vertical, itemPosition.width, 1);
 				GUIHelper.Separator(horizontalLinePosition, HorizontalLineColor);
 			}
@@ -1037,8 +1123,10 @@ namespace Rotorz.ReorderableList {
 			_allowDropInsertion = false;
 
 			// Item which is being dragged should be shown on top of other controls!
-			if (IsTrackingControl(_controlID)) {
-				if (isMouseDragEvent) {
+			if (IsTrackingControl(_controlID))
+			{
+				if (isMouseDragEvent)
+				{
 					if (s_DragItemPosition.yMax >= lastMidPoint)
 						newTargetIndex = count;
 
@@ -1051,18 +1139,21 @@ namespace Rotorz.ReorderableList {
 				}
 
 				DrawFloatingListItem(adaptor, targetSlotPosition);
-/* DEBUG
-				if (eventType == EventType.Repaint) {
-					GUI.color = Color.blue;
-					GUI.DrawTexture(new Rect(100, lastMidPoint, 20, 1), EditorGUIUtility.whiteTexture);
-					GUI.color = Color.white;
-				}
-//*/
+				/* DEBUG
+								if (eventType == EventType.Repaint) {
+									GUI.color = Color.blue;
+									GUI.DrawTexture(new Rect(100, lastMidPoint, 20, 1), EditorGUIUtility.whiteTexture);
+									GUI.color = Color.white;
+								}
+				//*/
 			}
-			else {
+			else
+			{
 				// Cannot react to drop insertion if a nested drop target has already reacted!
-				if (s_DropTargetNestedCounter == initialDropTargetNestedCounterValue) {
-					if (Event.current.mousePosition.y >= lastMidPoint) {
+				if (s_DropTargetNestedCounter == initialDropTargetNestedCounterValue)
+				{
+					if (Event.current.mousePosition.y >= lastMidPoint)
+					{
 						_insertionIndex = adaptor.Count;
 						_insertionPosition = itemPosition.yMax;
 					}
@@ -1077,11 +1168,13 @@ namespace Rotorz.ReorderableList {
 				AutoScrollTowardsMouse();
 		}
 
-		private static bool ContainsRect(Rect a, Rect b) {
+		private static bool ContainsRect(Rect a, Rect b)
+		{
 			return a.Contains(new Vector2(b.xMin, b.yMin)) && a.Contains(new Vector2(b.xMax, b.yMax));
 		}
 
-		private void AutoScrollTowardsMouse() {
+		private void AutoScrollTowardsMouse()
+		{
 			const float triggerPaddingInPixels = 8f;
 			const float maximumRangeInPixels = 4f;
 
@@ -1089,7 +1182,8 @@ namespace Rotorz.ReorderableList {
 			Vector2 mousePosition = Event.current.mousePosition;
 			Rect mouseRect = new Rect(mousePosition.x - triggerPaddingInPixels, mousePosition.y - triggerPaddingInPixels, triggerPaddingInPixels * 2, triggerPaddingInPixels * 2);
 
-			if (!ContainsRect(visiblePosition, mouseRect)) {
+			if (!ContainsRect(visiblePosition, mouseRect))
+			{
 				if (mousePosition.y < visiblePosition.center.y)
 					mousePosition = new Vector2(mouseRect.xMin, mouseRect.yMin);
 				else
@@ -1107,15 +1201,18 @@ namespace Rotorz.ReorderableList {
 			}
 		}
 
-		private void HandleDropInsertion(Rect position, IReorderableListAdaptor adaptor) {
+		private void HandleDropInsertion(Rect position, IReorderableListAdaptor adaptor)
+		{
 			var target = adaptor as IReorderableListDropTarget;
 			if (target == null || !_allowDropInsertion)
 				return;
 
-			if (target.CanDropInsert(_insertionIndex)) {
+			if (target.CanDropInsert(_insertionIndex))
+			{
 				++s_DropTargetNestedCounter;
 
-				switch (Event.current.type) {
+				switch (Event.current.type)
+				{
 					case EventType.DragUpdated:
 						DragAndDrop.visualMode = DragAndDropVisualMode.Move;
 						DragAndDrop.activeControlID = _controlID;
@@ -1148,19 +1245,22 @@ namespace Rotorz.ReorderableList {
 		/// <para>This method is only ever called during repaint events.</para>
 		/// </remarks>
 		/// <param name="position">Position if the drop indicator.</param>
-		protected virtual void DrawDropIndicator(Rect position) {
+		protected virtual void DrawDropIndicator(Rect position)
+		{
 			GUIHelper.Separator(position);
 		}
 
 		/// <summary>
 		/// Checks to see if list control needs to be automatically focused.
 		/// </summary>
-		private void CheckForAutoFocusControl() {
+		private void CheckForAutoFocusControl()
+		{
 			if (Event.current.type == EventType.Used)
 				return;
 
 			// Automatically focus control!
-			if (s_AutoFocusControlID == _controlID) {
+			if (s_AutoFocusControlID == _controlID)
+			{
 				s_AutoFocusControlID = 0;
 				GUIHelper.FocusTextInControl("AutoFocus_" + _controlID + "_" + s_AutoFocusIndex);
 				s_AutoFocusIndex = -1;
@@ -1172,15 +1272,18 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		/// <param name="position">Position of list control in GUI.</param>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
-		private void DrawFooterControls(Rect position, IReorderableListAdaptor adaptor) {
-			if (HasFooterControls) {
+		private void DrawFooterControls(Rect position, IReorderableListAdaptor adaptor)
+		{
+			if (HasFooterControls)
+			{
 				Rect buttonPosition = new Rect(position.xMax - 30, position.yMax - 1, 30, FooterButtonStyle.fixedHeight);
 
 				Rect menuButtonPosition = buttonPosition;
 				var menuIconNormal = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_AddMenu_Normal);
 				var menuIconActive = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_AddMenu_Active);
 
-				if (HasSizeField) {
+				if (HasSizeField)
+				{
 					// Draw size field.
 					Rect sizeFieldPosition = new Rect(
 						position.x,
@@ -1192,9 +1295,11 @@ namespace Rotorz.ReorderableList {
 					DrawSizeFooterControl(sizeFieldPosition, adaptor);
 				}
 
-				if (HasAddButton) {
+				if (HasAddButton)
+				{
 					// Draw add menu drop-down button.
-					if (HasAddMenuButton) {
+					if (HasAddMenuButton)
+					{
 						menuButtonPosition.x = buttonPosition.xMax - 14;
 						menuButtonPosition.xMax = buttonPosition.xMax;
 						menuIconNormal = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_Menu_Normal);
@@ -1207,16 +1312,19 @@ namespace Rotorz.ReorderableList {
 					var iconNormal = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_Add_Normal);
 					var iconActive = ReorderableListResources.GetTexture(ReorderableListTexture.Icon_Add_Active);
 
-					if (GUIHelper.IconButton(buttonPosition, true, iconNormal, iconActive, FooterButtonStyle)) {
+					if (GUIHelper.IconButton(buttonPosition, true, iconNormal, iconActive, FooterButtonStyle))
+					{
 						// Append item to list.
 						GUIUtility.keyboardControl = 0;
 						AddItem(adaptor);
 					}
 				}
 
-				if (HasAddMenuButton) {
+				if (HasAddMenuButton)
+				{
 					// Draw add menu drop-down button.
-					if (GUIHelper.IconButton(menuButtonPosition, true, menuIconNormal, menuIconActive, FooterButtonStyle)) {
+					if (GUIHelper.IconButton(menuButtonPosition, true, menuIconNormal, menuIconActive, FooterButtonStyle))
+					{
 						GUIUtility.keyboardControl = 0;
 						Rect totalAddButtonPosition = buttonPosition;
 						totalAddButtonPosition.xMax = position.xMax;
@@ -1229,7 +1337,8 @@ namespace Rotorz.ReorderableList {
 			}
 		}
 
-		private void DrawSizeFooterControl(Rect position, IReorderableListAdaptor adaptor) {
+		private void DrawSizeFooterControl(Rect position, IReorderableListAdaptor adaptor)
+		{
 			float restoreLabelWidth = EditorGUIUtility.labelWidth;
 			EditorGUIUtility.labelWidth = 60f;
 
@@ -1243,15 +1352,18 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		private static Dictionary<int, float> s_ContainerHeightCache = new Dictionary<int, float>();
 
-		private Rect GetListRectWithAutoLayout(IReorderableListAdaptor adaptor, float padding) {
+		private Rect GetListRectWithAutoLayout(IReorderableListAdaptor adaptor, float padding)
+		{
 			float totalHeight;
 
 			// Calculate position of list field using layout engine.
-			if (Event.current.type == EventType.Layout) {
+			if (Event.current.type == EventType.Layout)
+			{
 				totalHeight = CalculateListHeight(adaptor);
 				s_ContainerHeightCache[_controlID] = totalHeight;
 			}
-			else {
+			else
+			{
 				totalHeight = s_ContainerHeightCache.ContainsKey(_controlID)
 					? s_ContainerHeightCache[_controlID]
 					: 0;
@@ -1270,7 +1382,8 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// Position of list container area in GUI (excludes footer area).
 		/// </returns>
-		private Rect DrawLayoutListField(IReorderableListAdaptor adaptor, float padding) {
+		private Rect DrawLayoutListField(IReorderableListAdaptor adaptor, float padding)
+		{
 			Rect position = GetListRectWithAutoLayout(adaptor, padding);
 
 			// Make room for footer buttons?
@@ -1281,14 +1394,16 @@ namespace Rotorz.ReorderableList {
 			position.height -= VerticalSpacing;
 
 			s_CurrentListStack.Push(new ListInfo(_controlID, position));
-			try {
+			try
+			{
 				// Draw list as normal.
 				adaptor.BeginGUI();
 				DrawListContainerAndItems(position, adaptor);
 				HandleDropInsertion(position, adaptor);
 				adaptor.EndGUI();
 			}
-			finally {
+			finally
+			{
 				s_CurrentListStack.Pop();
 			}
 
@@ -1305,7 +1420,8 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// Position of list container area in GUI (excludes footer area).
 		/// </returns>
-		private Rect DrawLayoutEmptyList(IReorderableListAdaptor adaptor, DrawEmpty drawEmpty) {
+		private Rect DrawLayoutEmptyList(IReorderableListAdaptor adaptor, DrawEmpty drawEmpty)
+		{
 			Rect position = EditorGUILayout.BeginVertical(ContainerStyle);
 			{
 				if (drawEmpty != null)
@@ -1314,14 +1430,16 @@ namespace Rotorz.ReorderableList {
 					Debug.LogError("Unexpected call to 'DrawLayoutEmptyList'");
 
 				s_CurrentListStack.Push(new ListInfo(_controlID, position));
-				try {
+				try
+				{
 					adaptor.BeginGUI();
 					_insertionIndex = 0;
 					_insertionPosition = position.y + 2;
 					HandleDropInsertion(position, adaptor);
 					adaptor.EndGUI();
 				}
-				finally {
+				finally
+				{
 					s_CurrentListStack.Pop();
 				}
 			}
@@ -1339,7 +1457,8 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		/// <param name="position">Position of list control in GUI.</param>
 		/// <param name="drawEmpty">Callback to draw empty content.</param>
-		private void DrawEmptyListControl(Rect position, DrawEmptyAbsolute drawEmpty) {
+		private void DrawEmptyListControl(Rect position, DrawEmptyAbsolute drawEmpty)
+		{
 			if (Event.current.type == EventType.Repaint)
 				ContainerStyle.Draw(position, GUIContent.none, false, false, false, false);
 
@@ -1353,12 +1472,14 @@ namespace Rotorz.ReorderableList {
 		/// <summary>
 		/// Correct if for some reason one or more styles are missing!
 		/// </summary>
-		private void FixStyles() {
+		private void FixStyles()
+		{
 			ContainerStyle = ContainerStyle ?? ReorderableListStyles.Container;
 			FooterButtonStyle = FooterButtonStyle ?? ReorderableListStyles.FooterButton;
 			ItemButtonStyle = ItemButtonStyle ?? ReorderableListStyles.ItemButton;
 
-			if (s_RightAlignedLabelStyle == null) {
+			if (s_RightAlignedLabelStyle == null)
+			{
 				s_RightAlignedLabelStyle = new GUIStyle(GUI.skin.label);
 				s_RightAlignedLabelStyle.alignment = TextAnchor.MiddleRight;
 				s_RightAlignedLabelStyle.padding.right = 4;
@@ -1371,7 +1492,8 @@ namespace Rotorz.ReorderableList {
 		/// <param name="controlID">Unique ID of list control.</param>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
 		/// <param name="drawEmpty">Delegate for drawing empty list.</param>
-		private void Draw(int controlID, IReorderableListAdaptor adaptor, DrawEmpty drawEmpty) {
+		private void Draw(int controlID, IReorderableListAdaptor adaptor, DrawEmpty drawEmpty)
+		{
 			FixStyles();
 			PrepareState(controlID, adaptor);
 
@@ -1387,13 +1509,15 @@ namespace Rotorz.ReorderableList {
 		}
 
 		/// <inheritdoc cref="Draw(int, IReorderableListAdaptor, DrawEmpty)"/>
-		public void Draw(IReorderableListAdaptor adaptor, DrawEmpty drawEmpty) {
+		public void Draw(IReorderableListAdaptor adaptor, DrawEmpty drawEmpty)
+		{
 			int controlID = GetReorderableListControlID();
 			Draw(controlID, adaptor, drawEmpty);
 		}
 
 		/// <inheritdoc cref="Draw(int, IReorderableListAdaptor, DrawEmpty)"/>
-		public void Draw(IReorderableListAdaptor adaptor) {
+		public void Draw(IReorderableListAdaptor adaptor)
+		{
 			int controlID = GetReorderableListControlID();
 			Draw(controlID, adaptor, null);
 		}
@@ -1405,7 +1529,8 @@ namespace Rotorz.ReorderableList {
 		/// <param name="controlID">Unique ID of list control.</param>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
 		/// <param name="drawEmpty">Delegate for drawing empty list.</param>
-		private void Draw(Rect position, int controlID, IReorderableListAdaptor adaptor, DrawEmptyAbsolute drawEmpty) {
+		private void Draw(Rect position, int controlID, IReorderableListAdaptor adaptor, DrawEmptyAbsolute drawEmpty)
+		{
 			FixStyles();
 			PrepareState(controlID, adaptor);
 
@@ -1417,21 +1542,24 @@ namespace Rotorz.ReorderableList {
 			position.height -= VerticalSpacing;
 
 			s_CurrentListStack.Push(new ListInfo(_controlID, position));
-			try {
+			try
+			{
 				adaptor.BeginGUI();
 
 				DrawListContainerAndItems(position, adaptor);
 				HandleDropInsertion(position, adaptor);
 				CheckForAutoFocusControl();
 
-				if (adaptor.Count == 0) {
+				if (adaptor.Count == 0)
+				{
 					ReorderableListGUI.IndexOfChangedItem = -1;
 					DrawEmptyListControl(position, drawEmpty);
 				}
 
 				adaptor.EndGUI();
 			}
-			finally {
+			finally
+			{
 				s_CurrentListStack.Pop();
 			}
 
@@ -1444,13 +1572,15 @@ namespace Rotorz.ReorderableList {
 		/// <param name="position">Position of list control in GUI.</param>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
 		/// <param name="drawEmpty">Delegate for drawing empty list.</param>
-		public void Draw(Rect position, IReorderableListAdaptor adaptor, DrawEmptyAbsolute drawEmpty) {
+		public void Draw(Rect position, IReorderableListAdaptor adaptor, DrawEmptyAbsolute drawEmpty)
+		{
 			int controlID = GetReorderableListControlID();
 			Draw(position, controlID, adaptor, drawEmpty);
 		}
 
 		/// <inheritdoc cref="Draw(Rect, IReorderableListAdaptor, DrawEmptyAbsolute)"/>
-		public void Draw(Rect position, IReorderableListAdaptor adaptor) {
+		public void Draw(Rect position, IReorderableListAdaptor adaptor)
+		{
 			int controlID = GetReorderableListControlID();
 			Draw(position, controlID, adaptor, null);
 		}
@@ -1472,14 +1602,18 @@ namespace Rotorz.ReorderableList {
 		/// <param name="position">Position of list control in GUI.</param>
 		/// <param name="label">Prefix label for the control.</param>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
-		public void DrawSizeField(Rect position, GUIContent label, IReorderableListAdaptor adaptor) {
+		public void DrawSizeField(Rect position, GUIContent label, IReorderableListAdaptor adaptor)
+		{
 			int sizeControlID = GUIUtility.GetControlID(FocusType.Passive);
 			string sizeControlName = "ReorderableListControl.Size." + sizeControlID;
 			GUI.SetNextControlName(sizeControlName);
 
-			if (GUI.GetNameOfFocusedControl() == sizeControlName) {
-				if (Event.current.rawType == EventType.KeyDown) {
-					switch (Event.current.keyCode) {
+			if (GUI.GetNameOfFocusedControl() == sizeControlName)
+			{
+				if (Event.current.rawType == EventType.KeyDown)
+				{
+					switch (Event.current.keyCode)
+					{
 						case KeyCode.Return:
 						case KeyCode.KeypadEnter:
 							ResizeList(adaptor, _newSizeInput);
@@ -1489,7 +1623,8 @@ namespace Rotorz.ReorderableList {
 				}
 				_newSizeInput = EditorGUI.IntField(position, label, _newSizeInput);
 			}
-			else {
+			else
+			{
 				EditorGUI.IntField(position, label, adaptor.Count);
 				_newSizeInput = adaptor.Count;
 			}
@@ -1501,7 +1636,8 @@ namespace Rotorz.ReorderableList {
 		/// <param name="position">Position of list control in GUI.</param>
 		/// <param name="label">Prefix label for the control.</param>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
-		public void DrawSizeField(Rect position, string label, IReorderableListAdaptor adaptor) {
+		public void DrawSizeField(Rect position, string label, IReorderableListAdaptor adaptor)
+		{
 			s_Temp.text = label;
 			DrawSizeField(position, s_Temp, adaptor);
 		}
@@ -1511,7 +1647,8 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		/// <param name="position">Position of list control in GUI.</param>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
-		public void DrawSizeField(Rect position, IReorderableListAdaptor adaptor) {
+		public void DrawSizeField(Rect position, IReorderableListAdaptor adaptor)
+		{
 			DrawSizeField(position, s_SizePrefixLabel, adaptor);
 		}
 
@@ -1524,7 +1661,8 @@ namespace Rotorz.ReorderableList {
 		/// </remarks>
 		/// <param name="label">Prefix label for the control.</param>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
-		public void DrawSizeField(GUIContent label, IReorderableListAdaptor adaptor) {
+		public void DrawSizeField(GUIContent label, IReorderableListAdaptor adaptor)
+		{
 			Rect position = GUILayoutUtility.GetRect(0, EditorGUIUtility.singleLineHeight);
 			DrawSizeField(position, label, adaptor);
 		}
@@ -1534,7 +1672,8 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		/// <param name="label">Prefix label for the control.</param>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
-		public void DrawSizeField(string label, IReorderableListAdaptor adaptor) {
+		public void DrawSizeField(string label, IReorderableListAdaptor adaptor)
+		{
 			s_Temp.text = label;
 			DrawSizeField(s_Temp, adaptor);
 		}
@@ -1543,7 +1682,8 @@ namespace Rotorz.ReorderableList {
 		/// Draw list size field with automatic layout and the default prefix label.
 		/// </summary>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
-		public void DrawSizeField(IReorderableListAdaptor adaptor) {
+		public void DrawSizeField(IReorderableListAdaptor adaptor)
+		{
 			DrawSizeField(s_SizePrefixLabel, adaptor);
 		}
 
@@ -1587,7 +1727,8 @@ namespace Rotorz.ReorderableList {
 		// Command name is assigned by default context menu handler.
 		private static string s_ContextCommandName;
 
-		private void ShowContextMenu(int itemIndex, IReorderableListAdaptor adaptor) {
+		private void ShowContextMenu(int itemIndex, IReorderableListAdaptor adaptor)
+		{
 			GenericMenu menu = new GenericMenu();
 
 			s_ContextControlID = _controlID;
@@ -1620,7 +1761,8 @@ namespace Rotorz.ReorderableList {
 		/// <seealso cref="AddItemsToMenu"/>
 		protected static readonly GenericMenu.MenuFunction2 DefaultContextHandler = DefaultContextMenuHandler;
 
-		private static void DefaultContextMenuHandler(object userData) {
+		private static void DefaultContextMenuHandler(object userData)
+		{
 			var commandContent = userData as GUIContent;
 			if (commandContent == null || string.IsNullOrEmpty(commandContent.text))
 				return;
@@ -1637,8 +1779,10 @@ namespace Rotorz.ReorderableList {
 		/// <param name="menu">Menu which can be populated.</param>
 		/// <param name="itemIndex">Zero-based index of item which was right-clicked.</param>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
-		protected virtual void AddItemsToMenu(GenericMenu menu, int itemIndex, IReorderableListAdaptor adaptor) {
-			if ((Flags & ReorderableListFlags.DisableReordering) == 0) {
+		protected virtual void AddItemsToMenu(GenericMenu menu, int itemIndex, IReorderableListAdaptor adaptor)
+		{
+			if ((Flags & ReorderableListFlags.DisableReordering) == 0)
+			{
 				if (itemIndex > 0)
 					menu.AddItem(CommandMoveToTop, false, DefaultContextHandler, CommandMoveToTop);
 				else
@@ -1649,7 +1793,8 @@ namespace Rotorz.ReorderableList {
 				else
 					menu.AddDisabledItem(CommandMoveToBottom);
 
-				if (HasAddButton) {
+				if (HasAddButton)
+				{
 					menu.AddSeparator("");
 
 					menu.AddItem(CommandInsertAbove, false, DefaultContextHandler, CommandInsertAbove);
@@ -1660,7 +1805,8 @@ namespace Rotorz.ReorderableList {
 				}
 			}
 
-			if (HasRemoveButtons) {
+			if (HasRemoveButtons)
+			{
 				if (menu.GetItemCount() > 0)
 					menu.AddSeparator("");
 
@@ -1716,8 +1862,10 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// A value of <c>true</c> if command was known; otherwise <c>false</c>.
 		/// </returns>
-		protected virtual bool HandleCommand(string commandName, int itemIndex, IReorderableListAdaptor adaptor) {
-			switch (commandName) {
+		protected virtual bool HandleCommand(string commandName, int itemIndex, IReorderableListAdaptor adaptor)
+		{
+			switch (commandName)
+			{
 				case "Move to Top":
 					MoveItem(adaptor, itemIndex, 0);
 					return true;
@@ -1759,8 +1907,10 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// A value of <c>true</c> if command was known; otherwise <c>false</c>.
 		/// </returns>
-		public bool DoCommand(string commandName, int itemIndex, IReorderableListAdaptor adaptor) {
-			if (!HandleCommand(s_ContextCommandName, itemIndex, adaptor)) {
+		public bool DoCommand(string commandName, int itemIndex, IReorderableListAdaptor adaptor)
+		{
+			if (!HandleCommand(s_ContextCommandName, itemIndex, adaptor))
+			{
 				Debug.LogWarning("Unknown context command.");
 				return false;
 			}
@@ -1779,7 +1929,8 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// A value of <c>true</c> if command was known; otherwise <c>false</c>.
 		/// </returns>
-		public bool DoCommand(GUIContent command, int itemIndex, IReorderableListAdaptor adaptor) {
+		public bool DoCommand(GUIContent command, int itemIndex, IReorderableListAdaptor adaptor)
+		{
 			return DoCommand(command.text, itemIndex, adaptor);
 		}
 
@@ -1794,7 +1945,8 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// Required list height in pixels.
 		/// </returns>
-		public float CalculateListHeight(IReorderableListAdaptor adaptor) {
+		public float CalculateListHeight(IReorderableListAdaptor adaptor)
+		{
 			FixStyles();
 
 			float totalHeight = ContainerStyle.padding.vertical - 1 + VerticalSpacing;
@@ -1821,7 +1973,8 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// Required list height in pixels.
 		/// </returns>
-		public float CalculateListHeight(int itemCount, float itemHeight) {
+		public float CalculateListHeight(int itemCount, float itemHeight)
+		{
 			FixStyles();
 
 			float totalHeight = ContainerStyle.padding.vertical - 1 + VerticalSpacing;
@@ -1842,11 +1995,13 @@ namespace Rotorz.ReorderableList {
 		/// <param name="adaptor">Reorderable list adaptor.</param>
 		/// <param name="sourceIndex">Zero-based index of source item.</param>
 		/// <param name="destIndex">Zero-based index of destination index.</param>
-		protected void MoveItem(IReorderableListAdaptor adaptor, int sourceIndex, int destIndex) {
+		protected void MoveItem(IReorderableListAdaptor adaptor, int sourceIndex, int destIndex)
+		{
 			// Raise event before moving item so that the operation can be cancelled.
 			var movingEventArgs = new ItemMovingEventArgs(adaptor, sourceIndex, destIndex);
 			OnItemMoving(movingEventArgs);
-			if (!movingEventArgs.Cancel) {
+			if (!movingEventArgs.Cancel)
+			{
 				adaptor.Move(sourceIndex, destIndex);
 
 				// Item was actually moved!
@@ -1864,7 +2019,8 @@ namespace Rotorz.ReorderableList {
 		/// Add item at end of list and raises the event <see cref="ItemInserted"/>.
 		/// </summary>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
-		protected void AddItem(IReorderableListAdaptor adaptor) {
+		protected void AddItem(IReorderableListAdaptor adaptor)
+		{
 			adaptor.Add();
 			AutoFocusItem(s_ContextControlID, adaptor.Count - 1);
 
@@ -1880,7 +2036,8 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
 		/// <param name="itemIndex">Zero-based index of item.</param>
-		protected void InsertItem(IReorderableListAdaptor adaptor, int itemIndex) {
+		protected void InsertItem(IReorderableListAdaptor adaptor, int itemIndex)
+		{
 			adaptor.Insert(itemIndex);
 			AutoFocusItem(s_ContextControlID, itemIndex);
 
@@ -1896,7 +2053,8 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
 		/// <param name="itemIndex">Zero-based index of item.</param>
-		protected void DuplicateItem(IReorderableListAdaptor adaptor, int itemIndex) {
+		protected void DuplicateItem(IReorderableListAdaptor adaptor, int itemIndex)
+		{
 			adaptor.Duplicate(itemIndex);
 			AutoFocusItem(s_ContextControlID, itemIndex + 1);
 
@@ -1919,7 +2077,8 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// Returns a value of <c>false</c> if operation was cancelled.
 		/// </returns>
-		protected bool RemoveItem(IReorderableListAdaptor adaptor, int itemIndex) {
+		protected bool RemoveItem(IReorderableListAdaptor adaptor, int itemIndex)
+		{
 			var args = new ItemRemovingEventArgs(adaptor, itemIndex);
 			OnItemRemoving(args);
 			if (args.Cancel)
@@ -1944,13 +2103,15 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// Returns a value of <c>false</c> if operation was cancelled.
 		/// </returns>
-		protected bool ClearAll(IReorderableListAdaptor adaptor) {
+		protected bool ClearAll(IReorderableListAdaptor adaptor)
+		{
 			if (adaptor.Count == 0)
 				return true;
 
 			var args = new ItemRemovingEventArgs(adaptor, 0);
 			int count = adaptor.Count;
-			for (int i = 0; i < count; ++i) {
+			for (int i = 0; i < count; ++i)
+			{
 				args.ItemIndex = i;
 				OnItemRemoving(args);
 				if (args.Cancel)
@@ -1973,8 +2134,10 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// Returns a value of <c>false</c> if operation was cancelled.
 		/// </returns>
-		protected bool ResizeList(IReorderableListAdaptor adaptor, int newCount) {
-			if (newCount < 0) {
+		protected bool ResizeList(IReorderableListAdaptor adaptor, int newCount)
+		{
+			if (newCount < 0)
+			{
 				// Do nothing when new count is negative.
 				return true;
 			}
@@ -1982,11 +2145,13 @@ namespace Rotorz.ReorderableList {
 			int removeCount = Mathf.Max(0, adaptor.Count - newCount);
 			int addCount = Mathf.Max(0, newCount - adaptor.Count);
 
-			while (removeCount-- > 0) {
+			while (removeCount-- > 0)
+			{
 				if (!RemoveItem(adaptor, adaptor.Count - 1))
 					return false;
 			}
-			while (addCount-- > 0) {
+			while (addCount-- > 0)
+			{
 				AddItem(adaptor);
 			}
 

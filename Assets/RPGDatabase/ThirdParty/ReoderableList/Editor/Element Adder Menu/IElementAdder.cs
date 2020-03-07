@@ -1,16 +1,18 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 using System;
 
-namespace Rotorz.ReorderableList {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <summary>
 	/// Interface for an object which adds elements to a context object of the type
 	/// <typeparamref name="TContext"/>.
 	/// </summary>
 	/// <typeparam name="TContext">Type of the context object that elements can be added to.</typeparam>
-	public interface IElementAdder<TContext> {
+	public interface IElementAdder<TContext>
+	{
 
 		/// <summary>
 		/// Gets the context object.

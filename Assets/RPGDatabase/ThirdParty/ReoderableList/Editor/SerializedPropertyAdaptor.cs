@@ -1,12 +1,12 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
-using Rotorz.ReorderableList.Internal;
 using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace Rotorz.ReorderableList {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <summary>
 	/// Reorderable list adaptor for serialized array property.
@@ -15,11 +15,12 @@ namespace Rotorz.ReorderableList {
 	/// <para>This adaptor can be subclassed to add special logic to item height calculation.
 	/// You may want to implement a custom adaptor class where specialised functionality
 	/// is needed.</para>
-	/// <para>List elements are <b>not</b> cloned using the <see cref="System.ICloneable"/>
-	/// interface when using a <see cref="UnityEditor.SerializedProperty"/> to
+	/// <para>List elements are <b>not</b> cloned using the <see cref="ICloneable"/>
+	/// interface when using a <see cref="SerializedProperty"/> to
 	/// manipulate lists.</para>
 	/// </remarks>
-	public class SerializedPropertyAdaptor : IReorderableListAdaptor {
+	public class SerializedPropertyAdaptor : IReorderableListAdaptor
+	{
 
 		private SerializedProperty _arrayProperty;
 
@@ -39,14 +40,16 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// Serialized property wrapper for array element.
 		/// </returns>
-		public SerializedProperty this[int index] {
+		public SerializedProperty this[int index]
+		{
 			get { return _arrayProperty.GetArrayElementAtIndex(index); }
 		}
 
 		/// <summary>
 		/// Gets the underlying serialized array property.
 		/// </summary>
-		public SerializedProperty arrayProperty {
+		public SerializedProperty arrayProperty
+		{
 			get { return _arrayProperty; }
 		}
 
@@ -57,21 +60,23 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		/// <param name="arrayProperty">Serialized property for entire array.</param>
 		/// <param name="fixedItemHeight">Non-zero height overrides property drawer height calculation.</param>
-		public SerializedPropertyAdaptor(SerializedProperty arrayProperty, float fixedItemHeight) {
+		public SerializedPropertyAdaptor(SerializedProperty arrayProperty, float fixedItemHeight)
+		{
 			if (arrayProperty == null)
 				throw new ArgumentNullException("Array property was null.");
 			if (!arrayProperty.isArray)
 				throw new InvalidOperationException("Specified serialized propery is not an array.");
 
-			this._arrayProperty = arrayProperty;
-			this.FixedItemHeight = fixedItemHeight;
+			_arrayProperty = arrayProperty;
+			FixedItemHeight = fixedItemHeight;
 		}
 
 		/// <summary>
 		/// Initializes a new instance of <see cref="SerializedPropertyAdaptor"/>.
 		/// </summary>
 		/// <param name="arrayProperty">Serialized property for entire array.</param>
-		public SerializedPropertyAdaptor(SerializedProperty arrayProperty) : this(arrayProperty, 0f) {
+		public SerializedPropertyAdaptor(SerializedProperty arrayProperty) : this(arrayProperty, 0f)
+		{
 		}
 
 		#endregion
@@ -79,36 +84,43 @@ namespace Rotorz.ReorderableList {
 		#region IReorderableListAdaptor - Implementation
 
 		/// <inheritdoc/>
-		public int Count {
+		public int Count
+		{
 			get { return _arrayProperty.arraySize; }
 		}
 
 		/// <inheritdoc/>
-		public virtual bool CanDrag(int index) {
+		public virtual bool CanDrag(int index)
+		{
 			return true;
 		}
 		/// <inheritdoc/>
-		public virtual bool CanRemove(int index) {
+		public virtual bool CanRemove(int index)
+		{
 			return true;
 		}
 
 		/// <inheritdoc/>
-		public void Add() {
+		public void Add()
+		{
 			int newIndex = _arrayProperty.arraySize;
 			++_arrayProperty.arraySize;
 			SerializedPropertyUtility.ResetValue(_arrayProperty.GetArrayElementAtIndex(newIndex));
 		}
 		/// <inheritdoc/>
-		public void Insert(int index) {
+		public void Insert(int index)
+		{
 			_arrayProperty.InsertArrayElementAtIndex(index);
 			SerializedPropertyUtility.ResetValue(_arrayProperty.GetArrayElementAtIndex(index));
 		}
 		/// <inheritdoc/>
-		public void Duplicate(int index) {
+		public void Duplicate(int index)
+		{
 			_arrayProperty.InsertArrayElementAtIndex(index);
 		}
 		/// <inheritdoc/>
-		public void Remove(int index) {
+		public void Remove(int index)
+		{
 			// Unity doesn't remove element when it contains an object reference.
 			var elementProperty = _arrayProperty.GetArrayElementAtIndex(index);
 			if (elementProperty.propertyType == SerializedPropertyType.ObjectReference)
@@ -117,35 +129,42 @@ namespace Rotorz.ReorderableList {
 			_arrayProperty.DeleteArrayElementAtIndex(index);
 		}
 		/// <inheritdoc/>
-		public void Move(int sourceIndex, int destIndex) {
+		public void Move(int sourceIndex, int destIndex)
+		{
 			if (destIndex > sourceIndex)
 				--destIndex;
 			_arrayProperty.MoveArrayElement(sourceIndex, destIndex);
 		}
 		/// <inheritdoc/>
-		public void Clear() {
+		public void Clear()
+		{
 			_arrayProperty.ClearArray();
 		}
 
 		/// <inheritdoc/>
-		public virtual void BeginGUI() {
+		public virtual void BeginGUI()
+		{
 		}
 
 		/// <inheritdoc/>
-		public virtual void EndGUI() {
+		public virtual void EndGUI()
+		{
 		}
 
 		/// <inheritdoc/>
-		public virtual void DrawItemBackground(Rect position, int index) {
+		public virtual void DrawItemBackground(Rect position, int index)
+		{
 		}
 
 		/// <inheritdoc/>
-		public virtual void DrawItem(Rect position, int index) {
+		public virtual void DrawItem(Rect position, int index)
+		{
 			EditorGUI.PropertyField(position, this[index], GUIContent.none, false);
 		}
 
 		/// <inheritdoc/>
-		public virtual float GetItemHeight(int index) {
+		public virtual float GetItemHeight(int index)
+		{
 			return FixedItemHeight != 0f
 				? FixedItemHeight
 				: EditorGUI.GetPropertyHeight(this[index], GUIContent.none, false)

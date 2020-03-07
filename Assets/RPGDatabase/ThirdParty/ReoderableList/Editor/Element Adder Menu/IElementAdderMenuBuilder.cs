@@ -1,15 +1,17 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 using System;
 
-namespace Rotorz.ReorderableList {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <summary>
 	/// Interface for building an <see cref="IElementAdderMenu"/>.
 	/// </summary>
 	/// <typeparam name="TContext">Type of the context object that elements can be added to.</typeparam>
-	public interface IElementAdderMenuBuilder<TContext> {
+	public interface IElementAdderMenuBuilder<TContext>
+	{
 
 		/// <summary>
 		/// Sets contract type of the elements that can be included in the <see cref="IElementAdderMenu"/>.
@@ -49,7 +51,7 @@ namespace Rotorz.ReorderableList {
 		/// will not be included in the menu interface.</para>
 		/// </remarks>
 		/// <param name="typeFilter">Filter function.</param>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// If <paramref name="typeFilter"/> is <c>null</c>.
 		/// </exception>
 		void AddTypeFilter(Func<Type, bool> typeFilter);
@@ -58,7 +60,7 @@ namespace Rotorz.ReorderableList {
 		/// Adds a custom command to the menu.
 		/// </summary>
 		/// <param name="command">The custom command.</param>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// If <paramref name="command"/> is <c>null</c>.
 		/// </exception>
 		void AddCustomCommand(IElementAdderMenuCommand<TContext> command);

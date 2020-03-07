@@ -1,9 +1,10 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 using System;
 
-namespace Rotorz.ReorderableList {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <summary>
 	/// Additional flags which can be passed into reorderable list field.
@@ -16,7 +17,8 @@ namespace Rotorz.ReorderableList {
 	/// ]]></code>
 	/// </example>
 	[Flags]
-	public enum ReorderableListFlags {
+	public enum ReorderableListFlags
+	{
 		/// <summary>
 		/// Hide grab handles and disable reordering of list items.
 		/// </summary>

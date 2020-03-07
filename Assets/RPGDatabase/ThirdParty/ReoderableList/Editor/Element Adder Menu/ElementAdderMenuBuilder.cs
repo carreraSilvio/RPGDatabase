@@ -1,9 +1,11 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 using System;
 
-namespace Rotorz.ReorderableList {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <summary>
 	/// Factory methods that create <see cref="IElementAdderMenuBuilder{TContext}"/>
@@ -73,7 +75,8 @@ namespace Rotorz.ReorderableList {
 	/// }
 	/// ]]></code>
 	/// </example>
-	public static class ElementAdderMenuBuilder {
+	public static class ElementAdderMenuBuilder
+	{
 
 		/// <summary>
 		/// Gets a <see cref="IElementAdderMenuBuilder{TContext}"/> to build an element
@@ -84,7 +87,8 @@ namespace Rotorz.ReorderableList {
 		/// A new <see cref="IElementAdderMenuBuilder{TContext}"/> instance.
 		/// </returns>
 		/// <seealso cref="IElementAdderMenuBuilder{TContext}.SetContractType(Type)"/>
-		public static IElementAdderMenuBuilder<TContext> For<TContext>() {
+		public static IElementAdderMenuBuilder<TContext> For<TContext>()
+		{
 			return new GenericElementAdderMenuBuilder<TContext>();
 		}
 
@@ -98,7 +102,8 @@ namespace Rotorz.ReorderableList {
 		/// A new <see cref="IElementAdderMenuBuilder{TContext}"/> instance.
 		/// </returns>
 		/// <seealso cref="IElementAdderMenuBuilder{TContext}.SetContractType(Type)"/>
-		public static IElementAdderMenuBuilder<TContext> For<TContext>(Type contractType) {
+		public static IElementAdderMenuBuilder<TContext> For<TContext>(Type contractType)
+		{
 			var builder = For<TContext>();
 			builder.SetContractType(contractType);
 			return builder;

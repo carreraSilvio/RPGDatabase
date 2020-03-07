@@ -1,15 +1,17 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 using UnityEngine;
 
-namespace Rotorz.ReorderableList {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <summary>
 	/// Adaptor allowing reorderable list control to interface with list data.
 	/// </summary>
 	/// <see cref="IReorderableListDropTarget"/>
-	public interface IReorderableListAdaptor {
+	public interface IReorderableListAdaptor
+	{
 
 		/// <summary>
 		/// Gets count of elements in list.

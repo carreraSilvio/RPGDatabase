@@ -1,14 +1,16 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 using UnityEngine;
 
-namespace Rotorz.ReorderableList {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <summary>
 	/// Interface for a menu interface.
 	/// </summary>
-	public interface IElementAdderMenu {
+	public interface IElementAdderMenu
+	{
 
 		/// <summary>
 		/// Gets a value indicating whether the menu contains any items.

@@ -1,16 +1,18 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 using System;
 using System.ComponentModel;
 using UnityEngine;
 
-namespace Rotorz.ReorderableList {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <summary>
 	/// Arguments which are passed to <see cref="AddMenuClickedEventHandler"/>.
 	/// </summary>
-	public sealed class AddMenuClickedEventArgs : EventArgs {
+	public sealed class AddMenuClickedEventArgs : EventArgs
+	{
 
 		/// <summary>
 		/// Gets adaptor to reorderable list container.
@@ -26,9 +28,10 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
 		/// <param name="buttonPosition">Position of the add menu button.</param>
-		public AddMenuClickedEventArgs(IReorderableListAdaptor adaptor, Rect buttonPosition) {
-			this.Adaptor = adaptor;
-			this.ButtonPosition = buttonPosition;
+		public AddMenuClickedEventArgs(IReorderableListAdaptor adaptor, Rect buttonPosition)
+		{
+			Adaptor = adaptor;
+			ButtonPosition = buttonPosition;
 		}
 
 	}
@@ -43,7 +46,8 @@ namespace Rotorz.ReorderableList {
 	/// <summary>
 	/// Arguments which are passed to <see cref="ItemInsertedEventHandler"/>.
 	/// </summary>
-	public sealed class ItemInsertedEventArgs : EventArgs {
+	public sealed class ItemInsertedEventArgs : EventArgs
+	{
 
 		/// <summary>
 		/// Gets adaptor to reorderable list container which contains element.
@@ -65,10 +69,11 @@ namespace Rotorz.ReorderableList {
 		/// <param name="adaptor">Reorderable list adaptor.</param>
 		/// <param name="itemIndex">Zero-based index of item.</param>
 		/// <param name="wasDuplicated">Indicates if inserted item was duplicated from another item.</param>
-		public ItemInsertedEventArgs(IReorderableListAdaptor adaptor, int itemIndex, bool wasDuplicated) {
-			this.Adaptor = adaptor;
-			this.ItemIndex = itemIndex;
-			this.WasDuplicated = wasDuplicated;
+		public ItemInsertedEventArgs(IReorderableListAdaptor adaptor, int itemIndex, bool wasDuplicated)
+		{
+			Adaptor = adaptor;
+			ItemIndex = itemIndex;
+			WasDuplicated = wasDuplicated;
 		}
 
 	}
@@ -83,7 +88,8 @@ namespace Rotorz.ReorderableList {
 	/// <summary>
 	/// Arguments which are passed to <see cref="ItemRemovingEventHandler"/>.
 	/// </summary>
-	public sealed class ItemRemovingEventArgs : CancelEventArgs {
+	public sealed class ItemRemovingEventArgs : CancelEventArgs
+	{
 
 		/// <summary>
 		/// Gets adaptor to reorderable list container which contains element.
@@ -99,9 +105,10 @@ namespace Rotorz.ReorderableList {
 		/// </summary>
 		/// <param name="adaptor">Reorderable list adaptor.</param>
 		/// <param name="itemIndex">Zero-based index of item.</param>
-		public ItemRemovingEventArgs(IReorderableListAdaptor adaptor, int itemIndex) {
-			this.Adaptor = adaptor;
-			this.ItemIndex = itemIndex;
+		public ItemRemovingEventArgs(IReorderableListAdaptor adaptor, int itemIndex)
+		{
+			Adaptor = adaptor;
+			ItemIndex = itemIndex;
 		}
 
 	}
@@ -120,7 +127,8 @@ namespace Rotorz.ReorderableList {
 	/// <summary>
 	/// Arguments which are passed to <see cref="ItemMovingEventHandler"/>.
 	/// </summary>
-	public sealed class ItemMovingEventArgs : CancelEventArgs {
+	public sealed class ItemMovingEventArgs : CancelEventArgs
+	{
 
 		/// <summary>
 		/// Gets adaptor to reorderable list container which contains element.
@@ -140,8 +148,10 @@ namespace Rotorz.ReorderableList {
 		/// Gets zero-based index of item <strong>after</strong> it has been moved.
 		/// </summary>
 		/// <seealso cref="DestinationItemIndex"/>
-		public int NewItemIndex {
-			get {
+		public int NewItemIndex
+		{
+			get
+			{
 				int result = DestinationItemIndex;
 				if (result > ItemIndex)
 					--result;
@@ -155,10 +165,11 @@ namespace Rotorz.ReorderableList {
 		/// <param name="adaptor">Reorderable list adaptor.</param>
 		/// <param name="itemIndex">Zero-based index of item.</param>
 		/// <param name="destinationItemIndex">Xero-based index of item destination.</param>
-		public ItemMovingEventArgs(IReorderableListAdaptor adaptor, int itemIndex, int destinationItemIndex) {
-			this.Adaptor = adaptor;
-			this.ItemIndex = itemIndex;
-			this.DestinationItemIndex = destinationItemIndex;
+		public ItemMovingEventArgs(IReorderableListAdaptor adaptor, int itemIndex, int destinationItemIndex)
+		{
+			Adaptor = adaptor;
+			ItemIndex = itemIndex;
+			DestinationItemIndex = destinationItemIndex;
 		}
 
 	}
@@ -177,7 +188,8 @@ namespace Rotorz.ReorderableList {
 	/// <summary>
 	/// Arguments which are passed to <see cref="ItemMovedEventHandler"/>.
 	/// </summary>
-	public sealed class ItemMovedEventArgs : EventArgs {
+	public sealed class ItemMovedEventArgs : EventArgs
+	{
 
 		/// <summary>
 		/// Gets adaptor to reorderable list container which contains element.
@@ -198,10 +210,11 @@ namespace Rotorz.ReorderableList {
 		/// <param name="adaptor">Reorderable list adaptor.</param>
 		/// <param name="oldItemIndex">Old zero-based index of item.</param>
 		/// <param name="newItemIndex">New zero-based index of item.</param>
-		public ItemMovedEventArgs(IReorderableListAdaptor adaptor, int oldItemIndex, int newItemIndex) {
-			this.Adaptor = adaptor;
-			this.OldItemIndex = oldItemIndex;
-			this.NewItemIndex = newItemIndex;
+		public ItemMovedEventArgs(IReorderableListAdaptor adaptor, int oldItemIndex, int newItemIndex)
+		{
+			Adaptor = adaptor;
+			OldItemIndex = oldItemIndex;
+			NewItemIndex = newItemIndex;
 		}
 
 	}

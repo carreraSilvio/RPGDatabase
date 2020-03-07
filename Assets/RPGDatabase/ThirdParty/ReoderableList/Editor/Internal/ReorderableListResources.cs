@@ -1,14 +1,16 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace Rotorz.ReorderableList.Internal {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <exclude/>
-	public enum ReorderableListTexture {
+	public enum ReorderableListTexture
+	{
 		Icon_Add_Normal = 0,
 		Icon_Add_Active,
 		Icon_AddMenu_Normal,
@@ -31,9 +33,11 @@ namespace Rotorz.ReorderableList.Internal {
 	/// Resources to assist with reorderable list control.
 	/// </summary>
 	/// <exclude/>
-	public static class ReorderableListResources {
+	public static class ReorderableListResources
+	{
 
-		static ReorderableListResources() {
+		static ReorderableListResources()
+		{
 			GenerateSpecialTextures();
 			LoadResourceAssets();
 		}
@@ -96,7 +100,8 @@ namespace Rotorz.ReorderableList.Internal {
 		/// </summary>
 		/// <param name="name"></param>
 		/// <returns></returns>
-		public static Texture2D GetTexture(ReorderableListTexture name) {
+		public static Texture2D GetTexture(ReorderableListTexture name)
+		{
 			return s_Cached[(int)name];
 		}
 
@@ -109,7 +114,8 @@ namespace Rotorz.ReorderableList.Internal {
 		/// <summary>
 		/// Generate special textures.
 		/// </summary>
-		private static void GenerateSpecialTextures() {
+		private static void GenerateSpecialTextures()
+		{
 			texHighlightColor = CreatePixelTexture("(Generated) Highlight Color", ReorderableListStyles.SelectionBackgroundColor);
 		}
 
@@ -121,7 +127,8 @@ namespace Rotorz.ReorderableList.Internal {
 		/// <returns>
 		/// The new <c>Texture2D</c> instance.
 		/// </returns>
-		public static Texture2D CreatePixelTexture(string name, Color color) {
+		public static Texture2D CreatePixelTexture(string name, Color color)
+		{
 			var tex = new Texture2D(1, 1, TextureFormat.ARGB32, false, true);
 			tex.name = name;
 			tex.hideFlags = HideFlags.HideAndDontSave;
@@ -141,11 +148,13 @@ namespace Rotorz.ReorderableList.Internal {
 		/// Read textures from base-64 encoded strings. Automatically selects assets based
 		/// upon whether the light or dark (pro) skin is active.
 		/// </summary>
-		private static void LoadResourceAssets() {
+		private static void LoadResourceAssets()
+		{
 			var skin = EditorGUIUtility.isProSkin ? s_DarkSkin : s_LightSkin;
 			s_Cached = new Texture2D[skin.Length];
 
-			for (int i = 0; i < s_Cached.Length; ++i) {
+			for (int i = 0; i < s_Cached.Length; ++i)
+			{
 				// Get image data (PNG) from base64 encoded strings.
 				byte[] imageData = Convert.FromBase64String(skin[i]);
 
@@ -159,7 +168,7 @@ namespace Rotorz.ReorderableList.Internal {
 				tex.name = "(Generated) ReorderableList:" + i;
 				tex.filterMode = FilterMode.Point;
 #if UNITY_2017_1_OR_NEWER
-                ImageConversion.LoadImage(tex, imageData, markNonReadable: true);
+				tex.LoadImage(imageData, markNonReadable: true);
 #else
                 tex.LoadImage(imageData);
 #endif
@@ -177,13 +186,15 @@ namespace Rotorz.ReorderableList.Internal {
 		/// <param name="imageData">PNG image data.</param>
 		/// <param name="width">Width of image in pixels.</param>
 		/// <param name="height">Height of image in pixels.</param>
-		private static void GetImageSize(byte[] imageData, out int width, out int height) {
+		private static void GetImageSize(byte[] imageData, out int width, out int height)
+		{
 			width = ReadInt(imageData, 3 + 15);
 			height = ReadInt(imageData, 3 + 15 + 2 + 2);
 		}
 
-		private static int ReadInt(byte[] imageData, int offset) {
-			return (imageData[offset] << 8) | imageData[offset + 1];
+		private static int ReadInt(byte[] imageData, int offset)
+		{
+			return imageData[offset] << 8 | imageData[offset + 1];
 		}
 
 		#endregion

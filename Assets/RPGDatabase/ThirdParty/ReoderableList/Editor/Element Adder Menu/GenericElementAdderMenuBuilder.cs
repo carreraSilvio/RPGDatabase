@@ -1,4 +1,4 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 using System;
@@ -6,11 +6,14 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Rotorz.ReorderableList {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
-	internal sealed class GenericElementAdderMenuBuilder<TContext> : IElementAdderMenuBuilder<TContext> {
+	internal sealed class GenericElementAdderMenuBuilder<TContext> : IElementAdderMenuBuilder<TContext>
+	{
 
-		private static string NicifyTypeName(Type type) {
+		private static string NicifyTypeName(Type type)
+		{
 			return ObjectNames.NicifyVariableName(type.Name);
 		}
 
@@ -20,42 +23,50 @@ namespace Rotorz.ReorderableList {
 		private List<Func<Type, bool>> _typeFilters = new List<Func<Type, bool>>();
 		private List<IElementAdderMenuCommand<TContext>> _customCommands = new List<IElementAdderMenuCommand<TContext>>();
 
-		public GenericElementAdderMenuBuilder() {
+		public GenericElementAdderMenuBuilder()
+		{
 			_typeDisplayNameFormatter = NicifyTypeName;
 		}
 
-		public void SetContractType(Type contractType) {
+		public void SetContractType(Type contractType)
+		{
 			_contractType = contractType;
 		}
 
-		public void SetElementAdder(IElementAdder<TContext> elementAdder) {
+		public void SetElementAdder(IElementAdder<TContext> elementAdder)
+		{
 			_elementAdder = elementAdder;
 		}
 
-		public void SetTypeDisplayNameFormatter(Func<Type, string> formatter) {
+		public void SetTypeDisplayNameFormatter(Func<Type, string> formatter)
+		{
 			_typeDisplayNameFormatter = formatter ?? NicifyTypeName;
 		}
 
-		public void AddTypeFilter(Func<Type, bool> typeFilter) {
+		public void AddTypeFilter(Func<Type, bool> typeFilter)
+		{
 			if (typeFilter == null)
 				throw new ArgumentNullException("typeFilter");
 
 			_typeFilters.Add(typeFilter);
 		}
 
-		public void AddCustomCommand(IElementAdderMenuCommand<TContext> command) {
+		public void AddCustomCommand(IElementAdderMenuCommand<TContext> command)
+		{
 			if (command == null)
 				throw new ArgumentNullException("command");
 
 			_customCommands.Add(command);
 		}
 
-		public IElementAdderMenu GetMenu() {
+		public IElementAdderMenu GetMenu()
+		{
 			var menu = new GenericElementAdderMenu();
 
 			AddCommandsToMenu(menu, _customCommands);
 
-			if (_contractType != null) {
+			if (_contractType != null)
+			{
 				AddCommandsToMenu(menu, ElementAdderMeta.GetMenuCommands<TContext>(_contractType));
 				AddConcreteTypesToMenu(menu, ElementAdderMeta.GetConcreteElementTypes(_contractType, _typeFilters.ToArray()));
 			}
@@ -63,14 +74,16 @@ namespace Rotorz.ReorderableList {
 			return menu;
 		}
 
-		private void AddCommandsToMenu(GenericElementAdderMenu menu, IList<IElementAdderMenuCommand<TContext>> commands) {
+		private void AddCommandsToMenu(GenericElementAdderMenu menu, IList<IElementAdderMenuCommand<TContext>> commands)
+		{
 			if (commands.Count == 0)
 				return;
 
 			if (!menu.IsEmpty)
 				menu.AddSeparator();
 
-			foreach (var command in commands) {
+			foreach (var command in commands)
+			{
 				if (_elementAdder != null && command.CanExecute(_elementAdder))
 					menu.AddItem(command.Content, () => command.Execute(_elementAdder));
 				else
@@ -78,17 +91,20 @@ namespace Rotorz.ReorderableList {
 			}
 		}
 
-		private void AddConcreteTypesToMenu(GenericElementAdderMenu menu, Type[] concreteTypes) {
+		private void AddConcreteTypesToMenu(GenericElementAdderMenu menu, Type[] concreteTypes)
+		{
 			if (concreteTypes.Length == 0)
 				return;
 
 			if (!menu.IsEmpty)
 				menu.AddSeparator();
 
-			foreach (var concreteType in concreteTypes) {
+			foreach (var concreteType in concreteTypes)
+			{
 				var content = new GUIContent(_typeDisplayNameFormatter(concreteType));
 				if (_elementAdder != null && _elementAdder.CanAddElement(concreteType))
-					menu.AddItem(content, () => {
+					menu.AddItem(content, () =>
+					{
 						if (_elementAdder.CanAddElement(concreteType))
 							_elementAdder.AddElement(concreteType);
 					});

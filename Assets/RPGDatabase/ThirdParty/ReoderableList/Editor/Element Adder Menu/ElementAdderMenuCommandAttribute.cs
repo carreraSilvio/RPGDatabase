@@ -1,9 +1,10 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 using System;
 
-namespace Rotorz.ReorderableList {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <summary>
 	/// Annotate <see cref="IElementAdderMenuCommand{TContext}"/> implementations with a
@@ -47,13 +48,15 @@ namespace Rotorz.ReorderableList {
 	/// ]]></code>
 	/// </example>
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
-	public sealed class ElementAdderMenuCommandAttribute : Attribute {
+	public sealed class ElementAdderMenuCommandAttribute : Attribute
+	{
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ElementAdderMenuCommandAttribute"/> class.
 		/// </summary>
 		/// <param name="contractType">Contract type of addable elements.</param>
-		public ElementAdderMenuCommandAttribute(Type contractType) {
+		public ElementAdderMenuCommandAttribute(Type contractType)
+		{
 			ContractType = contractType;
 		}
 

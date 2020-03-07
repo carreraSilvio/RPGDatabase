@@ -1,4 +1,4 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 using System;
@@ -6,19 +6,24 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace Rotorz.ReorderableList.Internal {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <summary>
 	/// Utility functions to assist with GUIs.
 	/// </summary>
 	/// <exclude/>
-	public static class GUIHelper {
+	public static class GUIHelper
+	{
 
-		static GUIHelper() {
+		static GUIHelper()
+		{
 			var tyGUIClip = Type.GetType("UnityEngine.GUIClip,UnityEngine");
-			if (tyGUIClip != null) {
+			if (tyGUIClip != null)
+			{
 				var piVisibleRect = tyGUIClip.GetProperty("visibleRect", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-				if (piVisibleRect != null) {
+				if (piVisibleRect != null)
+				{
 					var getMethod = piVisibleRect.GetGetMethod(true) ?? piVisibleRect.GetGetMethod(false);
 					VisibleRect = (Func<Rect>)Delegate.CreateDelegate(typeof(Func<Rect>), getMethod);
 				}
@@ -60,7 +65,8 @@ namespace Rotorz.ReorderableList.Internal {
 		/// </summary>
 		/// <param name="position">Position of which to draw texture in space of GUI.</param>
 		/// <param name="texture">Texture.</param>
-		public static void DrawTexture(Rect position, Texture2D texture) {
+		public static void DrawTexture(Rect position, Texture2D texture)
+		{
 			if (Event.current.type != EventType.Repaint)
 				return;
 
@@ -72,17 +78,20 @@ namespace Rotorz.ReorderableList.Internal {
 		private static GUIContent s_TempIconContent = new GUIContent();
 		private static readonly int s_IconButtonHint = "_ReorderableIconButton_".GetHashCode();
 
-		public static bool IconButton(Rect position, bool visible, Texture2D iconNormal, Texture2D iconActive, GUIStyle style) {
+		public static bool IconButton(Rect position, bool visible, Texture2D iconNormal, Texture2D iconActive, GUIStyle style)
+		{
 			int controlID = GUIUtility.GetControlID(s_IconButtonHint, FocusType.Passive);
 			bool result = false;
 
 			position.height += 1;
 
-			switch (Event.current.GetTypeForControl(controlID)) {
+			switch (Event.current.GetTypeForControl(controlID))
+			{
 				case EventType.MouseDown:
 					// Do not allow button to be pressed using right mouse button since
 					// context menu should be shown instead!
-					if (GUI.enabled && Event.current.button != 1 && position.Contains(Event.current.mousePosition)) {
+					if (GUI.enabled && Event.current.button != 1 && position.Contains(Event.current.mousePosition))
+					{
 						GUIUtility.hotControl = controlID;
 						GUIUtility.keyboardControl = 0;
 						Event.current.Use();
@@ -95,7 +104,8 @@ namespace Rotorz.ReorderableList.Internal {
 					break;
 
 				case EventType.MouseUp:
-					if (GUIUtility.hotControl == controlID) {
+					if (GUIUtility.hotControl == controlID)
+					{
 						GUIUtility.hotControl = 0;
 						result = position.Contains(Event.current.mousePosition);
 						Event.current.Use();
@@ -103,7 +113,8 @@ namespace Rotorz.ReorderableList.Internal {
 					break;
 
 				case EventType.Repaint:
-					if (visible) {
+					if (visible)
+					{
 						bool isActive = GUIUtility.hotControl == controlID && position.Contains(Event.current.mousePosition);
 						s_TempIconContent.image = isActive ? iconActive : iconNormal;
 						position.height -= 1;
@@ -115,15 +126,18 @@ namespace Rotorz.ReorderableList.Internal {
 			return result;
 		}
 
-		public static bool IconButton(Rect position, Texture2D iconNormal, Texture2D iconActive, GUIStyle style) {
+		public static bool IconButton(Rect position, Texture2D iconNormal, Texture2D iconActive, GUIStyle style)
+		{
 			return IconButton(position, true, iconNormal, iconActive, style);
 		}
 
 		private static readonly Color s_SeparatorColor;
 		private static readonly GUIStyle s_SeparatorStyle;
 
-		public static void Separator(Rect position, Color color) {
-			if (Event.current.type == EventType.Repaint) {
+		public static void Separator(Rect position, Color color)
+		{
+			if (Event.current.type == EventType.Repaint)
+			{
 				Color restoreColor = GUI.color;
 				GUI.color = color;
 				s_SeparatorStyle.Draw(position, false, false, false, false);
@@ -131,7 +145,8 @@ namespace Rotorz.ReorderableList.Internal {
 			}
 		}
 
-		public static void Separator(Rect position) {
+		public static void Separator(Rect position)
+		{
 			Separator(position, s_SeparatorColor);
 		}
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace RPGDatabase.Demo
+namespace BrightLib.RPGDatabase.Demo
 {
     public class DemoActorInfoWindow : MonoBehaviour
     {

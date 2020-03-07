@@ -1,9 +1,10 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 using UnityEngine;
 
-namespace Rotorz.ReorderableList {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <summary>
 	/// Interface for a menu command that can be included in an <see cref="IElementAdderMenu"/>
@@ -12,7 +13,8 @@ namespace Rotorz.ReorderableList {
 	/// calling <see cref="IElementAdderMenuBuilder{TContext}.AddCustomCommand"/>.
 	/// </summary>
 	/// <typeparam name="TContext">Type of the context object that elements can be added to.</typeparam>
-	public interface IElementAdderMenuCommand<TContext> {
+	public interface IElementAdderMenuCommand<TContext>
+	{
 
 		/// <summary>
 		/// Gets the content of the menu command.

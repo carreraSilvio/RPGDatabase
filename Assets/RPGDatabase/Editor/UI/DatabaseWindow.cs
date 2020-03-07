@@ -1,5 +1,5 @@
 ﻿using BrightLib.RPGDatabase.Runtime;
-using Rotorz.ReorderableList;
+using BrightLib.RPGDatabase.ThirdParty.ReoderableList;
 using UnityEditor;
 using UnityEngine;
 

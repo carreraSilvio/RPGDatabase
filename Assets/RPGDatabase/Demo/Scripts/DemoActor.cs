@@ -1,6 +1,6 @@
 ﻿using BrightLib.RPGDatabase.Runtime;
 
-namespace RPGDatabase.Demo
+namespace BrightLib.RPGDatabase.Demo
 {
     public class DemoActor
     {

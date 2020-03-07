@@ -1,23 +1,26 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Rotorz.ReorderableList {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <summary>
 	/// Provides meta information which is useful when creating new implementations of
 	/// the <see cref="IElementAdderMenuBuilder{TContext}"/> interface.
 	/// </summary>
-	public static class ElementAdderMeta {
+	public static class ElementAdderMeta
+	{
 
 		#region Adder Menu Command Types
 
 		private static Dictionary<Type, Dictionary<Type, List<Type>>> s_ContextMap = new Dictionary<Type, Dictionary<Type, List<Type>>>();
 
-		private static IEnumerable<Type> GetMenuCommandTypes<TContext>() {
+		private static IEnumerable<Type> GetMenuCommandTypes<TContext>()
+		{
 			return
 				from a in AppDomain.CurrentDomain.GetAssemblies()
 				from t in a.GetTypes()
@@ -33,30 +36,34 @@ namespace Rotorz.ReorderableList {
 		/// <typeparam name="TContext">Type of the context object that elements can be added to.</typeparam>
 		/// <param name="contractType">Contract type of addable elements.</param>
 		/// <returns>
-		/// An array containing zero or more <see cref="System.Type"/>.
+		/// An array containing zero or more <see cref="Type"/>.
 		/// </returns>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// If <paramref name="contractType"/> is <c>null</c>.
 		/// </exception>
 		/// <seealso cref="GetMenuCommands{TContext}(Type)"/>
-		public static Type[] GetMenuCommandTypes<TContext>(Type contractType) {
+		public static Type[] GetMenuCommandTypes<TContext>(Type contractType)
+		{
 			if (contractType == null)
 				throw new ArgumentNullException("contractType");
 
 			Dictionary<Type, List<Type>> contractMap;
 			List<Type> commandTypes;
-			if (s_ContextMap.TryGetValue(typeof(TContext), out contractMap)) {
+			if (s_ContextMap.TryGetValue(typeof(TContext), out contractMap))
+			{
 				if (contractMap.TryGetValue(contractType, out commandTypes))
 					return commandTypes.ToArray();
 			}
-			else {
+			else
+			{
 				contractMap = new Dictionary<Type, List<Type>>();
 				s_ContextMap[typeof(TContext)] = contractMap;
 			}
 
 			commandTypes = new List<Type>();
 
-			foreach (var commandType in GetMenuCommandTypes<TContext>()) {
+			foreach (var commandType in GetMenuCommandTypes<TContext>())
+			{
 				var attributes = (ElementAdderMenuCommandAttribute[])Attribute.GetCustomAttributes(commandType, typeof(ElementAdderMenuCommandAttribute));
 				if (!attributes.Any(a => a.ContractType == contractType))
 					continue;
@@ -77,11 +84,12 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// An array containing zero or more <see cref="IElementAdderMenuCommand{TContext}"/> instances.
 		/// </returns>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// If <paramref name="contractType"/> is <c>null</c>.
 		/// </exception>
 		/// <seealso cref="GetMenuCommandTypes{TContext}(Type)"/>
-		public static IElementAdderMenuCommand<TContext>[] GetMenuCommands<TContext>(Type contractType) {
+		public static IElementAdderMenuCommand<TContext>[] GetMenuCommands<TContext>(Type contractType)
+		{
 			var commandTypes = GetMenuCommandTypes<TContext>(contractType);
 			var commands = new IElementAdderMenuCommand<TContext>[commandTypes.Length];
 			for (int i = 0; i < commandTypes.Length; ++i)
@@ -95,12 +103,14 @@ namespace Rotorz.ReorderableList {
 
 		private static Dictionary<Type, Type[]> s_ConcreteElementTypes = new Dictionary<Type, Type[]>();
 
-		private static IEnumerable<Type> GetConcreteElementTypesHelper(Type contractType) {
+		private static IEnumerable<Type> GetConcreteElementTypesHelper(Type contractType)
+		{
 			if (contractType == null)
 				throw new ArgumentNullException("contractType");
 
 			Type[] concreteTypes;
-			if (!s_ConcreteElementTypes.TryGetValue(contractType, out concreteTypes)) {
+			if (!s_ConcreteElementTypes.TryGetValue(contractType, out concreteTypes))
+			{
 				concreteTypes =
 					(from a in AppDomain.CurrentDomain.GetAssemblies()
 					 from t in a.GetTypes()
@@ -127,11 +137,12 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// An array of zero or more concrete element types.
 		/// </returns>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// If <paramref name="contractType"/> is <c>null</c>.
 		/// </exception>
 		/// <seealso cref="GetConcreteElementTypes(Type)"/>
-		public static Type[] GetConcreteElementTypes(Type contractType, Func<Type, bool>[] filters) {
+		public static Type[] GetConcreteElementTypes(Type contractType, Func<Type, bool>[] filters)
+		{
 			return
 				(from t in GetConcreteElementTypesHelper(contractType)
 				 where IsTypeIncluded(t, filters)
@@ -147,15 +158,17 @@ namespace Rotorz.ReorderableList {
 		/// <returns>
 		/// An array of zero or more concrete element types.
 		/// </returns>
-		/// <exception cref="System.ArgumentNullException">
+		/// <exception cref="ArgumentNullException">
 		/// If <paramref name="contractType"/> is <c>null</c>.
 		/// </exception>
 		/// <seealso cref="GetConcreteElementTypes(Type, Func{Type, bool}[])"/>
-		public static Type[] GetConcreteElementTypes(Type contractType) {
+		public static Type[] GetConcreteElementTypes(Type contractType)
+		{
 			return GetConcreteElementTypesHelper(contractType).ToArray();
 		}
 
-		private static bool IsTypeIncluded(Type concreteType, Func<Type, bool>[] filters) {
+		private static bool IsTypeIncluded(Type concreteType, Func<Type, bool>[] filters)
+		{
 			if (filters != null)
 				foreach (var filter in filters)
 					if (!filter(concreteType))

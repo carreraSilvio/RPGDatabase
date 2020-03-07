@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using Rotorz.ReorderableList;
 using System.Collections.Generic;
 using System;
 using BrightLib.RPGDatabase.Runtime;
+using BrightLib.RPGDatabase.ThirdParty.ReoderableList;
 
 namespace BrightLib.RPGDatabase.Editor
 {

@@ -1,26 +1,30 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
 using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace Rotorz.ReorderableList.Internal {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <summary>
 	/// Utility functionality for <see cref="SerializedPropertyAdaptor"/> implementations.
 	/// </summary>
-	public static class SerializedPropertyUtility {
+	public static class SerializedPropertyUtility
+	{
 
 		/// <summary>
 		/// Reset the value of a property.
 		/// </summary>
 		/// <param name="property">Serialized property for a serialized property.</param>
-		public static void ResetValue(SerializedProperty property) {
+		public static void ResetValue(SerializedProperty property)
+		{
 			if (property == null)
 				throw new ArgumentNullException("property");
 
-			switch (property.propertyType) {
+			switch (property.propertyType)
+			{
 				case SerializedPropertyType.Integer:
 					property.intValue = 0;
 					break;
@@ -46,16 +50,16 @@ namespace Rotorz.ReorderableList.Internal {
 					property.enumValueIndex = 0;
 					break;
 				case SerializedPropertyType.Vector2:
-					property.vector2Value = default(Vector2);
+					property.vector2Value = default;
 					break;
 				case SerializedPropertyType.Vector3:
-					property.vector3Value = default(Vector3);
+					property.vector3Value = default;
 					break;
 				case SerializedPropertyType.Vector4:
-					property.vector4Value = default(Vector4);
+					property.vector4Value = default;
 					break;
 				case SerializedPropertyType.Rect:
-					property.rectValue = default(Rect);
+					property.rectValue = default;
 					break;
 				case SerializedPropertyType.ArraySize:
 					property.intValue = 0;
@@ -67,21 +71,23 @@ namespace Rotorz.ReorderableList.Internal {
 					property.animationCurveValue = AnimationCurve.Linear(0f, 0f, 1f, 1f);
 					break;
 				case SerializedPropertyType.Bounds:
-					property.boundsValue = default(Bounds);
+					property.boundsValue = default;
 					break;
 				case SerializedPropertyType.Gradient:
 					//!TODO: Amend when Unity add a public API for setting the gradient.
 					break;
 			}
 
-			if (property.isArray) {
+			if (property.isArray)
+			{
 				property.arraySize = 0;
 			}
 
 			ResetChildPropertyValues(property);
 		}
 
-		private static void ResetChildPropertyValues(SerializedProperty element) {
+		private static void ResetChildPropertyValues(SerializedProperty element)
+		{
 			if (!element.hasChildren)
 				return;
 
@@ -89,7 +95,8 @@ namespace Rotorz.ReorderableList.Internal {
 			int elementPropertyDepth = element.depth;
 			bool enterChildren = true;
 
-			while (childProperty.Next(enterChildren) && childProperty.depth > elementPropertyDepth) {
+			while (childProperty.Next(enterChildren) && childProperty.depth > elementPropertyDepth)
+			{
 				enterChildren = false;
 				ResetValue(childProperty);
 			}
@@ -100,7 +107,8 @@ namespace Rotorz.ReorderableList.Internal {
 		/// </summary>
 		/// <param name="destProperty">Destination property.</param>
 		/// <param name="sourceProperty">Source property.</param>
-		public static void CopyPropertyValue(SerializedProperty destProperty, SerializedProperty sourceProperty) {
+		public static void CopyPropertyValue(SerializedProperty destProperty, SerializedProperty sourceProperty)
+		{
 			if (destProperty == null)
 				throw new ArgumentNullException("destProperty");
 			if (sourceProperty == null)
@@ -111,15 +119,18 @@ namespace Rotorz.ReorderableList.Internal {
 
 			CopyPropertyValueSingular(destProperty, sourceProperty);
 
-			if (sourceProperty.hasChildren) {
+			if (sourceProperty.hasChildren)
+			{
 				int elementPropertyDepth = sourceProperty.depth;
 				while (sourceProperty.Next(true) && destProperty.Next(true) && sourceProperty.depth > elementPropertyDepth)
 					CopyPropertyValueSingular(destProperty, sourceProperty);
 			}
 		}
 
-		private static void CopyPropertyValueSingular(SerializedProperty destProperty, SerializedProperty sourceProperty) {
-			switch (destProperty.propertyType) {
+		private static void CopyPropertyValueSingular(SerializedProperty destProperty, SerializedProperty sourceProperty)
+		{
+			switch (destProperty.propertyType)
+			{
 				case SerializedPropertyType.Integer:
 					destProperty.intValue = sourceProperty.intValue;
 					break;

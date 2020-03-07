@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Rotorz.ReorderableList;
+using BrightLib.RPGDatabase.ThirdParty.ReoderableList;
 using UnityEngine;
 
 namespace BrightLib.RPGDatabase.Editor
 {
-	public class SelectableItemAdaptor : GenericListAdaptor<string>
+    public class SelectableItemAdaptor : GenericListAdaptor<string>
 	{
 		private HashSet<int> _selectedIndices = new HashSet<int>();
 		private int _lastSelectedIndex;

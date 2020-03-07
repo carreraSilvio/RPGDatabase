@@ -1,7 +1,8 @@
-// Copyright (c) Rotorz Limited. All rights reserved.
+
 // Licensed under the MIT license. See LICENSE file in the project root.
 
-namespace Rotorz.ReorderableList {
+namespace BrightLib.RPGDatabase.ThirdParty.ReoderableList
+{
 
 	/// <summary>
 	/// Can be implemented along with <see cref="IReorderableListAdaptor"/> when drop
@@ -14,7 +15,8 @@ namespace Rotorz.ReorderableList {
 	/// dragging and dropping from the Unity "Project" window.</para>
 	/// </remarks>
 	/// <see cref="IReorderableListAdaptor"/>
-	public interface IReorderableListDropTarget {
+	public interface IReorderableListDropTarget
+	{
 
 		/// <summary>
 		/// Determines whether an item is being dragged and that it can be inserted

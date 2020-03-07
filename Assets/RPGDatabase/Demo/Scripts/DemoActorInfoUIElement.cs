@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace RPGDatabase.Demo
+namespace BrightLib.RPGDatabase.Demo
 {
     public class DemoActorInfoUIElement : MonoBehaviour
     {
