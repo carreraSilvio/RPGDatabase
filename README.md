@@ -38,10 +38,26 @@ Unity 2018.3 and up
 3. Copy the repo there
 
 ## Usage
+
+### Edit Database
 1. Go to Tools/Database
 2. Pick a tab you want to access the data
 3. Alter the data as you see fit for your game
 4. Do a "File/Save" or close the window to ensure the data is saved
-5. Instanciate an object of type RPGDatabaseManager
-6. Call the load function
-7. Use the fetch function and specify the list you want to fetch
+
+### Read Database
+
+```csharp
+//Loading database
+var _database = new RPGDatabaseManager();
+_database.Load();
+
+//Fetching data 
+var actorList = _database.FetchEntry<ActorDataList>();
+foreach(var actor in actorList)
+{
+    Debug.Log($"Actor name is {actor.name}");
+    Debug.Log($"Actor class is {_database.FetchClassData(actorData.classId).name}");
+    Debug.Log($"Actor HP at level 10 is {_database.FetchAmount(actor.Id, 10, ActorAttributeType.HP)}");
+}
+```
