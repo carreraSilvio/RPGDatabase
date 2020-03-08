@@ -16,11 +16,15 @@ Unity 2018.3 and up
 ## Install
 
 ### Unity 2019.3
-* Open the package manager and point to the rep url
-* ![Imgur](https://i.imgur.com/iYGgINz.png)
+1. Open the package manager and point to the rep url
+![Imgur](https://i.imgur.com/iYGgINz.png)
+2. Add the repo url either via https or ssh
 
 ### Before Unity 2019.3
-* Open the manifest and manually add
+
+#### Option A
+1. Open the manifest
+2. add the repo url either via https or ssh
 
 		{
     		"dependencies": {
@@ -28,10 +32,16 @@ Unity 2018.3 and up
     		}
 		}
 
+#### Option B
+1. Clone or download the project zip
+2. Inside your project Assets folder create a folder called RPGDatabase
+3. Copy the repo there
 
 ## Usage
 1. Go to Tools/Database
 2. Pick a tab you want to access the data
 3. Alter the data as you see fit for your game
 4. Do a "File/Save" or close the window to ensure the data is saved
-5. Instanciate an object of type DatabaseManager and fetch the data you need
+5. Instanciate an object of type RPGDatabaseManager
+6. Call the load function
+7. Use the fetch function and specify the list you want to fetch

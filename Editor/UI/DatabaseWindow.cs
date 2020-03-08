@@ -122,7 +122,6 @@ namespace BrightLib.RPGDatabase.Editor
                 menu.ShowAsContext();
             }
 
-
             if (_coreTabSelected == CoreTabId.Main)
             {
                 EditorGUILayout.BeginHorizontal();
