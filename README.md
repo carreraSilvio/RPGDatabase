@@ -17,6 +17,7 @@ Unity 2018.3 and up
 
 ### Unity 2019.3
 1. Open the package manager and point to the rep url
+
 ![Imgur](https://i.imgur.com/iYGgINz.png)
 
 ### Before Unity 2019.3
