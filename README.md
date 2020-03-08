@@ -17,15 +17,13 @@ Unity 2018.3 and up
 
 ### Unity 2019.3
 1. Open the package manager and point to the rep url
-
 ![Imgur](https://i.imgur.com/iYGgINz.png)
-2. Add the repo url either via https or ssh
 
 ### Before Unity 2019.3
 
 #### Option A
 1. Open the manifest
-2. add the repo url either via https or ssh
+2. Add the repo url either via https or ssh
 
 		{
     		"dependencies": {
