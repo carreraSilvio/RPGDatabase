@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System;
+﻿using UnityEditor;
 
 namespace BrightLib.RPGDatabase.Editor
 {

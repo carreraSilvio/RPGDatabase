@@ -40,11 +40,12 @@ namespace BrightLib.RPGDatabase.Editor
 
         private RPGDatabaseManager _database;
 
+        private bool _clearFocusThisFrame;
 
         [MenuItem("Tools/" + _kMenuName)]
         public static void ShowWindow()
         {
-            var wind = GetWindow(typeof(DatabaseWindow), false, _kWindowTitle);
+            GetWindow(typeof(DatabaseWindow), false, _kWindowTitle);
         }
 
         private void OnEnable()
@@ -106,20 +107,12 @@ namespace BrightLib.RPGDatabase.Editor
             AssetDatabase.Refresh();
         }
 
-        public void ShowMainTab()
+        public void ShowCoreTab(object coreTabId)
         {
             _clearFocusThisFrame = true;
-            _coreTabSelected = CoreTabId.Main;
+            _coreTabSelected = (CoreTabId)coreTabId;
             DatabaseEditorPrefs.SetCoreTab((int)_coreTabSelected);
         }
-
-        public void ShowConfigTab()
-        {
-            _clearFocusThisFrame = true;
-            _coreTabSelected = CoreTabId.Config;
-            DatabaseEditorPrefs.SetCoreTab((int)_coreTabSelected);
-        }
-
 
         void OnGUI()
         {
@@ -128,8 +121,8 @@ namespace BrightLib.RPGDatabase.Editor
                 var menu = new GenericMenu();
                 menu.AddItem(new GUIContent("Save"), false, Save);
                 menu.AddSeparator("");
-                menu.AddItem(new GUIContent("View/Main"), _coreTabSelected == CoreTabId.Main, ShowMainTab);
-                menu.AddItem(new GUIContent("View/Config"), _coreTabSelected == CoreTabId.Config, ShowConfigTab);
+                menu.AddItem(new GUIContent("View/Main"), _coreTabSelected == CoreTabId.Main, ShowCoreTab, CoreTabId.Main);
+                menu.AddItem(new GUIContent("View/Config"), _coreTabSelected == CoreTabId.Config, ShowCoreTab, CoreTabId.Config);
                 menu.ShowAsContext();
             }
 
@@ -172,8 +165,6 @@ namespace BrightLib.RPGDatabase.Editor
                 _clearFocusThisFrame = false;
             }
         }
-
-        private bool _clearFocusThisFrame;
 
         private void DrawActorsContent()
         {
