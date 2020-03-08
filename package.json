@@ -5,8 +5,17 @@
   "description": "Create and manage the data for your RPG. Allows you to create the basic set-up for your grand adventure!",
   "unity": "2018.2",
   "unityRelease": "15f1",
-  "author": {
+  "author": 
+  {
     "name": "Silvio Carréra",
     "url": "https://bitbucket.org/carreraSilvio/rpgdatabase"
   }
+  "samples": 
+  [
+    {
+        "displayName": "Basic Usage",
+        "description": "Simple scene that shows how to load and use the data in the database",
+        "path": "Samples~/BasicUsageSample"
+    }
+  ]
 }
