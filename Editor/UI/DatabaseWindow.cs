@@ -10,11 +10,6 @@ namespace BrightLib.RPGDatabase.Editor
         private const string _kWindowTitle = "Database";
         private const string _kMenuName = "Database";
 
-        private const string k_prefCoreTabSelected = "BrightDBPref_CoreTabSelected";
-        private const string k_prefMainTabSelected = "BrightDBPref_TabSelected";
-        private const string k_prefConfigTabSelected = "BrightDBPref_ConfigTabSelected";
-        private const string k_prefLastSaveDateTime = "BrightDBPref_LastSaveDateTime";
-
         private ActorDataList _actorDataList;
         private ActorClassDataList _classDataList;
         private SkillDataList _skillDataList;
@@ -37,7 +32,7 @@ namespace BrightLib.RPGDatabase.Editor
         enum CoreTabId { Main, Config }
         private CoreTabId _coreTabSelected;
 
-        enum MainTabId { Actors, Classes, Skills, Items, Weapons };
+        enum MainTabId {Actors, Classes, Skills, Items, Weapons };
         private MainTabId _mainTabSelected;
 
         enum ConfigTabId { WeaponsTypes, AttributeSpecs };
@@ -50,7 +45,6 @@ namespace BrightLib.RPGDatabase.Editor
         public static void ShowWindow()
         {
             var wind = GetWindow(typeof(DatabaseWindow), false, _kWindowTitle);
-            wind.minSize = new Vector2(400f, 500f);
         }
 
         private void OnEnable()
@@ -84,9 +78,9 @@ namespace BrightLib.RPGDatabase.Editor
             _infoSection = new InfoSection();
             _effectsSection = new EffectsSection();
 
-            _coreTabSelected = (CoreTabId)EditorPrefs.GetInt(k_prefCoreTabSelected, 0);
-            _mainTabSelected = (MainTabId)EditorPrefs.GetInt(k_prefMainTabSelected, 0);
-            _configTabSelected = (ConfigTabId)EditorPrefs.GetInt(k_prefConfigTabSelected, 0);
+            _coreTabSelected = (CoreTabId)DatabaseEditorPrefs.CoreTab;
+            _mainTabSelected = (MainTabId)DatabaseEditorPrefs.MainTab;
+            _configTabSelected = (ConfigTabId)DatabaseEditorPrefs.ConfigTab;
         }
 
         private void OnDestroy()
@@ -99,7 +93,7 @@ namespace BrightLib.RPGDatabase.Editor
             var saveDateTime = System.DateTime.Now.ToShortDateString() + " " + System.DateTime.Now.ToShortTimeString();
 
             Debug.Log($"Database saved {saveDateTime}");
-            EditorPrefs.SetString(k_prefLastSaveDateTime, saveDateTime);
+            DatabaseEditorPrefs.SetLastSaveDateTime(saveDateTime);
 
             EditorUtility.SetDirty(_actorDataList);
             EditorUtility.SetDirty(_classDataList);
@@ -116,14 +110,14 @@ namespace BrightLib.RPGDatabase.Editor
         {
             _clearFocusThisFrame = true;
             _coreTabSelected = CoreTabId.Main;
-            EditorPrefs.SetInt(k_prefCoreTabSelected, (int)_coreTabSelected);
+            DatabaseEditorPrefs.SetCoreTab((int)_coreTabSelected);
         }
 
         public void ShowConfigTab()
         {
             _clearFocusThisFrame = true;
             _coreTabSelected = CoreTabId.Config;
-            EditorPrefs.SetInt(k_prefCoreTabSelected, (int)_coreTabSelected);
+            DatabaseEditorPrefs.SetCoreTab((int)_coreTabSelected);
         }
 
 
@@ -148,7 +142,6 @@ namespace BrightLib.RPGDatabase.Editor
                 DrawTab(MainTabId.Skills);
                 DrawTab(MainTabId.Items);
                 DrawTab(MainTabId.Weapons);
-                GUI.enabled = true;
                 EditorGUILayout.EndHorizontal();
 
                 if (_mainTabSelected == MainTabId.Actors) DrawActorsContent();
@@ -162,7 +155,6 @@ namespace BrightLib.RPGDatabase.Editor
                 EditorGUILayout.BeginHorizontal();
                 DrawTab(ConfigTabId.WeaponsTypes);
                 DrawTab(ConfigTabId.AttributeSpecs);
-                GUI.enabled = true;
                 EditorGUILayout.EndHorizontal();
 
                 if (_configTabSelected == ConfigTabId.WeaponsTypes) DrawWeaponTypesContent();
@@ -171,7 +163,7 @@ namespace BrightLib.RPGDatabase.Editor
 
             GUILayout.FlexibleSpace();
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField($"Last saved {EditorPrefs.GetString(k_prefLastSaveDateTime)}");
+            EditorGUILayout.LabelField($"Last saved {DatabaseEditorPrefs.LastSaveDateTime}");
             EditorGUILayout.EndHorizontal();
 
             if (_clearFocusThisFrame)
@@ -326,8 +318,9 @@ namespace BrightLib.RPGDatabase.Editor
                 GUI.FocusControl(null);
                 _mainTabSelected = tabId;
             }
+            GUI.enabled = true;
 
-            EditorPrefs.SetInt(k_prefMainTabSelected, (int)_mainTabSelected);
+            DatabaseEditorPrefs.SetMainTab((int)_mainTabSelected);
         }
 
         private void DrawTab(ConfigTabId tabId)
@@ -338,8 +331,9 @@ namespace BrightLib.RPGDatabase.Editor
                 GUI.FocusControl(null);
                 _configTabSelected = tabId;
             }
+            GUI.enabled = true;
 
-            EditorPrefs.SetInt(k_prefConfigTabSelected, (int)_configTabSelected);
+            DatabaseEditorPrefs.SetConfigTab((int)_configTabSelected);
         }
 
     }

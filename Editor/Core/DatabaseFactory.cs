@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BrightLib.RPGDatabase.Editor
 {
-    public class DatabaseFactory : MonoBehaviour
+    public static class DatabaseFactory
     {
         private static void CreateDatabaseConfig()
         {
