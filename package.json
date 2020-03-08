@@ -1,6 +1,6 @@
 {
   "name": "com.brightlib.rpgdatabase",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "displayName": "RPG Database",
   "description": "Create and manage the data for your RPG. Allows you to create the basic set-up for your grand adventure!",
   "unity": "2018.2",
