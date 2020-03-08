@@ -145,8 +145,7 @@ namespace BrightLib.RPGDatabase.Editor
                 DrawTab(ConfigTabId.AttributeSpecs);
                 EditorGUILayout.EndHorizontal();
 
-                if (_configTabSelected == ConfigTabId.WeaponsTypes) DrawWeaponTypesContent();
-                else if (_configTabSelected == ConfigTabId.AttributeSpecs) DrawAttributeSpecsContent();
+                DrawContent(_configTabSelected);
             }
 
             GUILayout.FlexibleSpace();
@@ -220,10 +219,8 @@ namespace BrightLib.RPGDatabase.Editor
             _itemListSection.Draw();
 
             EditorGUILayout.BeginVertical();
-
             DrawInfo(_itemListSection);
             DrawEffects(_itemListSection);
-
             EditorGUILayout.EndVertical();
 
             EditorGUILayout.EndHorizontal();
@@ -245,32 +242,26 @@ namespace BrightLib.RPGDatabase.Editor
             UpdateDataList(_weaponDataList, _weaponListSection);
         }
 
-        private void DrawWeaponTypesContent()
+        private void DrawContent(ConfigTabId configTabId)
         {
-            _weaponTypeListSection.PrepareList(_weaponTypeDataList);
-
-            EditorGUILayout.BeginHorizontal();
-
-            _weaponTypeListSection.Draw();
-            DrawInfo(_weaponTypeListSection);
-
-            EditorGUILayout.EndHorizontal();
-
-            UpdateDataList(_weaponTypeDataList, _weaponTypeListSection);
+            if(configTabId == ConfigTabId.WeaponsTypes) 
+                DrawContent<WeaponTypeData>(_weaponTypeListSection, _weaponTypeDataList);
+            else if(configTabId == ConfigTabId.AttributeSpecs)
+                DrawContent<AttributeSpecData>(_attributeSpecListSection, _attributeSpectDataList);
         }
 
-        private void DrawAttributeSpecsContent()
+        private void DrawContent<T>(ListSection<T> listSection, DataList<T> dataList) where T : BaseData
         {
-            _attributeSpecListSection.PrepareList(_attributeSpectDataList);
+            listSection.PrepareList(dataList);
 
             EditorGUILayout.BeginHorizontal();
 
-            _attributeSpecListSection.Draw();
-            DrawInfo(_attributeSpecListSection);
+            listSection.Draw();
+            DrawInfo(listSection);
 
             EditorGUILayout.EndHorizontal();
 
-            UpdateDataList(_attributeSpectDataList, _attributeSpecListSection);
+            UpdateDataList(dataList, listSection);
         }
 
         private void DrawInfo<T>(ListSection<T> listSection) where T : BaseData
