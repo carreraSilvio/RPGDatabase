@@ -1,5 +1,6 @@
 ﻿using BrightLib.RPGDatabase.Runtime;
 using BrightLib.RPGDatabase.ThirdParty.ReoderableList;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -102,7 +103,7 @@ namespace BrightLib.RPGDatabase.Editor
             AssetDatabase.Refresh();
         }
 
-        public void ShowCoreTab(object coreTabId)
+        public void ChangeCoreTab(object coreTabId)
         {
             _clearFocusThisFrame = true;
             _coreTabSelected = (CoreTabId)coreTabId;
@@ -116,8 +117,8 @@ namespace BrightLib.RPGDatabase.Editor
                 var menu = new GenericMenu();
                 menu.AddItem(new GUIContent("Save"), false, Save);
                 menu.AddSeparator("");
-                menu.AddItem(new GUIContent("View/Main"), _coreTabSelected == CoreTabId.Main, ShowCoreTab, CoreTabId.Main);
-                menu.AddItem(new GUIContent("View/Config"), _coreTabSelected == CoreTabId.Config, ShowCoreTab, CoreTabId.Config);
+                menu.AddItem(new GUIContent("View/Main"), _coreTabSelected == CoreTabId.Main, ChangeCoreTab, CoreTabId.Main);
+                menu.AddItem(new GUIContent("View/Config"), _coreTabSelected == CoreTabId.Config, ChangeCoreTab, CoreTabId.Config);
                 menu.ShowAsContext();
             }
 
@@ -125,24 +126,17 @@ namespace BrightLib.RPGDatabase.Editor
             if (_coreTabSelected == CoreTabId.Main)
             {
                 EditorGUILayout.BeginHorizontal();
-                DrawTab(MainTabId.Actors);
-                DrawTab(MainTabId.Classes);
-                DrawTab(MainTabId.Skills);
-                DrawTab(MainTabId.Items);
-                DrawTab(MainTabId.Weapons);
+                var tab = MainTabId.Actors;
+                for(; tab <= MainTabId.Weapons; tab++) DrawTab(tab);
                 EditorGUILayout.EndHorizontal();
 
-                if (_mainTabSelected == MainTabId.Actors) DrawActorsContent();
-                else if (_mainTabSelected == MainTabId.Classes) DrawClassesContent();
-                else if (_mainTabSelected == MainTabId.Skills) DrawSkillsContent();
-                else if (_mainTabSelected == MainTabId.Items) DrawItemsContent();
-                else if (_mainTabSelected == MainTabId.Weapons) DrawWeaponsContent();
+                DrawContent(_mainTabSelected, _mainTabSelected == MainTabId.Items || _mainTabSelected == MainTabId.Skills);
             }
             else
             {
                 EditorGUILayout.BeginHorizontal();
-                DrawTab(ConfigTabId.WeaponsTypes);
-                DrawTab(ConfigTabId.AttributeSpecs);
+                var tab = ConfigTabId.WeaponsTypes;
+                for (; tab <= ConfigTabId.AttributeSpecs; tab++) DrawTab(tab);
                 EditorGUILayout.EndHorizontal();
 
                 DrawContent(_configTabSelected);
@@ -160,105 +154,43 @@ namespace BrightLib.RPGDatabase.Editor
             }
         }
 
-        private void DrawActorsContent()
+        private void DrawContent(MainTabId mainTabId, bool hasEffectsSection = false)
         {
-            _actorListSection.PrepareList(_actorDataList);
-
-            EditorGUILayout.BeginHorizontal();
-
-            _actorListSection.Draw();
-            EditorGUILayout.BeginVertical();
-            DrawInfo(_actorListSection);
-            EditorGUILayout.EndVertical();
-
-            EditorGUILayout.EndHorizontal();
-
-            UpdateDataList(_actorDataList, _actorListSection);
+            if (mainTabId == MainTabId.Actors)
+                DrawContent<ActorData>(_actorListSection, _actorDataList, hasEffectsSection);
+            else if (mainTabId == MainTabId.Classes)
+                DrawContent<ActorClassData>(_classListSection, _classDataList, hasEffectsSection);
+            else if (mainTabId == MainTabId.Items)
+                DrawContent<ItemData>(_itemListSection, _itemDataList, hasEffectsSection);
+            else if (mainTabId == MainTabId.Skills)
+                DrawContent<SkillData>(_skillListSection, _skillDataList, hasEffectsSection);
+            else if (mainTabId == MainTabId.Weapons)
+                DrawContent<WeaponData>(_weaponListSection, _weaponDataList, hasEffectsSection);
         }
 
-        private void DrawClassesContent()
-        {
-            _classListSection.PrepareList(_classDataList);
-
-            EditorGUILayout.BeginHorizontal();
-
-            _classListSection.Draw();
-
-            EditorGUILayout.BeginVertical();
-            DrawInfo(_classListSection);
-            EditorGUILayout.EndVertical();
-
-            EditorGUILayout.EndHorizontal();
-
-            UpdateDataList(_classDataList, _classListSection);
-        }
-
-        private void DrawSkillsContent()
-        {
-            _skillListSection.PrepareList(_skillDataList);
-
-            EditorGUILayout.BeginHorizontal();
-
-            _skillListSection.Draw();
-
-            EditorGUILayout.BeginVertical();
-            DrawInfo(_skillListSection);
-            DrawEffects(_skillListSection);
-            EditorGUILayout.EndVertical();
-
-            EditorGUILayout.EndHorizontal();
-
-            UpdateDataList(_skillDataList, _skillListSection);
-        }
-
-        private void DrawItemsContent()
-        {
-            _itemListSection.PrepareList(_itemDataList);
-
-            EditorGUILayout.BeginHorizontal();
-            _itemListSection.Draw();
-
-            EditorGUILayout.BeginVertical();
-            DrawInfo(_itemListSection);
-            DrawEffects(_itemListSection);
-            EditorGUILayout.EndVertical();
-
-            EditorGUILayout.EndHorizontal();
-
-            UpdateDataList(_itemDataList, _itemListSection);
-        }
-
-        private void DrawWeaponsContent()
-        {
-            _weaponListSection.PrepareList(_weaponDataList);
-
-            EditorGUILayout.BeginHorizontal();
-
-            _weaponListSection.Draw();
-            DrawInfo(_weaponListSection);
-
-            EditorGUILayout.EndHorizontal();
-
-            UpdateDataList(_weaponDataList, _weaponListSection);
-        }
-
-        private void DrawContent(ConfigTabId configTabId)
+        private void DrawContent(ConfigTabId configTabId, bool hasEffectsSection = false)
         {
             if(configTabId == ConfigTabId.WeaponsTypes) 
-                DrawContent<WeaponTypeData>(_weaponTypeListSection, _weaponTypeDataList);
+                DrawContent<WeaponTypeData>(_weaponTypeListSection, _weaponTypeDataList, hasEffectsSection);
             else if(configTabId == ConfigTabId.AttributeSpecs)
-                DrawContent<AttributeSpecData>(_attributeSpecListSection, _attributeSpectDataList);
+                DrawContent<AttributeSpecData>(_attributeSpecListSection, _attributeSpectDataList, hasEffectsSection);
         }
 
-        private void DrawContent<T>(ListSection<T> listSection, DataList<T> dataList) where T : BaseData
+        private void DrawContent<T>(ListSection<T> listSection, DataList<T> dataList, bool hasEffects = false) where T : BaseData
         {
             listSection.PrepareList(dataList);
 
             EditorGUILayout.BeginHorizontal();
+            {
+                listSection.Draw();
 
-            listSection.Draw();
-            DrawInfo(listSection);
-
+                EditorGUILayout.BeginVertical();
+                {
+                    DrawInfo(listSection);
+                    if (hasEffects) DrawEffects(listSection);
+                }
+                EditorGUILayout.EndVertical();
+            }
             EditorGUILayout.EndHorizontal();
 
             UpdateDataList(dataList, listSection);
@@ -294,23 +226,27 @@ namespace BrightLib.RPGDatabase.Editor
             {
                 GUI.FocusControl(null);
                 _mainTabSelected = tabId;
+                DatabaseEditorPrefs.SetMainTab((int)_mainTabSelected);
             }
             GUI.enabled = true;
-
-            DatabaseEditorPrefs.SetMainTab((int)_mainTabSelected);
         }
 
         private void DrawTab(ConfigTabId tabId)
         {
+            
             GUI.enabled = _configTabSelected != tabId;
             if (GUILayout.Button(tabId.ToString(), GUILayout.Width(110f)))
             {
                 GUI.FocusControl(null);
                 _configTabSelected = tabId;
+                DatabaseEditorPrefs.SetConfigTab((int)_configTabSelected);
             }
             GUI.enabled = true;
+        }
 
-            DatabaseEditorPrefs.SetConfigTab((int)_configTabSelected);
+        private void TestTab(Enum tabId)
+        {
+            
         }
 
     }
