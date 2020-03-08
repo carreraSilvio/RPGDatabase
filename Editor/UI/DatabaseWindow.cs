@@ -29,13 +29,8 @@ namespace BrightLib.RPGDatabase.Editor
         private InfoSection _infoSection;
         private EffectsSection _effectsSection;
 
-        enum CoreTabId { Main, Config }
         private CoreTabId _coreTabSelected;
-
-        enum MainTabId {Actors, Classes, Skills, Items, Weapons };
         private MainTabId _mainTabSelected;
-
-        enum ConfigTabId { WeaponsTypes, AttributeSpecs };
         private ConfigTabId _configTabSelected;
 
         private RPGDatabaseManager _database;
