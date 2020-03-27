@@ -28,7 +28,7 @@ Unity 2018.3 and up
 
 		{
     		"dependencies": {
-        		"com.brightlib.rpgdatabase": "https://github.com/carreraSilvio/rpgdatabase.git"
+        		"com.brightlib.rpgdatabase": "https://bitbucket.org/carreraSilvio/rpgdatabase.git"
     		}
 		}
 
