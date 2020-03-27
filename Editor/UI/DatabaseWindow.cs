@@ -8,8 +8,8 @@ namespace BrightLib.RPGDatabase.Editor
 {
     public class DatabaseWindow : EditorWindow
     {
-        private const string _kWindowTitle = "Database";
-        private const string _kMenuName = "Database";
+        private const string _kWindowTitle = "RPG Database";
+        private const string _kMenuName = "RPG Database";
 
         private ActorDataList _actorDataList;
         private ActorClassDataList _classDataList;
