@@ -17,7 +17,7 @@ MonoBehaviour:
   - _id: 101
     name: Ryu
     classId: 100
-    initialLevel: 1
+    initialLevel: 3
     initialWeapon: 100
   - _id: 102
     name: Nina

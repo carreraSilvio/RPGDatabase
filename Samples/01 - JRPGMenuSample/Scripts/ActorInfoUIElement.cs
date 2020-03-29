@@ -20,12 +20,12 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
 
         public void UpdateDisplay(Actor actor)
         {
-            _actorName.text = actor.Name;
-            _actorClass.text = actor.ClassName;
-            _actorLvl.text = $"Lvl: {actor.Level}";
+            //_actorName.text = actor.Name;
+            //_actorClass.text = actor.ClassName;
+            _actorLvl.text = $"{actor.Level}";
 
-            _actorHP.text = $"HP: {actor.hp}";
-            _actorMP.text = $"MP: {actor.mp}";
+            _actorHP.text = $"{actor.hp}/{actor.hp}";
+            _actorMP.text = $"{actor.mp}/{actor.mp}";
         }
     }
 }
