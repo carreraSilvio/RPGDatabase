@@ -1,3 +1,8 @@
+## [1.0.1] - 2020-03-29
+
+### Fix
+* Tweaks to the JRPGMenu sample
+
 ## [1.0.0] - 2020-03-27
 
 ### New
