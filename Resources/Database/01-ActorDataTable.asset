@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cfcb966a47fcdc42a4f088952a0c81a, type: 3}
   m_Name: 01-ActorDataTable
   m_EditorClassIdentifier: 
-  _entryUniqueId: 103
   entries:
   - _id: 101
     name: Ryu
@@ -51,6 +50,6 @@ MonoBehaviour:
     initialWeapon: 1
   - _id: 204
     name: Mogu
-    classId: 0
+    classId: 209
     initialLevel: 16
     initialWeapon: 1

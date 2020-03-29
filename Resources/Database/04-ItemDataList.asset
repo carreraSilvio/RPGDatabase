@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2a3087445750964f9dc02ef7d793e2f, type: 3}
   m_Name: 04-ItemDataList
   m_EditorClassIdentifier: 
-  _entryUniqueId: 103
   entries:
   - _id: 100
     name: Herb

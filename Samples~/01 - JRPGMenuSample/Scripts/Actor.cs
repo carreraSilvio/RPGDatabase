@@ -7,7 +7,7 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
         private ActorData _actorData;
         private ActorClassData _classData;
 
-        public int xp;
+        public int exp;
         private int _level;
 
         public int hp;

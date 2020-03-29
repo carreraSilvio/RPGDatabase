@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a984f9dcd80e44dbe100a6e5a6e34c, type: 3}
   m_Name: 05-WeaponDataList
   m_EditorClassIdentifier: 
-  _entryUniqueId: 103
   entries:
   - _id: 100
     name: Dirk

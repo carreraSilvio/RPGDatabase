@@ -1,14 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.UI.Button;
 
 namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
 {
     public class ActorInfoUIElement : MonoBehaviour
     {
-        [SerializeField] 
-        private Text _actorName = default;
-        [SerializeField] 
-        private Text _actorClass = default;
         [SerializeField] 
         private Text _actorLvl = default;
 
@@ -17,11 +14,24 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
         [SerializeField] 
         private Text _actorMP = default;
 
+        private Button _button;
+
+        public ButtonClickedEvent OnClick
+        {
+            get
+            {
+                return _button.onClick;
+            }
+        }
+
+        private void Awake()
+        {
+            _button = GetComponent<Button>();
+        }
+
 
         public void UpdateDisplay(Actor actor)
         {
-            //_actorName.text = actor.Name;
-            //_actorClass.text = actor.ClassName;
             _actorLvl.text = $"{actor.Level}";
 
             _actorHP.text = $"{actor.hp}/{actor.hp}";

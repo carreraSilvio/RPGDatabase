@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 877287a60481f1f44aad68d9a7e062f5, type: 3}
   m_Name: 10-WeaponTypeDataList
   m_EditorClassIdentifier: 
-  _entryUniqueId: 104
   entries:
   - _id: 100
     name: Sword

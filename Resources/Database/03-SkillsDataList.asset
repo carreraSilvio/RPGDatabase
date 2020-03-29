@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a44e938d88d92346b6bbef70addef33, type: 3}
   m_Name: 03-SkillsDataList
   m_EditorClassIdentifier: 
-  _entryUniqueId: 102
   entries:
   - _id: 100
     name: Cura

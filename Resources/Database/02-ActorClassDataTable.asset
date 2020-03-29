@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6fb6802766af99478f57dd8b4da88e7, type: 3}
   m_Name: 02-ActorClassDataTable
   m_EditorClassIdentifier: 
-  _entryUniqueId: 103
   entries:
   - _id: 100
     name: Wanderer

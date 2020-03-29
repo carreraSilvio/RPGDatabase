@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using BrightLib.RPGDatabase.Runtime;
+using System;
 
 namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
 {
     public class Main : MonoBehaviour
     {
-        public ActorInfoWindow ui;
+        public PartyInfoWindow partyInfoWnd;
+        public ActorDetailsWindow actorDetailsWnd;
 
         private Actor[] _actors;
 
@@ -19,9 +21,9 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
 
             //Fetching data and injecting into runtime classes
             var actorList = _database.FetchEntry<ActorDataList>();
-            _actors = new Actor[3];
+            _actors = new Actor[actorList.Count];
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < actorList.Count; i++)
             {
                 var actorData = actorList.entries[i];
                 var classData = _database.FetchClassData(actorData.classId);
@@ -34,10 +36,20 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
             }
 
             //Displaying it on the UI
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < actorList.Count; i++)
             {
-                ui.UpdateDisplay(_actors[i], i);
+                partyInfoWnd.UpdateDisplay(_actors[i], i);
             }
+            partyInfoWnd.Open();
+            partyInfoWnd.onClose += HandlePartyInfoWindowClose;
+        }
+
+        private void HandlePartyInfoWindowClose()
+        {
+            partyInfoWnd.onClose -= HandlePartyInfoWindowClose;
+
+            actorDetailsWnd.Open();
+            actorDetailsWnd.UpdateDisplay(_actors[0]);
         }
     }
 }
