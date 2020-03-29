@@ -29,3 +29,28 @@ MonoBehaviour:
     classId: 102
     initialLevel: 7
     initialWeapon: 102
+  - _id: 200
+    name: Karn
+    classId: 207
+    initialLevel: 9
+    initialWeapon: 1
+  - _id: 201
+    name: Gobi
+    classId: 205
+    initialLevel: 11
+    initialWeapon: 1
+  - _id: 202
+    name: Bleu
+    classId: 206
+    initialLevel: 12
+    initialWeapon: 1
+  - _id: 203
+    name: Ox
+    classId: 208
+    initialLevel: 14
+    initialWeapon: 1
+  - _id: 204
+    name: Mogu
+    classId: 0
+    initialLevel: 16
+    initialWeapon: 1
