@@ -1,8 +1,8 @@
 ﻿using BrightLib.RPGDatabase.Runtime;
 
-namespace BrightLib.RPGDatabase.Demo
+namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
 {
-    public class DemoActor
+    public class Actor
     {
         private ActorData _actorData;
         private ActorClassData _classData;
@@ -13,7 +13,7 @@ namespace BrightLib.RPGDatabase.Demo
         public int hp;
         public int mp;
 
-        public DemoActor(ActorData data, ActorClassData classData)
+        public Actor(ActorData data, ActorClassData classData)
         {
             _actorData = data;
             _classData = classData;

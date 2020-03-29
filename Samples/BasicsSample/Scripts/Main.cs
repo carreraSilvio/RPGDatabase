@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using BrightLib.RPGDatabase.Runtime;
 
-namespace BrightLib.RPGDatabase.Demo
+namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
 {
-    public class DemoRPGDatabase : MonoBehaviour
+    public class Main : MonoBehaviour
     {
-        public DemoActorInfoWindow ui;
+        public ActorInfoWindow ui;
 
-        private DemoActor[] _actors;
+        private Actor[] _actors;
 
         private RPGDatabaseManager _database;
 
@@ -19,13 +19,13 @@ namespace BrightLib.RPGDatabase.Demo
 
             //Fetching data and injecting into runtime classes
             var actorList = _database.FetchEntry<ActorDataList>();
-            _actors = new DemoActor[3];
+            _actors = new Actor[3];
 
             for (int i = 0; i < 3; i++)
             {
                 var actorData = actorList.entries[i];
                 var classData = _database.FetchClassData(actorData.classId);
-                _actors[i] = new DemoActor(actorData, classData);
+                _actors[i] = new Actor(actorData, classData);
 
                 var hp = _database.FetchAmount(actorData.Id, actorData.initialLevel, ActorAttributeType.HP);
                 var mp = _database.FetchAmount(actorData.Id, actorData.initialLevel, ActorAttributeType.MP);
