@@ -56,8 +56,10 @@ _database.Load();
 var actorList = _database.FetchEntry<ActorDataList>();
 foreach(var actor in actorList)
 {
+    var className = _database.FetchClassData(actorData.classId).name;
+    var hpAtLv = _database.FetchAmount(actor.Id, 10, ActorAttributeType.HP);
     Debug.Log($"Actor name is {actor.name}");
-    Debug.Log($"Actor class is {_database.FetchClassData(actorData.classId).name}");
-    Debug.Log($"Actor HP at level 10 is {_database.FetchAmount(actor.Id, 10, ActorAttributeType.HP)}");
+    Debug.Log($"Actor class is {className}");
+    Debug.Log($"Actor HP at level 10 is {hpAtLv}");
 }
 ```

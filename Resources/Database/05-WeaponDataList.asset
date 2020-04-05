@@ -43,7 +43,7 @@ MonoBehaviour:
     price: 55
     typeId: 103
     strIncrease: 4
-    magIncrease: 0
+    magIncrease: -10
     dexIncrease: 3
     agiIncrease: 0
     lckIncrease: 0
