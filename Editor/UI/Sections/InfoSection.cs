@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace BrightLib.RPGDatabase.Editor
 {
+
     public class InfoSection : Section
     {
         public BaseData entrySelected;
@@ -87,7 +88,7 @@ namespace BrightLib.RPGDatabase.Editor
             entry.strCurve = EditorGUILayout.CurveField("Strength", entry.strCurve, GUILayout.Height(25f));
             entry.magCurve = EditorGUILayout.CurveField("Magic", entry.magCurve, GUILayout.Height(25f));
 
-            entry.dexCurve = EditorGUILayout.CurveField("Dextery", entry.dexCurve, GUILayout.Height(25f));
+            entry.dexCurve = EditorGUILayout.CurveField(Constants.Attributes.DEX, entry.dexCurve, GUILayout.Height(25f));
             entry.agiCurve = EditorGUILayout.CurveField("Agility", entry.agiCurve, GUILayout.Height(25f));
             entry.lckCurve = EditorGUILayout.CurveField("Luck", entry.lckCurve, GUILayout.Height(25f));
 
@@ -125,7 +126,7 @@ namespace BrightLib.RPGDatabase.Editor
             EditorGUILayout.LabelField($"Mag:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
 
             targetCurveValue = entry.dexCurve.Evaluate(normalizedValue);
-            EditorGUILayout.LabelField($"Dex:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
+            EditorGUILayout.LabelField($"{Constants.Attributes.DEX_SHORT}:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
             targetCurveValue = entry.agiCurve.Evaluate(normalizedValue);
             EditorGUILayout.LabelField($"Agi:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
             targetCurveValue = entry.lckCurve.Evaluate(normalizedValue);
@@ -243,7 +244,7 @@ namespace BrightLib.RPGDatabase.Editor
             entry.strIncrease = EditorGUILayout.IntField("Strength", entry.strIncrease);
             entry.magIncrease = EditorGUILayout.IntField("Magic", entry.magIncrease);
 
-            entry.dexIncrease = EditorGUILayout.IntField("Dextery", entry.dexIncrease);
+            entry.dexIncrease = EditorGUILayout.IntField(Constants.Attributes.DEX, entry.dexIncrease);
             entry.agiIncrease = EditorGUILayout.IntField("Agility", entry.agiIncrease);
 
             entry.lckIncrease = EditorGUILayout.IntField("Luck", entry.lckIncrease);
