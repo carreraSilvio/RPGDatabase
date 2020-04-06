@@ -1,5 +1,4 @@
-﻿using BrightLib.Editor;
-using BrightLib.RPGDatabase.Runtime;
+﻿using BrightLib.RPGDatabase.Runtime;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;

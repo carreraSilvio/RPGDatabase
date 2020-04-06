@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace BrightLib.Editor
+namespace BrightLib.RPGDatabase.Editor
 {
 	public static class BrightEditorGUILayout
 	{
