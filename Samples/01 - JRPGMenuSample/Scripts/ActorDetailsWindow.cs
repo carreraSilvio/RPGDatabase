@@ -1,16 +1,19 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
 {
     public class ActorDetailsWindow : Window
     {
+        public Action onBackBtnClicked;
+
         private ActorInfoUIElement _actorInfo;
 
         protected override void PosBaseAwake()
         {
             _actorInfo = GetComponentInChildren<ActorInfoUIElement>();
-           
+           _buttons["backBtn"].onClick.AddListener(()=> { onBackBtnClicked?.Invoke(); });
         }
 
         public void UpdateDisplay(Actor actor)

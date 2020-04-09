@@ -72,6 +72,7 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
             {
                 actorDetailsWnd.Open();
                 actorDetailsWnd.UpdateDisplay(_actors[_selectedActorIndex]);
+                actorDetailsWnd.onBackBtnClicked += HandleBackButtonClicked;
             }
 
             _state = state;
@@ -96,6 +97,12 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
             partyInfoWnd.onActorClicked -= HandleActorClicked;
             partyInfoWnd.Close();
             TransitionTo(State.ActorDetails);
+        }
+
+        private void HandleBackButtonClicked()
+        {
+            actorDetailsWnd.Close();
+            TransitionTo(State.PartyInfo);
         }
 
         #endregion

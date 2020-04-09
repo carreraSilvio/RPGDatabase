@@ -6,8 +6,8 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
 {
     public class Window : MonoBehaviour
     {
-
         protected Dictionary<string, Text> _texts;
+        protected Dictionary<string, Button> _buttons;
 
         private void Awake()
         {
@@ -23,6 +23,21 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
                 }
                 _texts.Add(rawText.name, rawText);
             }
+
+            _buttons = new Dictionary<string, Button>();
+            var rawButtons = GetComponentsInChildren<Button>();
+            foreach (var rawButton in rawButtons)
+            {
+                if (rawButton.GetComponentInParent<UIElement>() != null) continue;
+                if (_texts.ContainsKey(rawButton.name))
+                {
+                    Debug.LogWarning($"{name}:{rawButton.name} already added. Please rename it.");
+                    continue;
+                }
+                _buttons.Add(rawButton.name, rawButton);
+            }
+
+
             PosBaseAwake();
         }
 
