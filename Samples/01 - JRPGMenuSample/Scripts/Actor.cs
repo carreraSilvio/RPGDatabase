@@ -13,6 +13,19 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
         public int hp;
         public int mp;
 
+        public int str;
+        public int intl;
+
+        public int dex;
+        public int agi;
+
+        public int lck;
+
+        public int def;
+        public int res;
+
+        public string wpnName;
+
         public Actor(ActorData data, ActorClassData classData)
         {
             _actorData = data;
@@ -20,10 +33,21 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
             _level = _actorData.initialLevel;
         }
 
-        public void SetAttributes(int hp, int mp)
+        public void SetAttributes(int hp, int mp, int str, int intl, int dex, int agi, int lck, int def, int res)
         {
             this.hp = hp;
             this.mp = mp;
+
+            this.str = str;
+            this.intl = intl;
+
+            this.dex = dex;
+            this.agi = agi;
+
+            this.lck = lck;
+
+            this.def = def;
+            this.res = res;
         }
 
         public string Name { get { return _actorData.name; } }

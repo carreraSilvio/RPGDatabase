@@ -11,6 +11,12 @@ namespace BrightLib.RPGDatabase.Runtime
             return classesList.entries.First(l => l.Id == classDataId);
         }
 
+        public WeaponData FetchWeapon(int weaponId)
+        {
+            var weaponDataList = FetchEntry<WeaponDataList>();
+            return weaponDataList.entries.First(l => l.Id == weaponId);
+        }
+
 
         /// <summary>
         /// Fetch the amount a given attribute will have in a given level

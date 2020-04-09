@@ -5,16 +5,8 @@ using static UnityEngine.UI.Button;
 
 namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
 {
-    public class ActorInfoUIElement : MonoBehaviour
+    public class ActorInfoUIElement : UIElement
     {
-        [SerializeField] 
-        private Text _actorLvl = default;
-
-        [SerializeField] 
-        private Text _actorHP = default;
-        [SerializeField] 
-        private Text _actorMP = default;
-
         private Button _button;
 
         private Dictionary<string, Text> _texts;
@@ -26,6 +18,8 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
                 return _button.onClick;
             }
         }
+
+        public Button Button { get => _button; set => _button = value; }
 
         private void Awake()
         {
@@ -44,10 +38,11 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
         public void UpdateDisplay(Actor actor)
         {
             _texts["nameValue"].text = $"{actor.Name}";
-            _actorLvl.text = $"{actor.Level}";
 
-            _actorHP.text = $"{actor.hp}/{actor.hp}";
-            _actorMP.text = $"{actor.mp}/{actor.mp}";
+            _texts["lvlValue"].text = $"{actor.Level}";
+
+            _texts["hpValue"].text = $"{actor.hp}/{actor.hp}";
+            _texts["mpValue"].text = $"{actor.mp}/{actor.mp}";
         }
     }
 }

@@ -3,35 +3,35 @@ using UnityEngine.UI;
 
 namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
 {
-    public class ActorDetailsWindow : MonoBehaviour
+    public class ActorDetailsWindow : Window
     {
-        [SerializeField]
-        private Text _name = default;
+        private ActorInfoUIElement _actorInfo;
 
-        [SerializeField]
-        private Text _lv = default;
-
-        [SerializeField]
-        private Text _hp = default;
-
-        [SerializeField]
-        private Text _mp = default;
-
-        [SerializeField]
-        private Text _exp = default;
-
-        public void Open()
+        protected override void PosBaseAwake()
         {
-            gameObject.SetActive(true);
+            _actorInfo = GetComponentInChildren<ActorInfoUIElement>();
+           
         }
 
         public void UpdateDisplay(Actor actor)
         {
-            _name.text = $"{actor.Name}";
-            _lv.text = $"{actor.Level}";
-            _hp.text = $"{actor.hp}/{actor.hp}";
-            _mp.text = $"{actor.mp}/{actor.mp}";
-            _exp.text = $"{actor.exp}/{actor.exp}";
+            _actorInfo.Button.interactable = false;
+            _actorInfo.UpdateDisplay(actor);
+
+            //Attrs
+            _texts["strValue"].text = $"{actor.str}";
+            _texts["intValue"].text = $"{actor.intl}";
+
+            _texts["dexValue"].text = $"{actor.dex}";
+            _texts["agiValue"].text = $"{actor.agi}";
+
+            _texts["lckValue"].text = $"{actor.lck}";
+
+            _texts["defValue"].text = $"{actor.def}";
+            _texts["resValue"].text = $"{actor.res}";
+
+            //Equipment
+            _texts["wpnValue"].text = $"{actor.wpnName}";
         }
     }
 }

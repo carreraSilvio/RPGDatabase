@@ -26,7 +26,7 @@ MonoBehaviour:
     defIncrease: 2
     resIncrease: 0
   - _id: 101
-    name: Bronze Claws
+    name: Iron Claws
     description: 
     price: 45
     typeId: 101

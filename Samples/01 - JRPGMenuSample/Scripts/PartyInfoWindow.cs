@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
 {
-    public class PartyInfoWindow : MonoBehaviour
+    public class PartyInfoWindow : Window
     {
-        public Action onClose;
+        public Action<int> onActorClicked;
 
         [SerializeField] 
         private ActorInfoUIElement[] _actorInfoUIElements = default;
@@ -15,28 +15,22 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
             _actorInfoUIElements[index].UpdateDisplay(actor);
         }
 
-        public void Open()
+        public override void Open()
         {
-            foreach(var element in _actorInfoUIElements)
+            for (int i = 0; i < _actorInfoUIElements.Length; i++)
             {
-                element.OnClick.AddListener(HandleActorClicked);
+                var index = i;
+                _actorInfoUIElements[i].OnClick.AddListener(()=> { onActorClicked?.Invoke(index); });
             }
-            gameObject.SetActive(true);
+            base.Open();
         }
-
-        public void Close()
+        public override void Close()
         {
-            foreach (var element in _actorInfoUIElements)
+            for (int i = 0; i < _actorInfoUIElements.Length; i++)
             {
-                element.OnClick.RemoveListener(HandleActorClicked);
+                _actorInfoUIElements[i].OnClick.RemoveAllListeners();
             }
-            onClose?.Invoke();
-            gameObject.SetActive(false);
-        }
-
-        private void HandleActorClicked()
-        {
-            Close();
+            base.Close();
         }
     }
 }
