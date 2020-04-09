@@ -1,3 +1,13 @@
+## [1.1.0] - 2020-04-09
+
+### New
+* Changed attribute name "Magic" to "Intelligence"
+* Added Graphics Face option to each actor
+* Finished JRPG Menu Sample flow
+
+### Fix
+* Dexterity instead of Dextery
+
 ## [1.0.1] - 2020-03-29
 
 ### Fix
