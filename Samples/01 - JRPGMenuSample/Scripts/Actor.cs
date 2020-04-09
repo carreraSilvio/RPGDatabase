@@ -1,4 +1,5 @@
 ﻿using BrightLib.RPGDatabase.Runtime;
+using UnityEngine;
 
 namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
 {
@@ -49,6 +50,9 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
             this.def = def;
             this.res = res;
         }
+
+        public Sprite FaceImage { get { return _actorData.graphics.face; } }
+
 
         public string Name { get { return _actorData.name; } }
         public string ClassName { get { return _classData.name; } }

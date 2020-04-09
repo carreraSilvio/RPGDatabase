@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.UI.Button;
 
@@ -7,6 +6,9 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
 {
     public class ActorInfoUIElement : UIElement
     {
+        
+        public Image faceImage = default;
+
         private Button _button;
 
         private Dictionary<string, Text> _texts;
@@ -37,6 +39,8 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
 
         public void UpdateDisplay(Actor actor)
         {
+            faceImage.sprite = actor.FaceImage;
+
             _texts["nameValue"].text = $"{actor.Name}";
 
             _texts["lvlValue"].text = $"{actor.Level}";

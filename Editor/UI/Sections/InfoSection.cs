@@ -26,6 +26,18 @@ namespace BrightLib.RPGDatabase.Editor
             else if (entrySelected is AttributeSpecData) DrawAttributeSpec();
         }
 
+        private static Sprite SpriteField(string name, Sprite texture)
+        {
+            GUILayout.BeginVertical();
+            var style = new GUIStyle(GUI.skin.label);
+            style.alignment = TextAnchor.UpperCenter;
+            style.fixedWidth = 64;
+            GUILayout.Label(name, style);
+            var result = (Sprite)EditorGUILayout.ObjectField(texture, typeof(Sprite), false, GUILayout.Width(64), GUILayout.Height(64));
+            GUILayout.EndVertical();
+            return result;
+        }
+
         private void DrawActor(RPGDatabaseManager database)
         {
             var entry = (ActorData)entrySelected;
@@ -51,6 +63,11 @@ namespace BrightLib.RPGDatabase.Editor
             entry.name = EditorGUILayout.TextField("Name", entry.name);
             entry.classId = EditorGUILayout.IntPopup("Class", entry.classId, classNames, classIds);
             entry.initialLevel = EditorGUILayout.IntSlider("Initial Level", entry.initialLevel, level.start, level.end);
+
+            EditorGUILayout.BeginVertical("GroupBox", GUILayout.Width(350));
+            BrightEditorGUILayout.LabelFieldBold("Graphics");
+            entry.graphics.face = SpriteField("Face", entry.graphics.face);
+            EditorGUILayout.EndVertical();
 
             EditorGUILayout.BeginVertical("GroupBox", GUILayout.Width(350));
             BrightEditorGUILayout.LabelFieldBold("Initial Equipment");

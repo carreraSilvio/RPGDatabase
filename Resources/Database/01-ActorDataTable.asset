@@ -17,19 +17,35 @@ MonoBehaviour:
     name: Morgana
     classId: 101
     initialLevel: 3
+    graphics:
+      face: {fileID: 21300000, guid: 770be6999a6003545856c43839aa0421, type: 3}
+      battler: {fileID: 0}
+      body: {fileID: 0}
     initialWeapon: 100
   - _id: 102
     name: Gris
     classId: 100
     initialLevel: 5
+    graphics:
+      face: {fileID: 21300000, guid: 27bf8711c725a5c4db0fe8f8a6cd0041, type: 3}
+      battler: {fileID: 0}
+      body: {fileID: 0}
     initialWeapon: 101
   - _id: 103
     name: Bleu
     classId: 102
     initialLevel: 7
+    graphics:
+      face: {fileID: 21300000, guid: 5e590bc55e7bd314ca58f3cbd9d2e9cd, type: 3}
+      battler: {fileID: 0}
+      body: {fileID: 0}
     initialWeapon: 200
   - _id: 200
     name: Kuro
     classId: 207
     initialLevel: 9
+    graphics:
+      face: {fileID: 21300000, guid: 9a5a2cb2a6c366c4885b720899da3a83, type: 3}
+      battler: {fileID: 0}
+      body: {fileID: 0}
     initialWeapon: 102
