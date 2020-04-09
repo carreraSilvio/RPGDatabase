@@ -84,15 +84,16 @@ namespace BrightLib.RPGDatabase.Editor
             entry.expCurve = EditorGUILayout.CurveField("Exp", entry.expCurve, GUILayout.Height(25f));
             entry.hpCurve = EditorGUILayout.CurveField("HP", entry.hpCurve, GUILayout.Height(25f));
             entry.mpCurve = EditorGUILayout.CurveField("MP", entry.mpCurve, GUILayout.Height(25f));
-            entry.strCurve = EditorGUILayout.CurveField("Strength", entry.strCurve, GUILayout.Height(25f));
-            entry.magCurve = EditorGUILayout.CurveField("Magic", entry.magCurve, GUILayout.Height(25f));
+
+            entry.strCurve = EditorGUILayout.CurveField(Constants.Attributes.STR, entry.strCurve, GUILayout.Height(25f));
+            entry.intCurve = EditorGUILayout.CurveField(Constants.Attributes.INT, entry.intCurve, GUILayout.Height(25f));
 
             entry.dexCurve = EditorGUILayout.CurveField(Constants.Attributes.DEX, entry.dexCurve, GUILayout.Height(25f));
-            entry.agiCurve = EditorGUILayout.CurveField("Agility", entry.agiCurve, GUILayout.Height(25f));
-            entry.lckCurve = EditorGUILayout.CurveField("Luck", entry.lckCurve, GUILayout.Height(25f));
+            entry.agiCurve = EditorGUILayout.CurveField(Constants.Attributes.AGI, entry.agiCurve, GUILayout.Height(25f));
+            entry.lckCurve = EditorGUILayout.CurveField(Constants.Attributes.LCK, entry.lckCurve, GUILayout.Height(25f));
 
-            entry.defCurve = EditorGUILayout.CurveField("Defense", entry.defCurve, GUILayout.Height(25f));
-            entry.resCurve = EditorGUILayout.CurveField("Resistance", entry.resCurve, GUILayout.Height(25f));
+            entry.defCurve = EditorGUILayout.CurveField(Constants.Attributes.DEF, entry.defCurve, GUILayout.Height(25f));
+            entry.resCurve = EditorGUILayout.CurveField(Constants.Attributes.RES, entry.resCurve, GUILayout.Height(25f));
             #endregion
 
             #region Preview
@@ -120,21 +121,22 @@ namespace BrightLib.RPGDatabase.Editor
             EditorGUILayout.LabelField($"MP:\t{mp.FetchAtCurvePoint(targetCurveValue)}");
 
             targetCurveValue = entry.strCurve.Evaluate(normalizedValue);
-            EditorGUILayout.LabelField($"Str:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
-            targetCurveValue = entry.magCurve.Evaluate(normalizedValue);
-            EditorGUILayout.LabelField($"Mag:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
+            EditorGUILayout.LabelField($"{Constants.Attributes.STR_SHORT}:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
+            targetCurveValue = entry.intCurve.Evaluate(normalizedValue);
+            EditorGUILayout.LabelField($"{Constants.Attributes.INT_SHORT}:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
 
             targetCurveValue = entry.dexCurve.Evaluate(normalizedValue);
             EditorGUILayout.LabelField($"{Constants.Attributes.DEX_SHORT}:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
             targetCurveValue = entry.agiCurve.Evaluate(normalizedValue);
-            EditorGUILayout.LabelField($"Agi:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
+            EditorGUILayout.LabelField($"{Constants.Attributes.AGI_SHORT}:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
+
             targetCurveValue = entry.lckCurve.Evaluate(normalizedValue);
-            EditorGUILayout.LabelField($"Lck:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
+            EditorGUILayout.LabelField($"{Constants.Attributes.LCK_SHORT}:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
 
             targetCurveValue = entry.defCurve.Evaluate(normalizedValue);
-            EditorGUILayout.LabelField($"Def:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
+            EditorGUILayout.LabelField($"{Constants.Attributes.DEF_SHORT}:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
             targetCurveValue = entry.resCurve.Evaluate(normalizedValue);
-            EditorGUILayout.LabelField($"Res:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
+            EditorGUILayout.LabelField($"{Constants.Attributes.RES_SHORT}:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
 
             EditorGUILayout.EndVertical();
             #endregion
@@ -240,15 +242,16 @@ namespace BrightLib.RPGDatabase.Editor
 
             EditorGUILayout.BeginVertical("GroupBox", GUILayout.Width(350));
             EditorGUILayout.LabelField("Attribute Effects");
-            entry.strIncrease = EditorGUILayout.IntField("Strength", entry.strIncrease);
-            entry.magIncrease = EditorGUILayout.IntField("Magic", entry.magIncrease);
+            entry.strIncrease = EditorGUILayout.IntField(Constants.Attributes.STR, entry.strIncrease);
+            entry.intIncrease = EditorGUILayout.IntField(Constants.Attributes.INT, entry.intIncrease);
 
             entry.dexIncrease = EditorGUILayout.IntField(Constants.Attributes.DEX, entry.dexIncrease);
-            entry.agiIncrease = EditorGUILayout.IntField("Agility", entry.agiIncrease);
+            entry.agiIncrease = EditorGUILayout.IntField(Constants.Attributes.AGI, entry.agiIncrease);
 
-            entry.lckIncrease = EditorGUILayout.IntField("Luck", entry.lckIncrease);
-            entry.defIncrease = EditorGUILayout.IntField("Defense", entry.defIncrease);
-            entry.resIncrease = EditorGUILayout.IntField("Resistance", entry.resIncrease);
+            entry.lckIncrease = EditorGUILayout.IntField(Constants.Attributes.LCK, entry.lckIncrease);
+
+            entry.defIncrease = EditorGUILayout.IntField(Constants.Attributes.DEF, entry.defIncrease);
+            entry.resIncrease = EditorGUILayout.IntField(Constants.Attributes.RES, entry.resIncrease);
             EditorGUILayout.EndVertical();
 
             EditorGUILayout.EndVertical();

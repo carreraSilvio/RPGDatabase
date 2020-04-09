@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entries:
   - _id: 100
-    name: Sword
+    name: Staff
   - _id: 101
-    name: Rapier
+    name: Claw
+  - _id: 201
+    name: Ring
   - _id: 103
-    name: Bow
+    name: Mace

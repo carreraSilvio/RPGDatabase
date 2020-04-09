@@ -14,37 +14,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entries:
   - _id: 100
-    name: Dirk
+    name: Wood Staff
     description: 
     price: 50
     typeId: 100
     strIncrease: 5
-    magIncrease: 0
+    intIncrease: 0
     dexIncrease: 0
     agiIncrease: 0
     lckIncrease: 0
     defIncrease: 2
     resIncrease: 0
   - _id: 101
-    name: Short Rapier
+    name: Bronze Claws
     description: 
     price: 45
     typeId: 101
     strIncrease: 4
-    magIncrease: 0
+    intIncrease: 0
     dexIncrease: 0
     agiIncrease: 0
     lckIncrease: 0
     defIncrease: 0
     resIncrease: 2
+  - _id: 200
+    name: Soft Ring
+    description: 
+    price: 30
+    typeId: 201
+    strIncrease: 0
+    intIncrease: 0
+    dexIncrease: 0
+    agiIncrease: 0
+    lckIncrease: 0
+    defIncrease: 0
+    resIncrease: 0
   - _id: 102
-    name: Bronze Bow
+    name: Iron Mace
     description: 
     price: 55
     typeId: 103
-    strIncrease: 4
-    magIncrease: -10
-    dexIncrease: 3
+    strIncrease: 7
+    intIncrease: 0
+    dexIncrease: 0
     agiIncrease: 0
     lckIncrease: 0
     defIncrease: 0

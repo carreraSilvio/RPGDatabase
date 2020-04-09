@@ -15,21 +15,21 @@ MonoBehaviour:
   entries:
   - _id: 101
     name: Morgana
-    classId: 100
+    classId: 101
     initialLevel: 3
     initialWeapon: 100
   - _id: 102
     name: Gris
-    classId: 101
+    classId: 100
     initialLevel: 5
     initialWeapon: 101
   - _id: 103
     name: Bleu
     classId: 102
     initialLevel: 7
-    initialWeapon: 102
+    initialWeapon: 200
   - _id: 200
     name: Kuro
     classId: 207
     initialLevel: 9
-    initialWeapon: 1
+    initialWeapon: 102

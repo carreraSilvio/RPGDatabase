@@ -12,7 +12,7 @@ namespace BrightLib.RPGDatabase.Runtime
         public AnimationCurve mpCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
         public AnimationCurve strCurve = AnimationCurve.Linear(0, 0, 1, 1);
-        public AnimationCurve magCurve = AnimationCurve.Linear(0, 0, 1, 1);
+        public AnimationCurve intCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
         public AnimationCurve dexCurve = AnimationCurve.Linear(0, 0, 1, 1);
         public AnimationCurve agiCurve = AnimationCurve.Linear(0, 0, 1, 1);
@@ -35,7 +35,7 @@ namespace BrightLib.RPGDatabase.Runtime
             else if (type == ActorAttributeType.MP) return mpCurve;
 
             else if (type == ActorAttributeType.Strength) return strCurve;
-            else if (type == ActorAttributeType.Magic) return magCurve;
+            else if (type == ActorAttributeType.Intelligence) return intCurve;
 
             else if (type == ActorAttributeType.Dextery) return dexCurve;
             else if (type == ActorAttributeType.Agility) return agiCurve;

@@ -9,10 +9,11 @@
         public int typeId;
 
         public int strIncrease;
-        public int magIncrease;
+        public int intIncrease;
 
         public int dexIncrease;
         public int agiIncrease;
+
         public int lckIncrease;
 
         public int defIncrease;
