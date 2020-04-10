@@ -66,16 +66,16 @@ namespace BrightLib.RPGDatabase.Runtime
             var list = FetchEntry<AttributeSpecDataList>();
 
             if (type == ActorAttributeType.Level)
-                return list.entries.First(x => x.name == "Level");
+                return list.entries.First(x => x.name == Constants.Attributes.LEVEL);
             else if (type == ActorAttributeType.EXP)
-                return list.entries.First(x => x.name == "XP");
+                return list.entries.First(x => x.name == Constants.Attributes.EXP);
             else if (type == ActorAttributeType.HP)
-                return list.entries.First(x => x.name == "HP");
+                return list.entries.First(x => x.name == Constants.Attributes.HP);
             else if (type == ActorAttributeType.MP)
-                return list.entries.First(x => x.name == "MP");
+                return list.entries.First(x => x.name == Constants.Attributes.MP);
 
             //Else
-            return list.entries.First(x => x.name == "Common");
+            return list.entries.First(x => x.name == Constants.Attributes.COMMON);
         }
     }
 }

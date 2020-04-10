@@ -48,6 +48,7 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
                 var res = _database.FetchAmount(actorData.Id, actorData.initialLevel, ActorAttributeType.Resistance);
 
                 _actors[i].wpnName = _database.FetchWeapon(actorData.initialWeapon).name;
+                _actors[i].expNextLevel = _database.FetchExpForNextLevel(actorData.Id, actorData.initialLevel);
 
                 _actors[i].SetAttributes(hp, mp, str, intl, dex, agi, lck, def, res);
             }

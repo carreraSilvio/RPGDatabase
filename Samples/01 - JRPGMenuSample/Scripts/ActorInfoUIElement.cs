@@ -44,6 +44,7 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
             _texts["nameValue"].text = $"{actor.Name}";
 
             _texts["lvlValue"].text = $"{actor.Level}";
+            _texts["nextLvlValue"].text = $"{actor.expNextLevel}";
 
             _texts["hpValue"].text = $"{actor.hp}/{actor.hp}";
             _texts["mpValue"].text = $"{actor.mp}/{actor.mp}";

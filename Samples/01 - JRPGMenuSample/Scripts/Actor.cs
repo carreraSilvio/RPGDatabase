@@ -26,6 +26,7 @@ namespace BrightLib.RPGDatabase.Samples.JRPGMenuSample
         public int res;
 
         public string wpnName;
+        public int expNextLevel;
 
         public Actor(ActorData data, ActorClassData classData)
         {
