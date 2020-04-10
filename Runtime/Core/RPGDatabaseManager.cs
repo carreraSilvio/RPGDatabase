@@ -17,6 +17,19 @@ namespace BrightLib.RPGDatabase.Runtime
             return weaponDataList.entries.First(l => l.Id == weaponId);
         }
 
+        public int FetchExpForNextLevel(int actorId, int currentLevel)
+        {
+            var actorData = FetchEntry<ActorDataList>().entries.First(l => l.Id == actorId);
+            var classData = FetchEntry<ActorClassDataList>().entries.First(l => l.Id == actorData.classId);
+
+            int expCurrentLevel = FetchCurveValue(classData.FetchCurve(ActorAttributeType.EXP), currentLevel, ActorAttributeType.EXP);
+            int expNextLevel = FetchCurveValue(classData.FetchCurve(ActorAttributeType.EXP), currentLevel + 1, ActorAttributeType.EXP);
+
+            int expDiff = expNextLevel - expCurrentLevel;
+
+            return expDiff;
+        }
+
 
         /// <summary>
         /// Fetch the amount a given attribute will have in a given level
@@ -54,7 +67,7 @@ namespace BrightLib.RPGDatabase.Runtime
 
             if (type == ActorAttributeType.Level)
                 return list.entries.First(x => x.name == "Level");
-            else if (type == ActorAttributeType.XP)
+            else if (type == ActorAttributeType.EXP)
                 return list.entries.First(x => x.name == "XP");
             else if (type == ActorAttributeType.HP)
                 return list.entries.First(x => x.name == "HP");

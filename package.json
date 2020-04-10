@@ -14,7 +14,7 @@
   [
     {
         "displayName": "JRPG Menu",
-        "description": "Fetches data from the database and displays it on a JRPG-Style Menu.",
+        "description": "Reads data from the database and displays it on a JRPG-Style Menu.",
         "path": "Samples~/01 - JRPGMenuSample"
     }
   ]

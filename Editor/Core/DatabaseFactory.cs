@@ -200,11 +200,11 @@ namespace BrightLib.RPGDatabase.Editor
             {
                 list.entries = new System.Collections.Generic.List<AttributeSpecData>
                 {
-                    new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "Level", start = 1, end = 100},
-                    new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "XP", start = 0, end = 9999},
-                    new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "HP", start = 20, end = 999 },
-                    new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "MP", start = 20, end = 999 },
-                    new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = "Common", start = 5, end = 99 }
+                    new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = Constants.Attributes.LEVEL, start = 1, end = 100},
+                    new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = Constants.Attributes.EXP, start = 0, end = 9999},
+                    new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = Constants.Attributes.HP, start = 20, end = 999 },
+                    new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = Constants.Attributes.MP, start = 20, end = 999 },
+                    new AttributeSpecData(DatabaseUtils.Config.FetchUniqueId()) { name = Constants.Attributes.COMMON, start = 5, end = 99 }
 
                 };
                 AssetDatabase.CreateAsset(list, "Assets/Resources/Database/11-AttributeSpecDataList.asset");

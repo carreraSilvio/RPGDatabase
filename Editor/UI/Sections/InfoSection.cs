@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace BrightLib.RPGDatabase.Editor
 {
-
     public class InfoSection : Section
     {
         public BaseData entrySelected;
@@ -55,7 +54,7 @@ namespace BrightLib.RPGDatabase.Editor
             var weaponIds = database.FetchEntry<WeaponDataList>().entries.Where(l => l.typeId == actorClass.weaponTypeId).Select(l => l.Id).ToArray();
 
             var attrList = database.FetchEntry<AttributeSpecDataList>();
-            var level = attrList.entries.First(x => x.name == "Level");
+            var level = attrList.entries.First(x => x.name == Constants.Attributes.LEVEL);
 
             EditorGUILayout.BeginVertical("GroupBox", GUILayout.Width(400));
             DrawTitle();
@@ -98,9 +97,9 @@ namespace BrightLib.RPGDatabase.Editor
 
             #region Growth
             BrightEditorGUILayout.LabelFieldBold("Growth");
-            entry.expCurve = EditorGUILayout.CurveField("Exp", entry.expCurve, GUILayout.Height(25f));
-            entry.hpCurve = EditorGUILayout.CurveField("HP", entry.hpCurve, GUILayout.Height(25f));
-            entry.mpCurve = EditorGUILayout.CurveField("MP", entry.mpCurve, GUILayout.Height(25f));
+            entry.expCurve = EditorGUILayout.CurveField(Constants.Attributes.EXP, entry.expCurve, GUILayout.Height(25f));
+            entry.hpCurve = EditorGUILayout.CurveField(Constants.Attributes.HP, entry.hpCurve, GUILayout.Height(25f));
+            entry.mpCurve = EditorGUILayout.CurveField(Constants.Attributes.MP, entry.mpCurve, GUILayout.Height(25f));
 
             entry.strCurve = EditorGUILayout.CurveField(Constants.Attributes.STR, entry.strCurve, GUILayout.Height(25f));
             entry.intCurve = EditorGUILayout.CurveField(Constants.Attributes.INT, entry.intCurve, GUILayout.Height(25f));
@@ -116,26 +115,26 @@ namespace BrightLib.RPGDatabase.Editor
             #region Preview
             EditorGUILayout.BeginVertical("GroupBox", GUILayout.Width(350));
             var list = database.FetchEntry<AttributeSpecDataList>();
-            var level = list.entries.First(x => x.name == "Level");
-            var exp = list.entries.First(x => x.name == "XP");
+            var level = list.entries.First(x => x.name == Constants.Attributes.LEVEL);
+            var exp = list.entries.First(x => x.name == Constants.Attributes.EXP);
 
-            var hp = list.entries.First(x => x.name == "HP");
-            var mp = list.entries.First(x => x.name == "MP");
-            var attr = list.entries.First(x => x.name == "Common");
+            var hp = list.entries.First(x => x.name == Constants.Attributes.HP);
+            var mp = list.entries.First(x => x.name == Constants.Attributes.MP);
+            var attr = list.entries.First(x => x.name == Constants.Attributes.COMMON);
 
             BrightEditorGUILayout.LabelFieldBold("Preview");
-            previewLv = EditorGUILayout.IntSlider("Lv", previewLv, level.start, level.end);
+            previewLv = EditorGUILayout.IntSlider(Constants.Attributes.LEVEL_SHORT, previewLv, level.start, level.end);
 
             float normalizedValue = Mathf.InverseLerp(level.start, level.end, previewLv);
             float targetCurveValue = 0f;
 
             targetCurveValue = entry.expCurve.Evaluate(normalizedValue);
-            EditorGUILayout.LabelField($"Exp:\t{exp.FetchAtCurvePoint(targetCurveValue)}");
+            EditorGUILayout.LabelField($"{Constants.Attributes.EXP}:\t{exp.FetchAtCurvePoint(targetCurveValue)}");
 
             targetCurveValue = entry.hpCurve.Evaluate(normalizedValue);
-            EditorGUILayout.LabelField($"HP:\t{hp.FetchAtCurvePoint(targetCurveValue)}");
+            EditorGUILayout.LabelField($"{Constants.Attributes.HP}:\t{hp.FetchAtCurvePoint(targetCurveValue)}");
             targetCurveValue = entry.mpCurve.Evaluate(normalizedValue);
-            EditorGUILayout.LabelField($"MP:\t{mp.FetchAtCurvePoint(targetCurveValue)}");
+            EditorGUILayout.LabelField($"{Constants.Attributes.MP}:\t{mp.FetchAtCurvePoint(targetCurveValue)}");
 
             targetCurveValue = entry.strCurve.Evaluate(normalizedValue);
             EditorGUILayout.LabelField($"{Constants.Attributes.STR_SHORT}:\t{attr.FetchAtCurvePoint(targetCurveValue)}");
@@ -168,7 +167,7 @@ namespace BrightLib.RPGDatabase.Editor
             #region Skills
             EditorGUILayout.BeginVertical("GroupBox", GUILayout.Width(350));
             skillUnlockVect = EditorGUILayout.BeginScrollView(skillUnlockVect, GUILayout.MinHeight(90));
-            BrightEditorGUILayout.LabelFieldBold("Skills");
+            BrightEditorGUILayout.LabelFieldBold(Constants.SKILLS);
             if (entry.skills == null) entry.skills = new System.Collections.Generic.List<SkillUnlockArgs>();
 
             for (int i = 0; i < entry.skills.Count; i++)
@@ -177,7 +176,7 @@ namespace BrightLib.RPGDatabase.Editor
 
                 EditorGUI.indentLevel++;
                 EditorGUILayout.BeginHorizontal();
-                skillUnlockArgs.level = EditorGUILayout.IntField("Lv", skillUnlockArgs.level);
+                skillUnlockArgs.level = EditorGUILayout.IntField(Constants.Attributes.LEVEL_SHORT, skillUnlockArgs.level);
                 skillUnlockArgs.skillId = EditorGUILayout.IntPopup(skillUnlockArgs.skillId, skillNames, skillIds);
                 if (GUILayout.Button("-", GUILayout.Width(20f)))
                 {
@@ -219,8 +218,8 @@ namespace BrightLib.RPGDatabase.Editor
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Use Cost");
-            skill.hpCost = EditorGUILayout.FloatField("HP", skill.hpCost);
-            skill.mpCost = EditorGUILayout.FloatField("MP", skill.mpCost);
+            skill.hpCost = EditorGUILayout.FloatField(Constants.Attributes.HP, skill.hpCost);
+            skill.mpCost = EditorGUILayout.FloatField(Constants.Attributes.MP, skill.mpCost);
 
             EditorGUILayout.EndVertical();
         }
