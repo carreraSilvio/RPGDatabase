@@ -1,14 +1,14 @@
 # RPG Database
-Create and manage the data for your RPG. Allows you to create the basic set-up for your grand adventure!
+Create and manage the data for your RPG. It allows you to create the basic set-up for your grand adventure!
 
 ![Imgur](https://i.imgur.com/4b4oGt8.gif)
 
 ## Features
-* Actors: Create the characters that will be part of your adventure.
-* Classes: Define how each actor class attributes will grow, weapons allowed and skills unlocks.
-* Skills: Robust options to create many types of skills .
-* Items: Configure the items in your game. Easily create key story items.
-* Weapons: Manage all the weapons in game and what how they wil affect the actors.
+* Actors: Create the characters that will take part in your adventure.
+* Classes: Define how attributes will grow, weapons allowed and skills it unlocks.
+* Skills: Robust options to create many types of skills.
+* Items: Potions, antidotes, bombs or quest items. Configure the items in your game.
+* Weapons: Create all the weapons the game will have and how they will affect the actors.
 
 ## Prerequisites
 Unity 2018.3 and up
@@ -16,7 +16,7 @@ Unity 2018.3 and up
 ## Install
 
 ### Unity 2019.3
-1. Open the package manager and point to the rep url
+1. Open the package manager and point to the repo URL
 
 ![Imgur](https://i.imgur.com/iYGgINz.png)
 
@@ -24,7 +24,7 @@ Unity 2018.3 and up
 
 #### Option A
 1. Open the manifest
-2. Add the repo url either via https or ssh
+2. Add the repo URL either via https or ssh
 
 		{
     		"dependencies": {
