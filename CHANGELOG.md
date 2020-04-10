@@ -1,3 +1,9 @@
+## [1.2.0] - 2020-04-10
+
+### New
+* Moved all references to Exp instead of dubious XP and EXP
+* Added option to fetch exp nedded for next level
+
 ## [1.1.0] - 2020-04-09
 
 ### New
