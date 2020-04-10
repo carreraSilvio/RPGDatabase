@@ -15,7 +15,7 @@ MonoBehaviour:
   entries:
   - _id: 100
     name: Wood Staff
-    description: 
+    description: Awesome staff made of wood
     price: 50
     typeId: 100
     strIncrease: 5
@@ -56,8 +56,8 @@ MonoBehaviour:
     typeId: 103
     strIncrease: 7
     intIncrease: 0
-    dexIncrease: 0
-    agiIncrease: 0
+    dexIncrease: -10
+    agiIncrease: -5
     lckIncrease: 0
     defIncrease: 0
     resIncrease: 0

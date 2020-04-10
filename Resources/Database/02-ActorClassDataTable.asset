@@ -239,8 +239,10 @@ MonoBehaviour:
       m_RotationOrder: 4
     weaponTypeId: 100
     skills:
-    - level: 2
+    - level: 7
       skillId: 100
+    - level: 10
+      skillId: 101
   - _id: 100
     name: Wolf
     expCurve:
