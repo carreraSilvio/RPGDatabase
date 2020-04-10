@@ -1,7 +1,7 @@
 # RPG Database
 Create and manage the data for your RPG. It allows you to create the basic set-up for your grand adventure!
 
-![Imgur](https://i.imgur.com/4b4oGt8.gif)
+![Imgur](https://i.imgur.com/PbIrcef.gif)
 
 ## Features
 * Actors: Create the characters that will take part in your adventure.
