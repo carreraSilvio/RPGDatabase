@@ -1,6 +1,6 @@
 {
   "name": "com.brightlib.rpgdatabase",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "displayName": "RPG Database",
   "description": "Create and manage the data for your RPG. It allows you to create the basic set-up for your grand adventure! Use Tools->Database to start editing your data.",
   "unity": "2018.2",
@@ -14,7 +14,7 @@
   [
     {
         "displayName": "JRPG Menu",
-        "description": "Shows how to read data from the database and display it on a JRPG-Style Menu.",
+        "description": "Shows how to read data and display it on a JRPG-Style Menu.",
         "path": "Samples~/01 - JRPGMenuSample"
     }
   ]

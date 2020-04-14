@@ -1,3 +1,9 @@
+## [1.2.1] - 2020-04-14
+
+### Fix
+* Removed MenuItem calls to some DataLists 
+
+
 ## [1.2.0] - 2020-04-10
 
 ### New
